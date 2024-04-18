@@ -1,0 +1,24 @@
+﻿namespace Skyware.Lis.AkitaModel.BgNhis;
+
+/// <summary>
+/// Medical practice having contract with NHIF (НЗОК)
+/// </summary>
+public class Practice
+{
+
+    /// <summary>
+    /// Practice number (ЕИК) of the laboratory.
+    /// </summary>
+    public string PracticeNumber { get; set; } = string.Empty;
+
+    /// <summary>
+    /// NHIF number of the practice (НЗОК номер), optional.
+    /// </summary>
+    public string NhifNumber { get; set; }
+
+    /// <summary>
+    /// Laboratory name, optional.
+    /// </summary>
+    public string Name { get; set; }
+
+}

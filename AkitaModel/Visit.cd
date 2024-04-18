@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Skyware.Lis.AkitaModel.Visit">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <AssociationLine Name="Items" Type="Skyware.Lis.AkitaModel.VisitItem" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="3.312" />
+        <Point X="5.875" Y="3.312" />
+        <Point X="5.875" Y="3.312" />
+        <Point X="10.25" Y="3.312" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Samples" Type="Skyware.Lis.AkitaModel.Sample" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="3.938" />
+        <Point X="8.375" Y="3.938" />
+        <Point X="8.375" Y="6.52" />
+        <Point X="8.75" Y="6.52" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IAAKAAAAAAAACAAAEAAAAAAAAAAAAAYgAAAAAAAAiAA=</HashCode>
+      <FileName>Visit.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Patient" />
+      <Property Name="Doctor" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+      <Property Name="Samples" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.VisitItem">
+    <Position X="10.25" Y="0.75" Width="2.25" />
+    <AssociationLine Name="Children" Type="Skyware.Lis.AkitaModel.VisitItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.5" Y="1.938" />
+        <Point X="13.382" Y="1.938" />
+        <Point X="13.382" Y="3.688" />
+        <Point X="12.5" Y="3.688" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IAADAAgAACAAiAAAAAAEAAyAAQAAAAAAGQAAAAAAkAA=</HashCode>
+      <FileName>VisitItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.Doctor">
+    <Position X="4.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAgAAAAAAIIBAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Doctor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.Patient">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABAAAAAQAAAAAAAAAAAAAAgAAQgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Patient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.Sample">
+    <Position X="8.75" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAEAAAAAAAACAAAAEAAEAAAAAgAAAAAAEAQ=</HashCode>
+      <FileName>Sample.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SampleType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.SampleType">
+    <Position X="11.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAgAAQAAQAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>SampleType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.PersonBase">
+    <Position X="3.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PersonBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

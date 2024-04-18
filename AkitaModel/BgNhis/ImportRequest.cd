@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Skyware.Lis.AkitaModel.BgNhis.ReferralImportReqest">
+    <Position X="9.5" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAACAAAAAAAAAAAAAAABAABAAAEAAAAA=</HashCode>
+      <FileName>BgNhis\ReferralImportReqest.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NhifContract" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.BgNhis.NhifContract">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <AssociationLine Name="Doctor" Type="Skyware.Lis.AkitaModel.Doctor" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11" Y="5.795" />
+        <Point X="12.625" Y="5.795" />
+        <Point X="12.625" Y="7.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAACAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>BgNhis\NhifContract.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Doctor" />
+      <Property Name="Practice" />
+      <Property Name="Specialty" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.Doctor">
+    <Position X="12" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAgAAAAAAIIBAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Doctor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.PersonBase">
+    <Position X="14" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PersonBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.BgNhis.Practice">
+    <Position X="7.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAQAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BgNhis\Practice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.BgNhis.NhifSpeciality">
+    <Position X="9.75" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAUAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>BgNhis\NhifSpeciality.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.BgNhis.ImportRequest">
+    <Position X="5.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACIAAAAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>BgNhis\ImportRequest.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Referrals" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

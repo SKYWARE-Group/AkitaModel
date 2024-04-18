@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <LangVersion>12.0</LangVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Mikhail Kalatchev</Authors>
+    <PackageId>Skyware.Lis.$(AssemblyName)</PackageId>
+    <Company>SKYWARE Group</Company>
+    <Product>Akita Model</Product>
+    <Description>Data model of Akita (LIS iLab API)</Description>
+    <Copyright>Copyright (C) 2000-2024, SKYWARE Group</Copyright>
+    <PackageProjectUrl>https://github.com/SKYWARE-Group/EventsModel</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SKYWARE-Group/EventsModel</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>iLab;Akita;Model</PackageTags>
+    <SignAssembly>False</SignAssembly>
+    <Version>0.0.1</Version>
+    <RootNamespace>Skyware.Lis.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AssemblyName>Skyware.Lis.$(MSBuildProjectName)</AssemblyName>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Title>Akita Data Model</Title>
+    <ApplicationIcon>akita.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="Skyware.Rila.Model" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="assets\akita.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="assets\readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
