@@ -1,20 +1,37 @@
-﻿using Skyware.Lis.AkitaModel.BgNhis;
+﻿namespace Skyware.Lis.AkitaModel;
 
-namespace Skyware.Lis.AkitaModel;
-
+/// <summary>
+/// Doctor
+/// </summary>
 public class Doctor : PersonBase
 {
-
+    /// <summary>
+    /// Uin
+    /// </summary>
     public string Uin { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Speciality
+    /// </summary>
     public Speciality Speciality { get; set; }
 
-    public string Region { get; set; }
+    /// <summary>
+    /// Region
+    /// </summary>
+    public string? Region { get; set; }
 
-    public string City { get; set; }
+    /// <summary>
+    /// City
+    /// </summary>
+    public string? City { get; set; }
 
-    public string PostalCode { get; set; }
+    /// <summary>
+    /// Postal code
+    /// </summary>
+    public string? PostalCode { get; set; }
 
-    public string PostAddress { get; set; }
-
+    /// <summary>
+    /// Post address
+    /// </summary>
+    public string? PostAddress { get; set; }
 }
