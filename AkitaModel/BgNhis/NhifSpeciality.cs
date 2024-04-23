@@ -17,7 +17,7 @@ public class NhifSpeciality
     public string NhisCode { get; set; }
 
     /// <summary>
-    /// Name of the speciality.
+    /// Name of the speciality, according to NHIF (НЗОК).
     /// </summary>
     public string Name { get; set; }
 

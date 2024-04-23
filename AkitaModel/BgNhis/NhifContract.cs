@@ -14,7 +14,7 @@ public class NhifContract
     /// <summary>
     /// Speciality under which the contract is signed.
     /// </summary>
-    public NhifSpeciality Specialty { get; set; }
+    public NhifSpeciality Speciality { get; set; }
 
     /// <summary>
     /// Medical practice.
