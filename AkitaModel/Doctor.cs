@@ -5,10 +5,16 @@
 /// </summary>
 public class Doctor : PersonBase
 {
+
     /// <summary>
     /// Uin
     /// </summary>
     public string Uin { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Title, e.g. "Dr.", "Prof.", etc.
+    /// </summary>
+    public string? Title {  get; set; } = string.Empty;
 
     /// <summary>
     /// Speciality
