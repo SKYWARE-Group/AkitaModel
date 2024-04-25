@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Skyware.Lis.AkitaModel.BgNhis.ReferralImportReqest">
-    <Position X="9.5" Y="3" Width="2.25" />
+  <Class Name="Skyware.Lis.AkitaModel.BgNhis.ReferralImportRequest">
+    <Position X="9" Y="3" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAACAAAAAAAAAAAAAAABAABAAAEAAAAA=</HashCode>
       <FileName>BgNhis\ReferralImportReqest.cs</FileName>
@@ -14,25 +14,25 @@
     <Position X="9.5" Y="5.5" Width="1.5" />
     <AssociationLine Name="Doctor" Type="Skyware.Lis.AkitaModel.Doctor" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="11" Y="5.795" />
-        <Point X="12.625" Y="5.795" />
+        <Point X="11" Y="5.938" />
+        <Point X="12.625" Y="5.938" />
         <Point X="12.625" Y="7.25" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAACAAQAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQAAAAAAAACAAA=</HashCode>
       <FileName>BgNhis\NhifContract.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Doctor" />
       <Property Name="Practice" />
-      <Property Name="Specialty" />
+      <Property Name="Speciality" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Skyware.Lis.AkitaModel.Doctor">
     <Position X="12" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAgAAAAAAIIBAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <HashCode>AAAAAQAAgAAAAEAIIBAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Doctor.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -58,9 +58,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Skyware.Lis.AkitaModel.BgNhis.ImportRequest">
-    <Position X="5.75" Y="3.25" Width="1.75" />
+    <Position X="5.75" Y="2.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AACIAAAAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AACIAAAAAAAEAAAAAAAAACAEAAAAAAAAAQAAAEAAAAA=</HashCode>
       <FileName>BgNhis\ImportRequest.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
