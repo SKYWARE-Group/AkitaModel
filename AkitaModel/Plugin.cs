@@ -1,5 +1,8 @@
 ﻿namespace Skyware.Lis.AkitaModel;
 
+/// <summary>
+/// Unified plugin information.
+/// </summary>
 public class Plugin
 {
 
