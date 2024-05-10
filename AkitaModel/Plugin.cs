@@ -1,13 +1,16 @@
 ﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Unified plugin information.
+/// Uniform plugin information.
 /// </summary>
+/// <remarks>
+/// The standard path for this resource should be /api/service/info
+/// </remarks>
 public class Plugin
 {
 
     /// <summary>
-    /// Name of the plugin, e.g. "Core", "BgNhis", etc.
+    /// Name of the plugin, e.g. "Core", "Robin", etc.
     /// </summary>
     public string Name { get; set; }
 
@@ -17,8 +20,15 @@ public class Plugin
     public string Description { get; set; }
 
     /// <summary>
-    /// Semantic version, e.g. "1.0.5"
+    /// Semantic version, e.g. "1.0.5".
     /// </summary>
+    /// <remarks>
+    /// Please, use reflection or similar approach to extract the version.
+    /// </remarks>
     public string Version { get; set; }
 
+    /// <summary>
+    /// Optional. URL of documentation.
+    /// </summary>
+    public string HelpLink { get; set; }
 }
