@@ -1,14 +1,16 @@
 ﻿using System;
 
+// Ignore Spelling: nrn
+
 namespace Skyware.Lis.AkitaModel.BgNhis;
 
 /// <summary>
-/// Referral import request
+/// Referral import request.
 /// </summary>
 public class ReferralImportRequest
 {
     /// <summary>
-    /// Nrn
+    /// National Reference Number in NHIS (НРН в НЗИС).
     /// </summary>
     public string Nrn { get; set; }
 
@@ -31,4 +33,5 @@ public class ReferralImportRequest
     /// Nhif contract
     /// </summary>
     public NhifContract NhifContract { get; set; }
+
 }

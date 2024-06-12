@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/SKYWARE-Group/AkitaModel</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SKYWARE-Group/AkitaModel</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>iLab;Akita;Model</PackageTags>
+    <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
     <Version>0.0.1</Version>
     <RootNamespace>Skyware.Lis.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
@@ -22,22 +22,18 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>Akita Data Model</Title>
     <ApplicationIcon>akita.ico</ApplicationIcon>
+    <PackageIcon>akita.png</PackageIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
     <PackageReference Include="Skyware.Rila.Model" Version="1.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="assets\akita.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="assets\readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+    <None Include="assets\akita.png" Pack="True" PackagePath="\" />
+    <None Include="assets\readme.md" Pack="True" PackagePath="\" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ public class Plugin
 {
 
     /// <summary>
-    /// Name of the plugin, e.g. "Core", "Robin", etc.
+    /// Name of the plugin, e.g. "Akita Core", "Robin", etc.
     /// </summary>
     public string Name { get; set; }
 
@@ -31,4 +31,5 @@ public class Plugin
     /// Optional. URL of documentation.
     /// </summary>
     public string HelpLink { get; set; }
+
 }

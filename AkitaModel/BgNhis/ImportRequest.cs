@@ -11,24 +11,24 @@ public class ImportRequest
     public string ApplicationName { get; set; }
 
     /// <summary>
-    /// Proc points location id
+    /// Processing points location Id.
     /// </summary>
-    public string? ProcPointLocationId { get; set; }
+    public string ProcPointLocationId { get; set; }
 
     /// <summary>
-    /// Schema
+    /// Sale schema.
     /// </summary>
-    public Schema? Schema { get; set; }
+    public Schema Schema { get; set; }
 
     /// <summary>
-    /// Reg location id
+    /// Reception location Id.
     /// </summary>
-    public string? RegLocationId { get; set; }
+    public string RegLocationId { get; set; }
 
     /// <summary>
     /// Location Id.
     /// </summary>
-    public string? LocationId { get; set; }
+    public string LocationId { get; set; }
 
     /// <summary>
     /// Application user.

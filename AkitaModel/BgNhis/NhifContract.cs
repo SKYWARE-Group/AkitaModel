@@ -9,7 +9,7 @@ public class NhifContract
 {
 
     /// <summary>
-    /// Doctor.
+    /// Laboratory doctor.
     /// </summary>
     public Doctor Doctor { get; set; }
 
@@ -24,7 +24,8 @@ public class NhifContract
     public Practice Practice { get; set; }
 
     /// <summary>
-    /// Products by doctor
+    /// Products (examinations) which are allowed by this contract.
     /// </summary>
-    public IList<Examination> Examinations { get; set; } = new List<Examination>();
+    public IList<Examination> Examinations { get; set; } = [];
+
 }

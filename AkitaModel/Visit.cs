@@ -15,7 +15,7 @@ public class Visit
     public int? Id { get; set; }
 
     /// <summary>
-    /// Reference to an external system
+    /// Reference to an external system.
     /// </summary>
     public string ExternalId { get; set; }
 
@@ -62,12 +62,12 @@ public class Visit
     /// <summary>
     /// Visit's examinations.
     /// </summary>
-    public List<VisitItem> Items { get; set; }
+    public IList<VisitItem> Items { get; set; }
 
     /// <summary>
     /// Samples to the visit.
     /// </summary>
-    public List<Sample> Samples { get; set; }
+    public IList<Sample> Samples { get; set; }
 
     // public List<Note>? Notes { get; set; }
 

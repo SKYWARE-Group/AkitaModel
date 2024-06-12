@@ -9,15 +9,18 @@ public class ReportRequest
 {
 
     /// <summary>
-    /// Culture of the report, e.g. "en-US", "bg-BG", etc.
+    /// Culture (Locale) of the report, e.g. "en-US", "bg-BG", etc.
     /// </summary>
+    /// <remarks>
+    /// This field is optional and if it isn't provided, server's default will be applied.
+    /// </remarks>
     public string Culture { get; set; }
 
     /// <summary>
-    /// Base64 encoded JSON collection of parameters.
+    /// <b>Base64 encoded JSON</b> collection of parameters.
     /// </summary>
     /// <remarks>
-    /// JSON before Base64 encoding must be like this:
+    /// JSON before Base64 encoding is a key-value pair dictionary and looks like this:
     /// <code>
     /// {
     ///   "key1": "value1",
@@ -25,14 +28,16 @@ public class ReportRequest
     ///   "key3": 3.14
     /// }
     /// </code>
+    /// This field is optional.
     /// </remarks>
     public string Parameters { get; set; }
 
     /// <summary>
-    /// Base64 encoded JSON with data source.
+    /// <b>Base64 encoded JSON</b> with data source.
     /// </summary>
     /// <remarks>
-    /// Consult the report's source for JSON before Base64 encoding.
+    /// Consult the report's source for the model.
+    /// This field is optional.
     /// </remarks>
     public string Data { get; set; }
 
