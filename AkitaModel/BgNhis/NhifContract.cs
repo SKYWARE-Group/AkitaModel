@@ -1,4 +1,6 @@
-﻿namespace Skyware.Lis.AkitaModel.BgNhis;
+﻿using System.Collections.Generic;
+
+namespace Skyware.Lis.AkitaModel.BgNhis;
 
 /// <summary>
 /// NHIF (НЗОК) contract of a doctor.
@@ -7,18 +9,23 @@ public class NhifContract
 {
 
     /// <summary>
-    /// Doctor.
+    /// Laboratory doctor.
     /// </summary>
     public Doctor Doctor { get; set; }
 
     /// <summary>
     /// Speciality under which the contract is signed.
     /// </summary>
-    public NhifSpeciality Specialty { get; set; }
+    public NhifSpeciality Speciality { get; set; }
 
     /// <summary>
     /// Medical practice.
     /// </summary>
     public Practice Practice { get; set; }
+
+    /// <summary>
+    /// Products (examinations) which are allowed by this contract.
+    /// </summary>
+    public IList<Examination> Examinations { get; set; } = [];
 
 }

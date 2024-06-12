@@ -1,13 +1,13 @@
 ﻿namespace Skyware.Lis.AkitaModel.BgNhis;
 
 /// <summary>
-/// Medical practice having contract with NHIF (НЗОК)
+/// Medical practice, registered in Bulgaria.
 /// </summary>
 public class Practice
 {
 
     /// <summary>
-    /// Practice number (ЕИК) of the laboratory.
+    /// Practice number (РЦЗ/РЗИ код) of the laboratory.
     /// </summary>
     public string PracticeNumber { get; set; } = string.Empty;
 

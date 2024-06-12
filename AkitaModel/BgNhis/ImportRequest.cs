@@ -5,11 +5,25 @@
 /// </summary>
 public class ImportRequest
 {
-
     /// <summary>
     /// Name of requesting application.
     /// </summary>
     public string ApplicationName { get; set; }
+
+    /// <summary>
+    /// Processing points location Id.
+    /// </summary>
+    public string ProcPointLocationId { get; set; }
+
+    /// <summary>
+    /// Sale schema.
+    /// </summary>
+    public Schema Schema { get; set; }
+
+    /// <summary>
+    /// Reception location Id.
+    /// </summary>
+    public string RegLocationId { get; set; }
 
     /// <summary>
     /// Location Id.
@@ -24,6 +38,6 @@ public class ImportRequest
     /// <summary>
     /// Collection of referrals to be imported.
     /// </summary>
-    public ReferralImportReqest[] Referrals { get; set; } = [];
+    public ReferralImportRequest[] Referrals { get; set; } = [];
 
 }
