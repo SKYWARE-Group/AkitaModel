@@ -1,15 +1,16 @@
-﻿namespace Skyware.Lis.AkitaModel.Flagging;
+﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
 /// Result types.
 /// </summary>
 public enum ResultTypes : byte
 {
+
     /// <summary>
     /// Textual result.
     /// </summary>
     Text = 4,
-    
+
     /// <summary>
     /// Numeric result, usually represents concentration.
     /// </summary>

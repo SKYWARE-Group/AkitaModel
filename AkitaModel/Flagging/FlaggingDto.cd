@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Skyware.Lis.AkitaModel.Flagging.ResultRequest">
+    <Position X="6.25" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAgAAAAAAAAAABAEAAAAAAAQwAAAAAAACAAAAAA=</HashCode>
+      <FileName>Flagging\ResultRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.Flagging.ResultResponse">
+    <Position X="9.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAQAAABAAAAAAAAAA=</HashCode>
+      <FileName>Flagging\ResultResponse.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CalculationResult" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Skyware.Lis.AkitaModel.Flagging.CalculationResult">
+    <Position X="12.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAACAAIAAA=</HashCode>
+      <FileName>Flagging\CalculationResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

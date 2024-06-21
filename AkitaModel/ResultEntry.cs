@@ -1,5 +1,8 @@
 ﻿namespace Skyware.Lis.AkitaModel.Flagging;
 
+/// <summary>
+/// Allowed result entry.
+/// </summary>
 public class ResultEntry
 {
 

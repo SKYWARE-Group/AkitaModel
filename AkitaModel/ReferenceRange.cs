@@ -1,12 +1,13 @@
 ﻿using System;
 
-namespace Skyware.Lis.AkitaModel.Flagging;
+namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
 /// Describes test decimal values and their alarms for specific gender or both of them
 /// </summary>
 public class ReferenceRange
-{ 
+{
+
     /// <summary>
     /// Species discriminator, e.g. 1=human.
     /// </summary>
