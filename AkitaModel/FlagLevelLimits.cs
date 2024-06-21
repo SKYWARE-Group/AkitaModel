@@ -1,4 +1,4 @@
-﻿namespace Skyware.Lis.AkitaModel.Flagging;
+﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
 /// Defines limit of flagging, e.g. up to alarm 1.

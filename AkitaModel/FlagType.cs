@@ -1,5 +1,8 @@
-﻿namespace Skyware.Lis.AkitaModel.Flagging;
+﻿namespace Skyware.Lis.AkitaModel;
 
+/// <summary>
+/// Represents symbols to be shown for results outside reference range.
+/// </summary>
 public class FlagType
 {
 
