@@ -5,9 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Refit;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.Robin;
-using Skyware.Lis.AkitaModel.Robin.Reports.Bg;
-using System.Diagnostics;
-using System.IO;
 
 Console.WriteLine("AkitaModel demo application");
 
@@ -18,45 +15,57 @@ IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl);
 
 #region Core
 
-//// Species
-//IEnumerable<Species> species = await akitaService.GetAllSpecies();
-//Console.WriteLine($"Species count: {species.Count()}");
-//Console.WriteLine($"First species name: {species.FirstOrDefault()?.Name}");
+// Species
+IEnumerable<Species> species = await akitaService.GetAllSpecies();
+Console.WriteLine($"Species count: {species.Count()}");
+Console.WriteLine($"First species name: {species.FirstOrDefault()?.Name}");
 
-//// Sample types
-//IEnumerable<SampleType> sampleTypes = await akitaService.GetAllSampleTypes();
-//Console.WriteLine($"Sample types count: {sampleTypes.Count()}");
-//Console.WriteLine($"First sample type name: {sampleTypes.FirstOrDefault()?.Name}");
+// Sample types
+IEnumerable<SampleType> sampleTypes = await akitaService.GetAllSampleTypes();
+Console.WriteLine($"Sample types count: {sampleTypes.Count()}");
+Console.WriteLine($"First sample type name: {sampleTypes.FirstOrDefault()?.Name}");
 
 // Locations
 IEnumerable<Location> locations = await akitaService.GetAllLocations();
 Console.WriteLine($"Locations types count: {locations.Count()}");
 Console.WriteLine($"First location name: {locations.FirstOrDefault()?.Name}");
 
-//// Location Groups
-//// TODO: Add LocationGroup in model
+// Location Groups
+// TODO: Add LocationGroup in model
 
-//// Departments
-//IEnumerable<Department> departments = await akitaService.GetAllDepartments();
-//Console.WriteLine($"Departments count: {departments.Count()}");
-//Console.WriteLine($"First department name: {departments.FirstOrDefault()?.Name}");
+// Departments
+IEnumerable<Department> departments = await akitaService.GetAllDepartments();
+Console.WriteLine($"Departments count: {departments.Count()}");
+Console.WriteLine($"First department name: {departments.FirstOrDefault()?.Name}");
 
-//// Tests
-//IEnumerable<Test> tests = await akitaService.GetAllTests();
-//Console.WriteLine($"Tests count: {tests.Count()}");
-//Console.WriteLine($"First test name: {tests.FirstOrDefault()?.Name}");
+// Tests
+IEnumerable<Test> tests = await akitaService.GetAllTests();
+Console.WriteLine($"Tests count: {tests.Count()}");
+Console.WriteLine($"First test name: {tests.FirstOrDefault()?.Name}");
 
-//// Profiles
-//// TODO: Add Profile in model
+// Single Test
+// TODO: Add function
 
-//// PID Types
-//// TODO: Add PidType in model
+// Profiles
+// TODO: Add Profile in model
 
-//// Footnotes
-//// TODO: Add Footnote in model
+// Single Profile
+// TODO: Add function
 
-//// CultureInfo
-//// TODO: Add CultureInfo in model
+// PID Types
+// TODO: Add PidType in model
+
+// Footnotes
+// TODO: Add Footnote in model
+
+// CultureInfo
+// TODO: Add CultureInfo in model
+
+
+#endregion
+
+#region BgNhis
+
 
 
 #endregion
@@ -66,7 +75,7 @@ Console.WriteLine($"First location name: {locations.FirstOrDefault()?.Name}");
 // Reports
 IEnumerable<DirectReport> reports = await akitaService.GetAllReports();
 Console.WriteLine($"Reports count: {reports.Count()}");
-Console.WriteLine($"First report name: {reports.FirstOrDefault()?.Id}");
+Console.WriteLine($"First report Id: {reports.FirstOrDefault()?.Id}");
 
 // Hello world
 HttpResponseMessage responseHello = await akitaService.GetSimpleReport(Constants.ROBIN_REPORTS_HELLO_WORLD, string.Empty);
@@ -76,5 +85,11 @@ await BinaryHelper.SaveAsTempAndOpen(responseHello);
 ReportRequest requestRefrral = new(DataFactory.GetDemoReferral());
 HttpResponseMessage responseReferral = await akitaService.GetFullReport(Constants.ROBIN_REPORTS_BG_LAB_REFERRAL, requestRefrral);
 await BinaryHelper.SaveAsTempAndOpen(responseReferral);
+
+#endregion
+
+#region LIS Flagging
+
+// TODO: Flagging...
 
 #endregion

@@ -7,22 +7,26 @@ namespace AkitaModelDemo.Services;
 public interface IAkitaApi
 {
 
-    //[Get(Constants.URL_CORE_PUBLIC_SPECIES)]
-    [Get(Constants.URL_CORE_PART_PUBLIC_SPECIES)]
+    // Commented paths are for direct (non-proxy) tests.
+
+    [Get(Constants.URL_CORE_PUBLIC_SPECIES)]
+    //[Get(Constants.URL_CORE_PART_PUBLIC_SPECIES)]
     Task<IEnumerable<Species>> GetAllSpecies();
 
-    //[Get(Constants.URL_CORE_PUBLIC_TESTS)]
-    [Get(Constants.URL_CORE_PART_PUBLIC_TESTS)]
+    [Get(Constants.URL_CORE_PUBLIC_TESTS)]
+    //[Get(Constants.URL_CORE_PART_PUBLIC_TESTS)]
     Task<IEnumerable<Test>> GetAllTests();
 
-    [Get(Constants.URL_CORE_PART_PUBLIC_SAMPLE_TYPES)]
+    [Get(Constants.URL_CORE_PUBLIC_SAMPLE_TYPES)]
+    //[Get(Constants.URL_CORE_PART_PUBLIC_SAMPLE_TYPES)]
     Task<IEnumerable<SampleType>> GetAllSampleTypes();
 
     [Get(Constants.URL_CORE_PUBLIC_LOCATIONS)]
     //[Get(Constants.URL_CORE_PART_PUBLIC_LOCATIONS)]
     Task<IEnumerable<Location>> GetAllLocations();
 
-    [Get(Constants.URL_CORE_PART_PUBLIC_DEPARTMENTS)]
+    [Get(Constants.URL_CORE_PUBLIC_DEPARTMENTS)]
+    //[Get(Constants.URL_CORE_PART_PUBLIC_DEPARTMENTS)]
     Task<IEnumerable<Department>> GetAllDepartments();
 
     [Get(Constants.URL_ROBIN_DIRECT_REPORTS)]
