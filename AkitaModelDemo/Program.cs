@@ -9,11 +9,10 @@ using Skyware.Lis.AkitaModel.Robin.Reports.Bg;
 using System.Diagnostics;
 using System.IO;
 
+Console.WriteLine("AkitaModel demo application");
 
 IConfiguration configuration = ConfigHelper.BuildConfig();
-AkitaSettings settings = configuration.GetSection(nameof(AkitaSettings)).Get<AkitaSettings>() ?? throw new ApplicationException("No config!");
-
-Console.WriteLine("Akita demo");
+AkitaSettings settings = configuration.GetSection(nameof(AkitaSettings)).Get<AkitaSettings>() ?? throw new ApplicationException("No configuration is found!");
 
 IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl);
 
