@@ -1,4 +1,6 @@
-﻿using Skyware.Lis.AkitaModel.Robin.Reports.Bg;
+﻿using Skyware.Lis.AkitaModel.Flagging;
+using Skyware.Lis.AkitaModel.Robin.Reports.Bg;
+using System.Runtime.CompilerServices;
 
 namespace AkitaModelDemo.Helpers;
 
@@ -55,4 +57,27 @@ public class DataFactory
             ]
     };
 
+    internal static IEnumerable<ResultRequest> GetDemoFlaggingTestResultRequest()
+    {
+        yield return new()
+        {
+            TestId = InternalConstants.FLAGGING_SINGLE_TEST_ID,
+            SpeciesId = 1,
+            RefId = "S7ENF",
+            DateOfBirth = new DateTime(1992, 12, 12),
+            IsMale = true,
+            NumericPrefix = "",
+            NumericResult = 13.38M,
+        };
+        yield return new()
+        {
+            TestId = InternalConstants.FLAGGING_SINGLE_TEST_ID,
+            SpeciesId = 1,
+            RefId = "S7ENE",
+            DateOfBirth = new DateTime(1992, 12, 12),
+            IsMale = true,
+            NumericPrefix = "",
+            TextResult = "13.38"
+        };
+    }
 }

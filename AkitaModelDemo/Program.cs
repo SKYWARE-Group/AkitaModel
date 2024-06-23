@@ -4,6 +4,7 @@ using AkitaModelDemo.Services;
 using Microsoft.Extensions.Configuration;
 using Refit;
 using Skyware.Lis.AkitaModel;
+using Skyware.Lis.AkitaModel.Flagging;
 using Skyware.Lis.AkitaModel.Robin;
 
 Console.WriteLine("AkitaModel demo application");
@@ -31,7 +32,9 @@ Console.WriteLine($"Locations types count: {locations.Count()}");
 Console.WriteLine($"First location name: {locations.FirstOrDefault()?.Name}");
 
 // Location Groups
-// TODO: Add LocationGroup in model
+IEnumerable<LocationGroup> locationGroups = await akitaService.GetAllLocationGroups();
+Console.WriteLine($"LocationGroups types count: {locationGroups.Count()}");
+Console.WriteLine($"First locationGroup name: {locationGroups.FirstOrDefault()?.Name}");
 
 // Departments
 IEnumerable<Department> departments = await akitaService.GetAllDepartments();
@@ -44,29 +47,40 @@ Console.WriteLine($"Tests count: {tests.Count()}");
 Console.WriteLine($"First test name: {tests.FirstOrDefault()?.Name}");
 
 // Single Test
-// TODO: Add function
+Test test = await akitaService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID);
+Console.WriteLine($"Test Id: {test?.Id}");
+Console.WriteLine($"Test name: {test?.Name}");
 
 // Profiles
-// TODO: Add Profile in model
+IEnumerable<Profile> profiles = await akitaService.GetAllProfiles();
+Console.WriteLine($"Profiles count: {profiles.Count()}");
+Console.WriteLine($"First profile name: {profiles.FirstOrDefault()?.Name}");
 
 // Single Profile
-// TODO: Add function
+Profile profile = await akitaService.GetSingleProfile(profiles?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_PROFILE_ID);
+Console.WriteLine($"Profile Id: {test?.Id}");
+Console.WriteLine($"Profile name: {test?.Name}");
+
 
 // PID Types
-// TODO: Add PidType in model
+IEnumerable<PIDType> pidTypes = await akitaService.GetAllPIDTypes();
+Console.WriteLine($"PIDTypes count: {pidTypes.Count()}");
+Console.WriteLine($"First PIDType name: {pidTypes.FirstOrDefault()?.Name}");
 
 // Footnotes
 // TODO: Add Footnote in model
+// TODO: API Returns Only an object with int sequence number
 
 // CultureInfo
-// TODO: Add CultureInfo in model
+CultureInfo culture = await akitaService.GetCultureInfo();
+Console.WriteLine($"CultureInfo Id: {culture?.Id}");
+Console.WriteLine($"CultureInfo currency: {culture?.CurrencySymbol}");
+
 
 
 #endregion
 
 #region BgNhis
-
-
 
 #endregion
 
@@ -90,6 +104,23 @@ await BinaryHelper.SaveAsTempAndOpen(responseReferral);
 
 #region LIS Flagging
 
-// TODO: Flagging...
+IFlaggingApi flaggingService = RestService.For<IFlaggingApi>(settings.BaseUrl);
+
+// Tests
+IEnumerable<Test> flaggingTests = await flaggingService.GetAllTests(settings.ApiKey);
+Console.WriteLine($"#FLAGGING Tests count: {flaggingTests.Count()}");
+Console.WriteLine($"#FLAGGING First test name: {flaggingTests.FirstOrDefault()?.Name}");
+
+// Flag Results
+IEnumerable<ResultRequest> resultRequest = DataFactory.GetDemoFlaggingTestResultRequest();
+IEnumerable<ResultResponse> resultResponses = await flaggingService.GetTestResult(resultRequest, settings.ApiKey);
+foreach (ResultResponse response in resultResponses)
+    Console.WriteLine($"#FLAGGING Test result: RefId: '{response.RefId}' Result: '{response.CalculationResult?.FlagLevel}'");
+
+// Single Test
+Test flaggingTest = await flaggingService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID, settings.ApiKey);
+Console.WriteLine($"#FLAGGING Test Id: {test?.Id}");
+Console.WriteLine($"#FLAGGING Test name: {test?.Name}");
+
 
 #endregion
