@@ -1,4 +1,4 @@
-﻿namespace Skyware.Lis.AkitaModel.Flagging;
+﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
 /// Allowed result entry.
