@@ -117,8 +117,8 @@ foreach (ResultResponse response in resultResponses)
 
 // Single Test
 Test flaggingTest = await akitaService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID, settings.ApiKey);
-Console.WriteLine($"#FLAGGING Test Id: {test?.Id}");
-Console.WriteLine($"#FLAGGING Test name: {test?.Name}");
+Console.WriteLine($"#FLAGGING Test Id: {flaggingTest?.Id}");
+Console.WriteLine($"#FLAGGING Test name: {flaggingTest?.Name}");
 
 
 #endregion
