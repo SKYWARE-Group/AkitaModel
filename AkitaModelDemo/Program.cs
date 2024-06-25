@@ -104,21 +104,19 @@ await BinaryHelper.SaveAsTempAndOpen(responseReferral);
 
 #region LIS Flagging
 
-IFlaggingApi flaggingService = RestService.For<IFlaggingApi>(settings.BaseUrl);
-
 // Tests
-IEnumerable<Test> flaggingTests = await flaggingService.GetAllTests(settings.ApiKey);
+IEnumerable<Test> flaggingTests = await akitaService.GetAllTests(settings.ApiKey);
 Console.WriteLine($"#FLAGGING Tests count: {flaggingTests.Count()}");
 Console.WriteLine($"#FLAGGING First test name: {flaggingTests.FirstOrDefault()?.Name}");
 
 // Flag Results
 IEnumerable<ResultRequest> resultRequest = DataFactory.GetDemoFlaggingTestResultRequest();
-IEnumerable<ResultResponse> resultResponses = await flaggingService.GetTestResult(resultRequest, settings.ApiKey);
+IEnumerable<ResultResponse> resultResponses = await akitaService.GetTestResult(resultRequest, settings.ApiKey);
 foreach (ResultResponse response in resultResponses)
     Console.WriteLine($"#FLAGGING Test result: RefId: '{response.RefId}' Result: '{response.CalculationResult?.FlagLevel}'");
 
 // Single Test
-Test flaggingTest = await flaggingService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID, settings.ApiKey);
+Test flaggingTest = await akitaService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID, settings.ApiKey);
 Console.WriteLine($"#FLAGGING Test Id: {test?.Id}");
 Console.WriteLine($"#FLAGGING Test name: {test?.Name}");
 

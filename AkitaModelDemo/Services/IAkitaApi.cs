@@ -1,5 +1,6 @@
 ﻿using Refit;
 using Skyware.Lis.AkitaModel;
+using Skyware.Lis.AkitaModel.Flagging;
 using Skyware.Lis.AkitaModel.Robin;
 
 namespace AkitaModelDemo.Services;
@@ -57,4 +58,17 @@ public interface IAkitaApi
     [Post(Constants.URL_ROBIN_DIRECT_FULL_REPORT)]
     Task<HttpResponseMessage> GetFullReport(string id, [Body] ReportRequest data);
     Task<Profile> GetSingleProfile(object value);
+
+    #region Flagging
+
+    [Get(Constants.URL_FLAGGING_TESTS)]
+    Task<IEnumerable<Test>> GetAllTests([Header(Constants.API_KEY_HEADER)] string authorization);
+
+    [Post(Constants.URL_FLAGGING_TESTS)]
+    Task<IEnumerable<ResultResponse>> GetTestResult([Body] IEnumerable<ResultRequest> request, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    [Get(Constants.URL_FLAGGING_SINGLE_TEST)]
+    Task<Test> GetSingleTest(int id, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    #endregion
 }
