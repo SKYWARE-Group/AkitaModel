@@ -29,6 +29,7 @@ public class Constants
 
     public const string URL_CORE_PART_PUBLIC_PROFILES = "/api/public/profiles";
     public const string URL_CORE_PUBLIC_PROFILES = URL_CORE_API_BASE + URL_CORE_PART_PUBLIC_PROFILES;
+    public const string URL_CORE_PUBLIC_SINGLE_PROFILE = URL_CORE_API_BASE + URL_CORE_PART_PUBLIC_PROFILES + "/{id}";
 
     public const string URL_CORE_PART_PUBLIC_PID_TYPES = "/api/public/pidtypes";
     public const string URL_CORE_PUBLIC_PID_TYPES = URL_CORE_API_BASE + URL_CORE_PART_PUBLIC_PID_TYPES;
@@ -65,5 +66,13 @@ public class Constants
 
     #endregion
 
+    #region LIS Flagging
 
+    public const string URL_FLAGGING_API_BASE = "/apps/flagging";
+
+    public const string URL_FLAGGING_PART_TESTS = "/api/tests";
+    public const string URL_FLAGGING_TESTS = URL_FLAGGING_API_BASE + URL_FLAGGING_PART_TESTS;
+    public const string URL_FLAGGING_SINGLE_TEST = URL_FLAGGING_API_BASE + URL_FLAGGING_PART_TESTS + "/{id}";
+
+    #endregion
 }
