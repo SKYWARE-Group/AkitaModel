@@ -1,5 +1,7 @@
 ﻿using Refit;
+using Skyware.Arda.Model;
 using Skyware.Lis.AkitaModel;
+using Skyware.Lis.AkitaModel.BgNhis;
 using Skyware.Lis.AkitaModel.Flagging;
 using Skyware.Lis.AkitaModel.Robin;
 
@@ -69,6 +71,19 @@ public interface IAkitaApi
 
     [Get(Constants.URL_FLAGGING_SINGLE_TEST)]
     Task<Test> GetSingleTest(int id, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    #endregion
+
+    #region BgNhis
+
+    [Get(Constants.URL_BGNHIS_GET_REFERRAL)]
+    Task<Referral?> GetReferral([AliasAs("nrn")] string nrn, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    [Get(Constants.URL_BGNHIS_SEARCH_REFERRALS)]
+    Task<IEnumerable<Referral>> SearchReferrals([AliasAs("pid")]  string pid, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    [Get(Constants.URL_BGNHIS_GET_CONTRACTS)]
+    Task<IEnumerable<NhifContract>> GetContracts([Header(Constants.API_KEY_HEADER)] string authorization);
 
     #endregion
 }

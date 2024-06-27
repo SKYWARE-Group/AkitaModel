@@ -7,6 +7,10 @@ namespace AkitaModelDemo.Helpers;
 public class DataFactory
 {
 
+    public static string PID = "3303234518";
+
+    public static string NRN = "241797000039";
+
     public static LabReferral GetDemoReferral() => new()
     {
         Nrn = "23184A000A1F",

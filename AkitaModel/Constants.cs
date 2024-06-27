@@ -75,4 +75,20 @@ public class Constants
     public const string URL_FLAGGING_SINGLE_TEST = URL_FLAGGING_API_BASE + URL_FLAGGING_PART_TESTS + "/{id}";
 
     #endregion
+
+    #region BgNhis
+
+    public const string URL_BGNHIS_API_BASE = "/apps/bg-nhis";
+
+    public const string URL_BASE_PART_REFERRALS = "/api/nhisreferrals";
+
+    public const string URL_BASE_PART_CONTRACTS = "/api/contracts";
+
+    public const string URL_BGNHIS_GET_REFERRAL = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS + "/{nrn}";
+
+    public const string URL_BGNHIS_SEARCH_REFERRALS = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS + "/search/{pid}";
+
+    public const string URL_BGNHIS_GET_CONTRACTS = URL_BGNHIS_API_BASE + URL_BASE_PART_CONTRACTS;
+
+    #endregion
 }
