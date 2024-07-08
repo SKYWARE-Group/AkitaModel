@@ -46,10 +46,10 @@ IEnumerable<Test> tests = await akitaService.GetAllTests();
 Console.WriteLine($"Tests count: {tests.Count()}");
 Console.WriteLine($"First test name: {tests.FirstOrDefault()?.Name}");
 
-// Single Test
-Test test = await akitaService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID);
-Console.WriteLine($"Test Id: {test?.Id}");
-Console.WriteLine($"Test name: {test?.Name}");
+//// Single Test
+//Test test = await akitaService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID);
+//Console.WriteLine($"Test Id: {test?.Id}");
+//Console.WriteLine($"Test name: {test?.Name}");
 
 // Profiles
 IEnumerable<Profile> profiles = await akitaService.GetAllProfiles();
@@ -58,8 +58,8 @@ Console.WriteLine($"First profile name: {profiles.FirstOrDefault()?.Name}");
 
 // Single Profile
 Profile profile = await akitaService.GetSingleProfile(profiles?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_PROFILE_ID);
-Console.WriteLine($"Profile Id: {test?.Id}");
-Console.WriteLine($"Profile name: {test?.Name}");
+Console.WriteLine($"Profile Id: {profile?.Id}");
+Console.WriteLine($"Profile name: {profile?.Name}");
 
 
 // PID Types
