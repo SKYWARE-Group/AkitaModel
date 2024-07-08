@@ -3,7 +3,9 @@ using AkitaModelDemo.Models;
 using AkitaModelDemo.Services;
 using Microsoft.Extensions.Configuration;
 using Refit;
+using Skyware.Arda.Model;
 using Skyware.Lis.AkitaModel;
+using Skyware.Lis.AkitaModel.BgNhis;
 using Skyware.Lis.AkitaModel.Flagging;
 using Skyware.Lis.AkitaModel.Robin;
 
@@ -76,11 +78,23 @@ CultureInfo culture = await akitaService.GetCultureInfo();
 Console.WriteLine($"CultureInfo Id: {culture?.Id}");
 Console.WriteLine($"CultureInfo currency: {culture?.CurrencySymbol}");
 
-
-
 #endregion
 
 #region BgNhis
+
+// Get referral
+Referral? referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
+Console.WriteLine($"#BGNHIS Referral number: {referral?.Nrn}");
+
+// Search referrals
+IEnumerable<Referral> referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
+Console.WriteLine($"#BGNHIS Referrals count: {referrals.Count()}");
+Console.WriteLine($"#BGNHIS First Referral number: {referrals.FirstOrDefault()?.Nrn}");
+
+// Contracts
+IEnumerable<NhifContract> contracts = await akitaService.GetContracts(settings.ApiKey);
+Console.WriteLine($"#BGNHIS NhifContracts count: {contracts.Count()}");
+Console.WriteLine($"#BGNHIS First NhifContract doctor uin: {contracts.FirstOrDefault()?.Doctor.Uin}");
 
 #endregion
 
