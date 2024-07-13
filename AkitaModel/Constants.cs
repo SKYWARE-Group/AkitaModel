@@ -49,6 +49,9 @@ public class Constants
     public const string URL_CORE_PART_PUBLIC_CULTURE_INFO = "/api/public/cultureinfo";
     public const string URL_CORE_PUBLIC_CULTURE_INFO = URL_CORE_API_BASE + URL_CORE_PART_PUBLIC_CULTURE_INFO;
 
+    public const string URL_CORE_PART_PUBLIC_PRICELIST = "/api/public/pricelist";
+    public const string URL_CORE_PUBLIC_PRICELIST = URL_CORE_API_BASE + URL_CORE_PART_PUBLIC_PRICELIST;
+
     #endregion
 
     #region Robin
@@ -91,4 +94,5 @@ public class Constants
     public const string URL_BGNHIS_GET_CONTRACTS = URL_BGNHIS_API_BASE + URL_BASE_PART_CONTRACTS;
 
     #endregion
+
 }
