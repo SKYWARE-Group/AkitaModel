@@ -10,6 +10,7 @@ public class BgNhis
 {
     public static async Task Run(IAkitaApi akitaService, AkitaSettings settings)
     {
+
         // Get referral
         Referral? referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
         Console.WriteLine($"#BGNHIS Referral number: {referral?.Nrn}");

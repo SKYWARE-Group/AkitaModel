@@ -13,6 +13,7 @@ AkitaSettings settings = configuration.GetSection(nameof(AkitaSettings)).Get<Aki
 IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl);
 
 await Core.Run(akitaService);
+await Core.RunSchemas(akitaService, settings);
 await BgNhis.Run(akitaService, settings);
 await Robin.Run(akitaService, settings);
 await Flagging.Run(akitaService, settings);

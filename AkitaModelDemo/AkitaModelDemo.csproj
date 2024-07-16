@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit.HttpClientFactory" Version="7.1.0" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
   </ItemGroup>

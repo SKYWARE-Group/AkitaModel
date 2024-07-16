@@ -10,7 +10,7 @@ namespace AkitaModelDemo.Services;
 public interface IAkitaApi
 {
 
-    // Commented paths are for direct (non-proxy) tests.
+    #region Core-Public
 
     [Get(Constants.URL_CORE_PUBLIC_SPECIES)]
     Task<IEnumerable<Species>> GetAllSpecies();
@@ -56,31 +56,42 @@ public interface IAkitaApi
 
     [Post(Constants.URL_ROBIN_DIRECT_FULL_REPORT)]
     Task<HttpResponseMessage> GetFullReport(string id, [Body] ReportRequest data);
-    Task<Profile> GetSingleProfile(object value);
+
+    #endregion
+
+    #region Core-Schemas
+
+    [Get(Constants.URL_CORE_SCHMEAS)]
+    Task<IEnumerable<Skyware.Lis.AkitaModel.Schema>> GetAllSchemas([Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Get(Constants.URL_CORE_PUBLIC_SINGLE_SCHMEA)]
+    Task<Skyware.Lis.AkitaModel.Schema> GetSingleSchema(int id, [Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    #endregion
 
     #region Flagging
 
     [Get(Constants.URL_FLAGGING_TESTS)]
-    Task<IEnumerable<Test>> GetAllTests([Header(Constants.API_KEY_HEADER)] string authorization);
+    Task<IEnumerable<Test>> GetAllTests([Header(Constants.API_KEY_HEADER)] string apiKey);
 
     [Post(Constants.URL_FLAGGING_TESTS)]
     Task<IEnumerable<ResultResponse>> GetTestResult([Body] IEnumerable<ResultRequest> request, [Header(Constants.API_KEY_HEADER)] string authorization);
 
     [Get(Constants.URL_FLAGGING_SINGLE_TEST)]
-    Task<Test> GetSingleTest(int id, [Header(Constants.API_KEY_HEADER)] string authorization);
+    Task<Test> GetSingleTest(int id, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     #endregion
 
     #region BgNhis
 
     [Get(Constants.URL_BGNHIS_GET_REFERRAL)]
-    Task<Referral?> GetReferral([AliasAs("nrn")] string nrn, [Header(Constants.API_KEY_HEADER)] string authorization);
+    Task<Referral?> GetReferral([AliasAs("nrn")] string nrn, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     [Get(Constants.URL_BGNHIS_SEARCH_REFERRALS)]
-    Task<IEnumerable<Referral>> SearchReferrals([AliasAs("pid")]  string pid, [Header(Constants.API_KEY_HEADER)] string authorization);
+    Task<IEnumerable<Referral>> SearchReferrals([AliasAs("pid")] string pid, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     [Get(Constants.URL_BGNHIS_GET_CONTRACTS)]
-    Task<IEnumerable<NhifContract>> GetContracts([Header(Constants.API_KEY_HEADER)] string authorization);
+    Task<IEnumerable<NhifContract>> GetContracts([Header(Constants.API_KEY_HEADER)] string apiKey);
 
     #endregion
 }

@@ -52,6 +52,10 @@ public class Constants
     public const string URL_CORE_PART_PUBLIC_PRICELIST = "/api/public/pricelist";
     public const string URL_CORE_PUBLIC_PRICELIST = URL_CORE_API_BASE + URL_CORE_PART_PUBLIC_PRICELIST;
 
+    public const string URL_CORE_PART_SCHMEAS = "/api/schemas";
+    public const string URL_CORE_SCHMEAS = URL_CORE_API_BASE + URL_CORE_PART_SCHMEAS;
+    public const string URL_CORE_PUBLIC_SINGLE_SCHMEA = URL_CORE_API_BASE + URL_CORE_PART_SCHMEAS + "/{id}";
+
     #endregion
 
     #region Robin
