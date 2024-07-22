@@ -6,6 +6,7 @@ namespace Skyware.Lis.AkitaModel;
 
 public class CultureInfo
 {
+    public static IFormatProvider InvariantCulture { get; internal set; }
     public int Id { get; set; }
 
     public string CurrencySymbol { get; set; }

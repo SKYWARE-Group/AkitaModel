@@ -48,6 +48,17 @@ public interface IAkitaApi
     [Get(Constants.URL_CORE_PUBLIC_DEPARTMENTS)]
     Task<IEnumerable<Department>> GetAllDepartments();
 
+    #endregion
+
+    #region Core-Sales
+
+    [Post(Constants.URL_CORE_SALES)]
+    Task<Visit> CreateSale([Body] Visit visit, [Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    #endregion
+
+    #region Robin
+
     [Get(Constants.URL_ROBIN_DIRECT_REPORTS)]
     Task<IEnumerable<DirectReport>> GetAllReports();
 

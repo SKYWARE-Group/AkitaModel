@@ -10,9 +10,13 @@ public class Product
 
     public int DepartmentId { get; set; }
 
+    public int? Rank { get; set; }
+
     public int? TestId { get; set; }
 
     public int? ProfileId { get; set; }
+
+    public string LoincCode { get; set; }
 
     public string Name { get; set; }
 

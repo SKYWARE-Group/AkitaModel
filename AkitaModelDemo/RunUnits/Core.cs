@@ -93,4 +93,26 @@ public class Core
 
     }
 
+    public static async Task RunSales(IAkitaApi akitaService, AkitaSettings settings)
+    {
+
+        // All schemas
+        IEnumerable<Schema> schemas = await akitaService.GetAllSchemas(settings.ApiKey);
+        Console.WriteLine($"Schemas count: {schemas.Count()}");
+        Console.WriteLine($"First schema name: {schemas.FirstOrDefault()?.Name}");
+
+        // Single schema
+        Schema schema = await akitaService.GetSingleSchema(schemas?.FirstOrDefault()?.Id ?? 1, settings.ApiKey);
+        Console.WriteLine($"Schema Id: {schema?.Id}");
+        Console.WriteLine($"Schema name: {schema?.Name}");
+        Console.WriteLine($"Schema products: {schema?.Items?.Count() ?? 0}");
+
+        // Register Sale
+        Visit visitBulgarian = DataFactory.GetBulgarianCitizenVisit(schemas?.FirstOrDefault()?.Id ?? 1, schema?.Items?.Where(x => !string.IsNullOrWhiteSpace(x.LoincCode)).Take(3).Select(x => x.LoincCode) ?? []);
+        visitBulgarian = await akitaService.CreateSale(visitBulgarian, settings.ApiKey);
+        Console.WriteLine($"Visit Id: {visitBulgarian?.Id}");
+
+
+    }
+
 }

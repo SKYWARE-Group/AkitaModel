@@ -1,6 +1,4 @@
 ﻿using Skyware.Lis.AkitaModel.Flagging;
-using Skyware.Lis.AkitaModel.Robin.Reports.Bg;
-using System.Runtime.CompilerServices;
 
 namespace AkitaModelDemo.Helpers;
 
@@ -11,7 +9,7 @@ public class DataFactory
 
     public static string NRN = "241797000039";
 
-    public static LabReferral GetDemoReferral() => new()
+    public static Skyware.Lis.AkitaModel.Robin.Reports.Bg.LabReferral GetDemoReferral() => new()
     {
         Nrn = "23184A000A1F",
         AmbulatoryNrn = "2316A7000AA1",
@@ -34,7 +32,7 @@ public class DataFactory
                 Area = "Младост",
                 Street = "Йонко Вапцаров",
                 StreetNumber = "22",
-            }
+            },
         },
         Doctor = new()
         {
@@ -44,24 +42,24 @@ public class DataFactory
         },
         Examinations =
             [
-                new ReferralItem()
+                new Skyware.Lis.AkitaModel.Robin.Reports.Bg.ReferralItem()
                 {
                     NhifCode = "01.01",
                     StatisticsCode = "91910-04",
                     SpecialtyCode = "14",
                     Uin = "1600004145",
                 },
-                new ReferralItem()
+                new Skyware.Lis.AkitaModel.Robin.Reports.Bg.ReferralItem()
                 {
                     NhifCode = "01.03",
                     StatisticsCode = "91900-99",
                     SpecialtyCode = "14",
                     Uin = "1600004145",
                 }
-            ]
+            ],
     };
 
-    internal static IEnumerable<ResultRequest> GetDemoFlaggingTestResultRequest()
+    public static IEnumerable<ResultRequest> GetDemoFlaggingTestResultRequest()
     {
         yield return new()
         {
@@ -81,7 +79,35 @@ public class DataFactory
             DateOfBirth = new DateTime(1992, 12, 12),
             IsMale = true,
             NumericPrefix = "",
-            TextResult = "13.38"
+            TextResult = "13.38",
         };
     }
+
+    public static Skyware.Lis.AkitaModel.Patient GetBulgarianCitizen()
+    {
+        return new()
+        {
+            PidTypeId = 1, // EGN
+            PatientId = "8008075567",
+            GivenName = "Явор",
+            MiddleName = "Иванов",
+            FamilyName = "Илиев",
+            DateOfBirth = new DateTime(1980, 8, 7),
+            IsDobAprox = false,
+            IsMale = true,
+        };
+    }
+
+    public static Skyware.Lis.AkitaModel.Visit GetBulgarianCitizenVisit(int schemaId, IEnumerable<string> codes)
+    {
+        return new()
+        {
+            Patient = GetBulgarianCitizen(),
+            SchemaId = schemaId,
+            Items = codes.Select(x => new Skyware.Lis.AkitaModel.VisitItem() { LoincId = x }).ToArray(),
+        };
+    }
+
+
+
 }
