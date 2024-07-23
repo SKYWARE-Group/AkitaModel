@@ -25,7 +25,6 @@ public class BinaryHelper
         await File.WriteAllBytesAsync(targetPath, data);
     }
 
-
     public static void OpenFile(string targetPath)
     {
         using Process fileopener = new();

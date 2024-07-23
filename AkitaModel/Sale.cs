@@ -6,7 +6,7 @@ namespace Skyware.Lis.AkitaModel;
 /// <summary>
 /// Visit, laboratory order.
 /// </summary>
-public class Visit
+public class Sale
 {
 
     /// <summary>
@@ -55,6 +55,11 @@ public class Visit
     public string Field3 { get; set; } = string.Empty;
 
     /// <summary>
+    /// Priority
+    /// </summary>
+    public bool? IsStat { get; set; }
+
+    /// <summary>
     /// Referring doctor.
     /// </summary>
     public Doctor Doctor { get; set; }
@@ -62,7 +67,7 @@ public class Visit
     /// <summary>
     /// Visit's examinations.
     /// </summary>
-    public IList<VisitItem> Items { get; set; }
+    public IList<SaleItem> Items { get; set; }
 
     /// <summary>
     /// Samples to the visit.

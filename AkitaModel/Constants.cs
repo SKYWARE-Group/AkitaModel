@@ -58,7 +58,10 @@ public class Constants
 
     public const string URL_CORE_PART_SALES = "/api/sales";
     public const string URL_CORE_SALES = URL_CORE_API_BASE + URL_CORE_PART_SALES;
-    //public const string URL_CORE_PUBLIC_SINGLE_SCHMEA = URL_CORE_API_BASE + URL_CORE_PART_SCHMEAS + "/{id}";
+    public const string URL_CORE_SINGLE_SALE = URL_CORE_SALES + "/{id}";
+    public const string URL_CORE_SINGLE_SALE_ITEMS = URL_CORE_SINGLE_SALE + "/items";
+    public const string URL_CORE_SINGLE_SALE_SAMPLES = URL_CORE_SINGLE_SALE + "/samples";
+    public const string URL_CORE_SINGLE_SALE_ITEMS_RESULT = URL_CORE_SINGLE_SALE_ITEMS + "/{loincCode}/result";
 
     #endregion
 

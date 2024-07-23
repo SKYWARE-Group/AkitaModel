@@ -5,7 +5,7 @@ namespace Skyware.Lis.AkitaModel;
 /// <summary>
 /// Examination record - test or panel and its results.
 /// </summary>
-public class VisitItem
+public class SaleItem
 {
  
     /// <summary>
@@ -109,6 +109,6 @@ public class VisitItem
     /// <summary>
     /// Child items, applicable only to panels/profiles.
     /// </summary>
-    public List<VisitItem> Children { get; set; }
+    public List<SaleItem> Children { get; set; }
 
 }

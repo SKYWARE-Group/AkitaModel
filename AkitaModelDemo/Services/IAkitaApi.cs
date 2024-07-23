@@ -53,7 +53,19 @@ public interface IAkitaApi
     #region Core-Sales
 
     [Post(Constants.URL_CORE_SALES)]
-    Task<Visit> CreateSale([Body] Visit visit, [Header(Constants.API_KEY_HEADER)] string apiKey);
+    Task<Sale> CreateSale([Body] Sale visit, [Header(Constants.API_KEY_HEADER)] string apiKey, [Query] bool? genbc = null);
+
+    [Put(Constants.URL_CORE_SINGLE_SALE)]
+    Task<Sale> UpadteSale(int id, [Body] Sale visit, [Header(Constants.API_KEY_HEADER)] string apiKey, [Query] bool? genbc = null);
+
+    [Get(Constants.URL_CORE_SINGLE_SALE_SAMPLES)]
+    Task<IEnumerable<Sample>> GetSamples(int id, [Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Put(Constants.URL_CORE_SINGLE_SALE_ITEMS)]
+    Task<SaleItem> SetResult(int id, [Body] SaleItem item, [Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Delete(Constants.URL_CORE_SINGLE_SALE_ITEMS_RESULT)]
+    Task<SaleItem> UnsetResult(int id, string loincCode, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     #endregion
 

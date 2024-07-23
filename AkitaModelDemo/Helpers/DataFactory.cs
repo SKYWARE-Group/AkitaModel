@@ -40,23 +40,22 @@ public class DataFactory
             Uin = "0400045236",
             SpecialityCode = "00",
         },
-        Examinations =
-            [
-                new Skyware.Lis.AkitaModel.Robin.Reports.Bg.ReferralItem()
-                {
-                    NhifCode = "01.01",
-                    StatisticsCode = "91910-04",
-                    SpecialtyCode = "14",
-                    Uin = "1600004145",
-                },
-                new Skyware.Lis.AkitaModel.Robin.Reports.Bg.ReferralItem()
-                {
-                    NhifCode = "01.03",
-                    StatisticsCode = "91900-99",
-                    SpecialtyCode = "14",
-                    Uin = "1600004145",
-                }
-            ],
+        Examinations = [
+            new Skyware.Lis.AkitaModel.Robin.Reports.Bg.ReferralItem()
+            {
+                NhifCode = "01.01",
+                StatisticsCode = "91910-04",
+                SpecialtyCode = "14",
+                Uin = "1600004145",
+            },
+            new Skyware.Lis.AkitaModel.Robin.Reports.Bg.ReferralItem()
+            {
+                NhifCode = "01.03",
+                StatisticsCode = "91900-99",
+                SpecialtyCode = "14",
+                Uin = "1600004145",
+            }
+        ],
     };
 
     public static IEnumerable<ResultRequest> GetDemoFlaggingTestResultRequest()
@@ -83,30 +82,52 @@ public class DataFactory
         };
     }
 
-    public static Skyware.Lis.AkitaModel.Patient GetBulgarianCitizen()
+    public static Skyware.Lis.AkitaModel.Patient GetBulgarianCitizen() => new()
     {
-        return new()
-        {
-            PidTypeId = 1, // EGN
-            PatientId = "8008075567",
-            GivenName = "Явор",
-            MiddleName = "Иванов",
-            FamilyName = "Илиев",
-            DateOfBirth = new DateTime(1980, 8, 7),
-            IsDobAprox = false,
-            IsMale = true,
-        };
-    }
+        PidTypeId = 1, // EGN
+        PatientId = "8008075567",
+        GivenName = "Явор",
+        MiddleName = "Иванов",
+        FamilyName = "Илиев",
+        DateOfBirth = new DateTime(1980, 8, 7),
+        IsDobAprox = false,
+        IsMale = true,
+    };
 
-    public static Skyware.Lis.AkitaModel.Visit GetBulgarianCitizenVisit(int schemaId, IEnumerable<string> codes)
+    public static Skyware.Lis.AkitaModel.Patient GetJohnDoe() => new()
     {
-        return new()
-        {
-            Patient = GetBulgarianCitizen(),
-            SchemaId = schemaId,
-            Items = codes.Select(x => new Skyware.Lis.AkitaModel.VisitItem() { LoincId = x }).ToArray(),
-        };
-    }
+        PidTypeId = 0, // Anonymous
+        GivenName = "John",
+        FamilyName = "Doe",
+        DateOfBirth = new DateTime(1985, 4, 12),
+        IsDobAprox = true,
+        IsMale = true,
+    };
+
+    public static Skyware.Lis.AkitaModel.Patient GetJaneDoe() => new()
+    {
+        PidTypeId = 0, // Anonymous
+        GivenName = "Jane",
+        FamilyName = "Doe",
+        DateOfBirth = new DateTime(1990, 8, 22),
+        IsDobAprox = false,
+        IsMale = false,
+    };
+
+    public static Skyware.Lis.AkitaModel.Sale GetBulgarianCitizenVisit(int schemaId, IEnumerable<string> codes) => new()
+    {
+        Patient = GetBulgarianCitizen(),
+        SchemaId = schemaId,
+        Items = codes.Select(x => new Skyware.Lis.AkitaModel.SaleItem() { LoincId = x }).ToArray(),
+    };
+
+    public static Skyware.Lis.AkitaModel.Sale GetJohnDoeVisit(int schemaId, IEnumerable<string> codes) => new()
+    {
+        Patient = GetJohnDoe(),
+        SchemaId = schemaId,
+        IsStat = true,
+        Items = codes.Select(x => new Skyware.Lis.AkitaModel.SaleItem() { LoincId = x }).ToArray(),
+    };
 
 
 

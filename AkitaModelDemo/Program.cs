@@ -7,19 +7,22 @@ using Refit;
 
 Console.WriteLine("AkitaModel demo application");
 
+// Set up --------------------------
+// Configuration
 IConfiguration configuration = ConfigHelper.BuildConfig();
 AkitaSettings settings = configuration.GetSection(nameof(AkitaSettings)).Get<AkitaSettings>() ?? throw new ApplicationException("No configuration is found!");
 
+// REST Service
 RefitSettings refitSettings = new()
 {
     ContentSerializer = new SystemTextJsonContentSerializer(Skyware.Lis.AkitaModel.Helpers.JsonSettings.GetJsonOptions()),
 };
-
 IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSettings);
 
+// ---------------------------------
+// Test invocations
 // Core
-await Core.Run(akitaService);
-//await Core.RunSchemas(akitaService, settings);
+await Core.RunPublic(akitaService);
 await Core.RunSales(akitaService, settings);
 
 // BgNhis
@@ -31,3 +34,4 @@ await Robin.Run(akitaService, settings);
 // Flagging
 await Flagging.Run(akitaService, settings);
 
+Console.WriteLine("Done.");
