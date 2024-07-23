@@ -1,5 +1,4 @@
-﻿using Skyware.Lis.AkitaModel.Flagging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Skyware.Lis.AkitaModel;
 

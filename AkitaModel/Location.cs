@@ -74,7 +74,10 @@ public class Location
 
     public int GroupId { get; set; }
 
-    //public LocationGroup LocationGroup { get; set; }
+    /// <summary>
+    /// The <see cref="AkitaModel.LocationGroup"/> this location belongs to.
+    /// </summary>
+    public LocationGroup LocationGroup { get; set; }
 
     public bool CanReceiveSamples { get; set; } = true;
 

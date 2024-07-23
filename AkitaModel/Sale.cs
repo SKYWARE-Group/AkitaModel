@@ -6,7 +6,7 @@ namespace Skyware.Lis.AkitaModel;
 /// <summary>
 /// Visit, laboratory order.
 /// </summary>
-public class Visit
+public class Sale
 {
 
     /// <summary>
@@ -17,7 +17,7 @@ public class Visit
     /// <summary>
     /// Reference to an external system.
     /// </summary>
-    public string ExternalId { get; set; }
+    public string ExternalId { get; set; } = string.Empty;
 
     /// <summary>
     /// Date and time the visit was registered.
@@ -42,17 +42,22 @@ public class Visit
     /// <summary>
     /// Custom field #1.
     /// </summary>
-    public string Field1 { get; set; }
+    public string Field1 { get; set; } = string.Empty;
 
     /// <summary>
     /// Custom field #2.
     /// </summary>
-    public string Field2 { get; set; }
+    public string Field2 { get; set; } = string.Empty;
 
     /// <summary>
     /// Custom field #3.
     /// </summary>
-    public string Field3 { get; set; }
+    public string Field3 { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Priority
+    /// </summary>
+    public bool? IsStat { get; set; }
 
     /// <summary>
     /// Referring doctor.
@@ -62,7 +67,7 @@ public class Visit
     /// <summary>
     /// Visit's examinations.
     /// </summary>
-    public IList<VisitItem> Items { get; set; }
+    public IList<SaleItem> Items { get; set; }
 
     /// <summary>
     /// Samples to the visit.
