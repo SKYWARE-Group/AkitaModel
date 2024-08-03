@@ -16,10 +16,10 @@ public interface IAkitaApi
     Task<IEnumerable<Species>> GetAllSpecies();
 
     [Get(Constants.URL_CORE_PUBLIC_TESTS)]
-    Task<IEnumerable<Test>> GetAllTests();
+    Task<IEnumerable<Test>> GetAllTests([Query] bool? loadRanges = null, [Query] bool? loadSampleType = null, [Query] bool? loadFlagType = null);
 
     [Get(Constants.URL_CORE_PUBLIC_SINGLE_TEST)]
-    Task<Test> GetSingleTest(int id);
+    Task<Test> GetSingleTest(int id, [Query] bool? loadRanges = null, [Query] bool? loadSampleType = null, [Query] bool? loadFlagType = null);
 
     [Get(Constants.URL_CORE_PUBLIC_SAMPLE_TYPES)]
     Task<IEnumerable<SampleType>> GetAllSampleTypes();

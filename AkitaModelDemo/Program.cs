@@ -26,7 +26,7 @@ await Core.RunPublic(akitaService);
 await Core.RunSales(akitaService, settings);
 
 // BgNhis
-await BgNhis.Run(akitaService, settings);
+//await BgNhis.Run(akitaService, settings);
 
 // Robin
 await Robin.Run(akitaService, settings);
