@@ -82,6 +82,11 @@ public class Test
     public FlagType FlagType { get; set; }
 
     /// <summary>
+    /// If false, test should be considered as "internal use only" and shouldn't be reported to third parties. 
+    /// </summary>
+    public bool? ShowInResults { get; set; } = true;
+
+    /// <summary>
     /// Maximum allowed flag level.
     /// </summary>
     public FlagLevelLimits FlagLimit { get; set; } = FlagLevelLimits.UP_TO_ULTRA;
