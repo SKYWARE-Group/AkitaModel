@@ -9,6 +9,11 @@ public class ReferenceRange
 {
 
     /// <summary>
+    /// PK in DB.
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
     /// Species discriminator, e.g. 1=human.
     /// </summary>
     public int SpeciesId { get; set; } = 1;
