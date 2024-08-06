@@ -1,6 +1,6 @@
 ﻿namespace Skyware.Lis.AkitaModel.Courier;
 
-// Ignore Spelling: hl ngh
+// Ignore Spelling: hl
 
 /// <summary>
 /// HL7 syntax dialect.
@@ -9,12 +9,12 @@ public class Dialect
 {
 
     /// <summary>
-    /// Identifier in the Courier system, e.g. "ngh-2020".
+    /// Identifier in the Courier system, e.g. "hl7.251.basic".
     /// </summary>
     public string Id { get; set; }
 
     /// <summary>
-    /// Friendly name, e.g. "North General Hospital 2020".
+    /// Friendly name, e.g. "HL7 v2.5.1 Basic".
     /// </summary>
     public string Name { get; set; }
 
