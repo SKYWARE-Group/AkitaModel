@@ -4,6 +4,8 @@ using AkitaModelDemo.Services;
 using Skyware.Arda.Model;
 using Skyware.Lis.AkitaModel.BgNhis;
 
+// Ignore Spelling: bg uin
+
 namespace AkitaModelDemo.RunUnits;
 
 public class BgNhis
