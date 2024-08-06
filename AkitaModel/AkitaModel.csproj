@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.7</Version>
+    <Version>0.0.8</Version>
     <RootNamespace>Skyware.Lis.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.$(MSBuildProjectName)</AssemblyName>

@@ -36,6 +36,11 @@ public class ImportRequest
     public string UserName { get; set; }
 
     /// <summary>
+    /// Id of the existing Sale the referrals must be added.
+    /// </summary>
+    public int? SaleId { get; set; }
+
+    /// <summary>
     /// Collection of referrals to be imported.
     /// </summary>
     public ReferralImportRequest[] Referrals { get; set; } = [];
