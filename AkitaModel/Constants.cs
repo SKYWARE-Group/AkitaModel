@@ -100,9 +100,14 @@ public class Constants
 
     public const string URL_BGNHIS_GET_REFERRAL = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS + "/{nrn}";
 
+    public const string URL_BGNHIS_REFERRAL_ITEM = URL_BGNHIS_GET_REFERRAL + "/{code}";
+
     public const string URL_BGNHIS_SEARCH_REFERRALS = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS + "/search/{pid}";
 
     public const string URL_BGNHIS_GET_CONTRACTS = URL_BGNHIS_API_BASE + URL_BASE_PART_CONTRACTS;
+
+    public const string URL_BGNHIS_POST_IMPORT = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS;
+
 
     #endregion
 

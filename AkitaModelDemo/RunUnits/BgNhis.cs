@@ -1,8 +1,9 @@
 ﻿using AkitaModelDemo.Helpers;
 using AkitaModelDemo.Models;
 using AkitaModelDemo.Services;
-using Skyware.Arda.Model;
+using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.BgNhis;
+using Skyware.Rila.Model;
 
 // Ignore Spelling: bg uin
 
@@ -22,19 +23,17 @@ public class BgNhis
 
     public static async Task Run(IAkitaApi akitaService, AkitaSettings settings)
     {
-
         // 1. Сценарий 1
         // 1.1 Извличане на НМДД по НРД (очаква се 1)
         // 1.2 Търсене по ЕГН (очаква се 1)
 
         // Get referral
-        Referral? referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Referral number: {referral?.Nrn}");
+        RilaReferralResultsData referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
+        Console.WriteLine($"#BGNHIS Referral number: {referral?.ReferralData.Nrn}");
 
         // Search referrals
-        IEnumerable<Referral> referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
+        IEnumerable<RilaReferralResultsData> referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
         Console.WriteLine($"#BGNHIS Referrals count: {referrals.Count()}");
-        Console.WriteLine($"#BGNHIS First Referral number: {referrals.FirstOrDefault()?.Nrn}");
 
 
         // 2. Сценарий 2
@@ -43,10 +42,45 @@ public class BgNhis
         // 2.3. Добавяне на № 3 към продажбата от 2.2 (вече трябва да им 3)
         // 2.4. Премахва са № 1 (очаква се да останат само 2)
         // 2.5. В № 2 първия код се анулира (void)
-        // 2.5. Кода по т 2.5. се възстановява
+        // 2.6. Кода по т 2.5. се възстановява
+        // 2.7  Освобождаване на всички направления
 
+        //2.1
+        IEnumerable<RilaReferralResultsData> referrals2 = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
+        Console.WriteLine($"#BGNHIS Referrals count: {referrals2.Count()}");
+
+        List<string> nrns = referrals2.Select(r => r.ReferralData.Nrn).ToList();
+
+        //2.2
+        var importRequest = DataFactory.GetImportRequest(nrns[0], nrns[1]);
+        Sale sale = await akitaService.Import(importRequest, settings.ApiKey);
+        Console.WriteLine($"#BGNHIS Sale id with 2 referrals: {sale.Id}");
+
+        if (sale is not null)
+        {
+            //2.3
+            importRequest = DataFactory.GetImportRequestWithSale(sale.Id, nrns[2]);
+            sale = await akitaService.Import(importRequest, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Import third referral: {sale.Id}");
+
+            //2.4
+            sale = await akitaService.ReleaseReferral(nrns[2], settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Remove third referral: {sale.Id}");
+
+            string code = referrals2.ToList()[1].ReferralData.Procedures.FirstOrDefault()?.Code ?? string.Empty;
+
+            //2.5
+            var response = await akitaService.VoidReferralItem(nrns[1], code, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Referral item voided result: {response}");
+            //2.6
+            response = await akitaService.RestoreReferralItem(nrns[1], code, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Referral item restored result: {response}");
+
+            //2.7
+            importRequest = DataFactory.GetImportRequestWithThreeReferrals(nrns);
+            sale = await akitaService.ReleaseAll(importRequest, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Remove all referrals: {sale.Id}");
+        }
 
     }
-
-
 }

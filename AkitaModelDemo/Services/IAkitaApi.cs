@@ -1,9 +1,9 @@
 ﻿using Refit;
-using Skyware.Arda.Model;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.BgNhis;
 using Skyware.Lis.AkitaModel.Flagging;
 using Skyware.Lis.AkitaModel.Robin;
+using Skyware.Rila.Model;
 
 namespace AkitaModelDemo.Services;
 
@@ -108,13 +108,28 @@ public interface IAkitaApi
     #region BgNhis
 
     [Get(Constants.URL_BGNHIS_GET_REFERRAL)]
-    Task<Referral?> GetReferral([AliasAs("nrn")] string nrn, [Header(Constants.API_KEY_HEADER)] string apiKey);
+    Task<RilaReferralResultsData> GetReferral(string nrn, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     [Get(Constants.URL_BGNHIS_SEARCH_REFERRALS)]
-    Task<IEnumerable<Referral>> SearchReferrals([AliasAs("pid")] string pid, [Header(Constants.API_KEY_HEADER)] string apiKey);
+    Task<IEnumerable<RilaReferralResultsData>> SearchReferrals(string pid, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     [Get(Constants.URL_BGNHIS_GET_CONTRACTS)]
     Task<IEnumerable<NhifContract>> GetContracts([Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Post(Constants.URL_BGNHIS_POST_IMPORT)]
+    Task<Sale> Import([Body] ImportRequest request, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    [Delete(Constants.URL_BGNHIS_GET_REFERRAL)]
+    Task<Sale> ReleaseReferral(string nrn, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    [Delete(Constants.URL_BGNHIS_POST_IMPORT)]
+    Task<Sale> ReleaseAll([Body] ImportRequest request, [Header(Constants.API_KEY_HEADER)] string authorization);
+
+    [Delete(Constants.URL_BGNHIS_REFERRAL_ITEM)]
+    Task<ApiResponse<bool>> VoidReferralItem(string nrn, string code, [Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Patch(Constants.URL_BGNHIS_REFERRAL_ITEM)]
+    Task<ApiResponse<bool>> RestoreReferralItem(string nrn, string code, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     #endregion
 }

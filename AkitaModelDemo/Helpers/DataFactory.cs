@@ -1,13 +1,315 @@
-﻿using Skyware.Lis.AkitaModel.Flagging;
+﻿using Skyware.Lis.AkitaModel;
+using Skyware.Lis.AkitaModel.BgNhis;
+using Skyware.Lis.AkitaModel.Flagging;
 
 namespace AkitaModelDemo.Helpers;
 
 public class DataFactory
 {
 
-    public static string PID = "3303234518";
+    public static string PID = "1552284828";
 
-    public static string NRN = "241797000039";
+    public static string NRN = "24222000000A";
+
+    public static ImportRequest GetImportRequestWithThreeReferrals(IList<string> nrns) => new()
+    {
+        ApplicationName = string.Empty,
+        ProcPointLocationId = "1",
+        Schema = new()
+        {
+            SchemaId = 2,
+            FundId = 1,
+            Fund2Id = null
+        },
+        RegLocationId = "1",
+        LocationId = "1",
+        UserName = string.Empty,
+        SaleId = 0,
+        Referrals = [
+                       new ReferralImportRequest
+                        {
+                            Nrn = nrns[0],
+                            VisitDate = DateTime.Now,
+                            SampleDate = DateTime.Now,
+                            ResultsDate = DateTime.Now,
+                            NhifContract = new()
+                            {
+                                Doctor = new()
+                                {
+                                    Id = 0,
+                                    GivenName = string.Empty,
+                                    MiddleName = string.Empty,
+                                    FamilyName = string.Empty,
+                                    Uin="2300006463",
+                                    Title = string.Empty,
+                                    Speciality = new Speciality
+                                    {
+                                        Id=0,
+                                        Name=string.Empty
+                                    },
+                                    Region=string.Empty,
+                                    City=string.Empty,
+                                    PostalCode = string.Empty,
+                                    PostAddress = string.Empty
+                                },
+                               Speciality = new()
+                               {
+                                   NhifCode = "09",
+                                   NhisCode = string.Empty,
+                                   Name = string.Empty
+                               },
+                               Practice = new()
+                               {
+                                   PracticeNumber = "2210131574",
+                                   NhifNumber = string.Empty,
+                                   Name = string.Empty
+
+                               }
+                            },
+                        },
+                        new ReferralImportRequest
+                        {
+                            Nrn = nrns[1],
+                            VisitDate = DateTime.Now,
+                            SampleDate = DateTime.Now,
+                            ResultsDate = DateTime.Now,
+                            NhifContract = new()
+                            {
+                                Doctor = new()
+                                {
+                                    Id = 0,
+                                    GivenName = string.Empty,
+                                    MiddleName = string.Empty,
+                                    FamilyName = string.Empty,
+                                    Uin="2300006463",
+                                    Title = string.Empty,
+                                    Speciality = new Speciality
+                                    {
+                                        Id=0,
+                                        Name=string.Empty
+                                    },
+                                    Region=string.Empty,
+                                    City=string.Empty,
+                                    PostalCode = string.Empty,
+                                    PostAddress = string.Empty
+                                },
+                               Speciality = new()
+                               {
+                                   NhifCode = "09",
+                                   NhisCode = string.Empty,
+                                   Name = string.Empty
+                               },
+                               Practice = new()
+                               {
+                                   PracticeNumber = "2210131574",
+                                   NhifNumber = string.Empty,
+                                   Name = string.Empty
+
+                               }
+                            },
+                        },
+                        new ReferralImportRequest
+                        {
+                            Nrn = nrns[2],
+                            VisitDate = DateTime.Now,
+                            SampleDate = DateTime.Now,
+                            ResultsDate = DateTime.Now,
+                            NhifContract = new()
+                            {
+                                Doctor = new()
+                                {
+                                    Id = 0,
+                                    GivenName = string.Empty,
+                                    MiddleName = string.Empty,
+                                    FamilyName = string.Empty,
+                                    Uin="2300006463",
+                                    Title = string.Empty,
+                                    Speciality = new Speciality
+                                    {
+                                        Id=0,
+                                        Name=string.Empty
+                                    },
+                                    Region=string.Empty,
+                                    City=string.Empty,
+                                    PostalCode = string.Empty,
+                                    PostAddress = string.Empty
+                                },
+                               Speciality = new()
+                               {
+                                   NhifCode = "09",
+                                   NhisCode = string.Empty,
+                                   Name = string.Empty
+                               },
+                               Practice = new()
+                               {
+                                   PracticeNumber = "2210131574",
+                                   NhifNumber = string.Empty,
+                                   Name = string.Empty
+
+                               }
+                            },
+                        }
+                   ]
+    };
+
+    public static ImportRequest GetImportRequestWithSale(int? saleId, string nrn3) => new()
+    {
+        ApplicationName = string.Empty,
+        ProcPointLocationId = "1",
+        Schema = new()
+        {
+            SchemaId = 2,
+            FundId = 1,
+            Fund2Id = null
+        },
+        RegLocationId = "1",
+        LocationId = "1",
+        UserName = string.Empty,
+        SaleId = saleId,
+        Referrals = [
+                        new ReferralImportRequest
+                        {
+                            Nrn = nrn3,
+                            VisitDate = DateTime.Now,
+                            SampleDate = DateTime.Now,
+                            ResultsDate = DateTime.Now,
+                            NhifContract = new()
+                            {
+                                Doctor = new()
+                                {
+                                    Id = 0,
+                                    GivenName = string.Empty,
+                                    MiddleName = string.Empty,
+                                    FamilyName = string.Empty,
+                                    Uin="2300006463",
+                                    Title = string.Empty,
+                                    Speciality = new Speciality
+                                    {
+                                        Id=0,
+                                        Name=string.Empty
+                                    },
+                                    Region=string.Empty,
+                                    City=string.Empty,
+                                    PostalCode = string.Empty,
+                                    PostAddress = string.Empty
+                                },
+                               Speciality = new()
+                               {
+                                   NhifCode = "09",
+                                   NhisCode = string.Empty,
+                                   Name = string.Empty
+                               },
+                               Practice = new()
+                               {
+                                   PracticeNumber = "2210131574",
+                                   NhifNumber = string.Empty,
+                                   Name = string.Empty
+
+                               }
+                            },
+                        }
+                    ]
+    };
+
+    public static ImportRequest GetImportRequest(string nrn1, string nrn2) => new()
+    {
+        ApplicationName = string.Empty,
+        ProcPointLocationId = "1",
+        Schema = new()
+        {
+            SchemaId = 2,
+            FundId = 1,
+            Fund2Id = null
+        },
+        RegLocationId = "1",
+        LocationId = "1",
+        UserName = string.Empty,
+        SaleId = 0,
+        Referrals = [
+                        new ReferralImportRequest
+                        {
+                            Nrn = nrn1,
+                            VisitDate = DateTime.Now,
+                            SampleDate = DateTime.Now,
+                            ResultsDate = DateTime.Now,
+                            NhifContract = new()
+                            {
+                                Doctor = new()
+                                {                                    
+                                    Id = 0,
+                                    GivenName = string.Empty,
+                                    MiddleName = string.Empty,
+                                    FamilyName = string.Empty,
+                                    Uin="2300006463",
+                                    Title = string.Empty,
+                                    Speciality = new Speciality
+                                    {
+                                        Id=0,
+                                        Name=string.Empty
+                                    },
+                                    Region=string.Empty,
+                                    City=string.Empty,
+                                    PostalCode = string.Empty,
+                                    PostAddress = string.Empty
+                                },
+                               Speciality = new()
+                               {
+                                   NhifCode = "09",
+                                   NhisCode = string.Empty,
+                                   Name = string.Empty
+                               },
+                               Practice = new()
+                               {
+                                   PracticeNumber = "2210131574",
+                                   NhifNumber = string.Empty,
+                                   Name = string.Empty
+                                   
+                               }
+                            },
+                        },
+                        new ReferralImportRequest
+                        {
+                            Nrn = nrn2,
+                            VisitDate = DateTime.Now,
+                            SampleDate = DateTime.Now,
+                            ResultsDate = DateTime.Now,
+                            NhifContract = new()
+                            {
+                                Doctor = new()
+                                {
+                                    Id = 0,
+                                    GivenName = string.Empty,
+                                    MiddleName = string.Empty,
+                                    FamilyName = string.Empty,
+                                    Uin="2300006463",
+                                    Title = string.Empty,
+                                    Speciality = new Speciality
+                                    {
+                                        Id=0,
+                                        Name=string.Empty
+                                    },
+                                    Region=string.Empty,
+                                    City=string.Empty,
+                                    PostalCode = string.Empty,
+                                    PostAddress = string.Empty
+                                },
+                               Speciality = new()
+                               {
+                                   NhifCode = "09",
+                                   NhisCode = string.Empty,
+                                   Name = string.Empty
+                               },
+                               Practice = new()
+                               {
+                                   PracticeNumber = "2210131574",
+                                   NhifNumber = string.Empty,
+                                   Name = string.Empty
+
+                               }
+                            },
+                        }
+                    ]
+    };
 
     public static Skyware.Lis.AkitaModel.Robin.Reports.Bg.LabReferral GetDemoReferral() => new()
     {
