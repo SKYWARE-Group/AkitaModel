@@ -7,9 +7,9 @@ namespace AkitaModelDemo.Helpers;
 public class DataFactory
 {
 
-    public static string PID = "1552284828";
+    public static string PID = "0248091410";
 
-    public static string NRN = "24222000000A";
+    public static string NRN = "242266000002";
 
     public static ImportRequest GetImportRequestWithThreeReferrals(IList<string> nrns) => new()
     {
@@ -211,6 +211,24 @@ public class DataFactory
                     ]
     };
 
+    
+    public static ImportRequest GetImportRequest(IEnumerable<string> nrnList, NhifContract contract) =>
+        new()
+        {
+            Referrals = nrnList
+                .Select(x => new ReferralImportRequest()
+                {
+                    Nrn = x,
+                    NhifContract = new()
+                    {
+                        Doctor = new() { Uin = contract.Doctor.Uin },
+                        Practice = new() { PracticeNumber = contract.Practice.PracticeNumber, NhifNumber = contract.Practice.NhifNumber },
+                        Speciality = new() { NhifCode = contract.Speciality.NhifCode }
+                    }
+                })
+                .ToArray()
+        };
+
     public static ImportRequest GetImportRequest(string nrn1, string nrn2) => new()
     {
         ApplicationName = string.Empty,
@@ -235,7 +253,7 @@ public class DataFactory
                             NhifContract = new()
                             {
                                 Doctor = new()
-                                {                                    
+                                {
                                     Id = 0,
                                     GivenName = string.Empty,
                                     MiddleName = string.Empty,
@@ -263,7 +281,7 @@ public class DataFactory
                                    PracticeNumber = "2210131574",
                                    NhifNumber = string.Empty,
                                    Name = string.Empty
-                                   
+
                                }
                             },
                         },
