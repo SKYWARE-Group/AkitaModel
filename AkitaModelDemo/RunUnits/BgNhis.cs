@@ -58,42 +58,34 @@ public class BgNhis
         List<string> nrns = referrals2.Select(r => r.ReferralData.Nrn).ToList();
 
         //2.2
-        var importRequest = DataFactory.GetImportRequest(referrals2.Select(x => x.ReferralData.Nrn), contracts.FirstOrDefault()!);
+        var importRequest = DataFactory.GetImportRequest(nrns.Take(2), contracts.FirstOrDefault()!, null);
         Sale sale = await akitaService.Import(importRequest, settings.ApiKey);
         Console.WriteLine($"#BGNHIS Sale id with 2 referrals: {sale.Id}");
 
-        foreach (RilaReferralResultsData r in referrals2)
+        if (sale is not null)
         {
-            await akitaService.ReleaseReferral(r.ReferralData.Nrn, settings.ApiKey);
-            Console.WriteLine($"Referral {r.ReferralData.Nrn} released.");
+            //2.3
+            importRequest = DataFactory.GetImportRequest(nrns.Skip(2), contracts.FirstOrDefault()!, sale.Id);
+            sale = await akitaService.Import(importRequest, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Import third referral: {sale.Id}");
+
+            //2.4
+            sale = await akitaService.ReleaseReferral(nrns.FirstOrDefault()!, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Remove third referral: {sale.Id}");
+
+            string code = referrals2.ToList()[1].ReferralData.Procedures.FirstOrDefault()?.Code ?? string.Empty;
+
+            //2.5
+            var response = await akitaService.VoidReferralItem(nrns[1], code, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Referral item voided result: {response.StatusCode}");
+            //2.6
+            response = await akitaService.RestoreReferralItem(nrns[1], code, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Referral item restored result: {response.StatusCode}");
+
+            //2.7
+            importRequest = DataFactory.GetImportRequest(nrns, contracts.FirstOrDefault()!, null);
+            sale = await akitaService.ReleaseAll(importRequest, settings.ApiKey);
+            Console.WriteLine($"#BGNHIS Remove all referrals: {sale.Id}");
         }
-
-
-        //if (sale is not null)
-        //{
-        //    //2.3
-        //    importRequest = DataFactory.GetImportRequestWithSale(sale.Id, nrns[2]);
-        //    sale = await akitaService.Import(importRequest, settings.ApiKey);
-        //    Console.WriteLine($"#BGNHIS Import third referral: {sale.Id}");
-
-        //    //2.4
-        //    sale = await akitaService.ReleaseReferral(nrns[0], settings.ApiKey);
-        //    Console.WriteLine($"#BGNHIS Remove third referral: {sale.Id}");
-
-        //    string code = referrals2.ToList()[1].ReferralData.Procedures.FirstOrDefault()?.Code ?? string.Empty;
-
-        //    //2.5
-        //    var response = await akitaService.VoidReferralItem(nrns[1], code, settings.ApiKey);
-        //    Console.WriteLine($"#BGNHIS Referral item voided result: {response}");
-        //    //2.6
-        //    response = await akitaService.RestoreReferralItem(nrns[1], code, settings.ApiKey);
-        //    Console.WriteLine($"#BGNHIS Referral item restored result: {response}");
-
-        //    //2.7
-        //    importRequest = DataFactory.GetImportRequestWithThreeReferrals(nrns);
-        //    sale = await akitaService.ReleaseAll(importRequest, settings.ApiKey);
-        //    Console.WriteLine($"#BGNHIS Remove all referrals: {sale.Id}");
-        //}
-
     }
 }
