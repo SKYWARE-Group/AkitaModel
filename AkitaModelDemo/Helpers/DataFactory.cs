@@ -1,5 +1,4 @@
-﻿using Skyware.Lis.AkitaModel;
-using Skyware.Lis.AkitaModel.BgNhis;
+﻿using Skyware.Lis.AkitaModel.BgNhis;
 using Skyware.Lis.AkitaModel.Flagging;
 
 namespace AkitaModelDemo.Helpers;
@@ -7,9 +6,9 @@ namespace AkitaModelDemo.Helpers;
 public class DataFactory
 {
 
-    public static string PID = "1747144541";
+    public static string PID = "0051224573";
 
-    public static string NRN = "242266000002";
+    public static string NRN = "2422940000BC";
 
     public static ImportRequest GetImportRequest(IEnumerable<string> nrnList, NhifContract contract, int? saleId) =>
         new()

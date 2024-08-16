@@ -34,12 +34,12 @@ public class BgNhis
         // 1.2 Търсене по ЕГН (очаква се 1)
 
         // Get referral
-        RilaReferralResultsData referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
+        RilaReferralResultsData? referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
         Console.WriteLine($"#BGNHIS Referral number: {referral?.ReferralData.Nrn}");
 
         // Search referrals
-        IEnumerable<RilaReferralResultsData> referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Referrals count: {referrals.Count()}");
+        IEnumerable<RilaReferralResultsData>? referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
+        Console.WriteLine($"#BGNHIS Referrals count: {referrals?.Count()}");
 
 
         // 2. Сценарий 2
@@ -52,8 +52,10 @@ public class BgNhis
         // 2.7  Освобождаване на всички направления
 
         //2.1
-        IEnumerable<RilaReferralResultsData> referrals2 = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Referrals count: {referrals2.Count()}");
+        IEnumerable<RilaReferralResultsData>? referrals2 = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
+        Console.WriteLine($"#BGNHIS Referrals count: {referrals2?.Count()}");
+        if (referrals2 is null) throw new Exception("No referrals");
+
 
         List<string> nrns = referrals2.Select(r => r.ReferralData.Nrn).ToList();
 

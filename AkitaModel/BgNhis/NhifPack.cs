@@ -9,12 +9,12 @@ public class NhifPack
 {
 
     /// <summary>
-    /// NHIF (НЗОК) code
+    /// NHIF (НЗОК) code.
     /// </summary>
     public string Code { get; set; }
 
     /// <summary>
-    /// Name
+    /// Name, according to NHIF (НЗОК).
     /// </summary>
     public string Name { get; set; }
 

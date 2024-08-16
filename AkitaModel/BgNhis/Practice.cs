@@ -7,7 +7,7 @@ public class Practice
 {
 
     /// <summary>
-    /// Practice number (РЦЗ/РЗИ код) of the laboratory.
+    /// Practice number (РЦЗ/РЗИ код) of the laboratory, mandatory.
     /// </summary>
     public string PracticeNumber { get; set; } = string.Empty;
 

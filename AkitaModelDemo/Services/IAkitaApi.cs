@@ -108,10 +108,10 @@ public interface IAkitaApi
     #region BgNhis
 
     [Get(Constants.URL_BGNHIS_GET_REFERRAL)]
-    Task<RilaReferralResultsData> GetReferral(string nrn, [Header(Constants.API_KEY_HEADER)] string apiKey);
+    Task<RilaReferralResultsData?> GetReferral(string nrn, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     [Get(Constants.URL_BGNHIS_SEARCH_REFERRALS)]
-    Task<IEnumerable<RilaReferralResultsData>> SearchReferrals(string pid, [Header(Constants.API_KEY_HEADER)] string apiKey);
+    Task<IEnumerable<RilaReferralResultsData>?> SearchReferrals(string pid, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     [Get(Constants.URL_BGNHIS_GET_CONTRACTS)]
     Task<IEnumerable<NhifContract>> GetContracts([Header(Constants.API_KEY_HEADER)] string apiKey);
