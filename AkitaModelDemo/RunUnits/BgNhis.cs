@@ -37,6 +37,10 @@ public class BgNhis
         RilaReferralResultsData? referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
         Console.WriteLine($"#BGNHIS Referral number: {referral?.ReferralData.Nrn}");
 
+        // Get referral not found
+        var message = await akitaService.GetReferralNotFound("fsjefoheshjf", settings.ApiKey);
+        Console.WriteLine($"#BGNHIS Fake referral with status code: {message.StatusCode}");
+
         // Search referrals
         IEnumerable<RilaReferralResultsData>? referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
         Console.WriteLine($"#BGNHIS Referrals count: {referrals?.Count()}");
