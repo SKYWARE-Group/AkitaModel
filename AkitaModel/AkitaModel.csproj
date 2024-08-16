@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.8</Version>
+    <Version>0.0.9</Version>
     <RootNamespace>Skyware.Lis.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.$(MSBuildProjectName)</AssemblyName>
@@ -24,6 +24,10 @@
     <ApplicationIcon>akita.ico</ApplicationIcon>
     <PackageIcon>akita.png</PackageIcon>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>$(DefineConstants);LOCAL_TEST</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

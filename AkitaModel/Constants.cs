@@ -15,7 +15,11 @@ public class Constants
 
     #region Core
 
+#if LOCAL_TEST
+    public const string URL_CORE_API_BASE = "";
+#else
     public const string URL_CORE_API_BASE = "/apps/core";
+#endif
 
     public const string URL_CORE_PART_PUBLIC_TESTS = "/api/public/tests";
     public const string URL_CORE_PUBLIC_TESTS = URL_CORE_API_BASE + URL_CORE_PART_PUBLIC_TESTS;
@@ -67,7 +71,13 @@ public class Constants
 
     #region Robin
 
+
+#if LOCAL_TEST
+    public const string URL_ROBIN_API_BASE = "";
+#else
     public const string URL_ROBIN_API_BASE = "/apps/robin";
+#endif
+
 
     public const string URL_ROBIN_PART_DIRECT_REPORTS = "/api/direct-reports";
     public const string URL_ROBIN_DIRECT_REPORTS = URL_ROBIN_API_BASE + URL_ROBIN_PART_DIRECT_REPORTS;
@@ -82,7 +92,11 @@ public class Constants
 
     #region LIS Flagging
 
+#if LOCAL_TEST
+    public const string URL_FLAGGING_API_BASE = "";
+#else
     public const string URL_FLAGGING_API_BASE = "/apps/flagging";
+#endif
 
     public const string URL_FLAGGING_PART_TESTS = "/api/tests";
     public const string URL_FLAGGING_TESTS = URL_FLAGGING_API_BASE + URL_FLAGGING_PART_TESTS;
@@ -92,7 +106,12 @@ public class Constants
 
     #region BgNhis
 
+#if LOCAL_TEST
+    public const string URL_BGNHIS_API_BASE = "";
+#else
     public const string URL_BGNHIS_API_BASE = "/apps/bg-nhis";
+#endif
+
 
     public const string URL_BASE_PART_REFERRALS = "/api/nhisreferrals";
 
@@ -100,9 +119,14 @@ public class Constants
 
     public const string URL_BGNHIS_GET_REFERRAL = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS + "/{nrn}";
 
+    public const string URL_BGNHIS_REFERRAL_ITEM = URL_BGNHIS_GET_REFERRAL + "/{code}";
+
     public const string URL_BGNHIS_SEARCH_REFERRALS = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS + "/search/{pid}";
 
     public const string URL_BGNHIS_GET_CONTRACTS = URL_BGNHIS_API_BASE + URL_BASE_PART_CONTRACTS;
+
+    public const string URL_BGNHIS_POST_IMPORT = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS;
+
 
     #endregion
 

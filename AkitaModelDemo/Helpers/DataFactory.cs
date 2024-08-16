@@ -1,13 +1,32 @@
-﻿using Skyware.Lis.AkitaModel.Flagging;
+﻿using Skyware.Lis.AkitaModel.BgNhis;
+using Skyware.Lis.AkitaModel.Flagging;
 
 namespace AkitaModelDemo.Helpers;
 
 public class DataFactory
 {
 
-    public static string PID = "3303234518";
+    public static string PID = "0051224573";
 
-    public static string NRN = "241797000039";
+    public static string NRN = "2422940000BC";
+
+    public static ImportRequest GetImportRequest(IEnumerable<string> nrnList, NhifContract contract, int? saleId) =>
+        new()
+        {
+            SaleId = saleId,
+            Referrals = nrnList
+                .Select(x => new ReferralImportRequest()
+                {
+                    Nrn = x,
+                    NhifContract = new()
+                    {
+                        Doctor = new() { Uin = contract.Doctor.Uin },
+                        Practice = new() { PracticeNumber = contract.Practice.PracticeNumber, NhifNumber = contract.Practice.NhifNumber },
+                        Speciality = new() { NhifCode = contract.Speciality.NhifCode }
+                    }
+                })
+                .ToArray()
+        };
 
     public static Skyware.Lis.AkitaModel.Robin.Reports.Bg.LabReferral GetDemoReferral() => new()
     {

@@ -24,6 +24,11 @@ public class NhifContract
     public Practice Practice { get; set; }
 
     /// <summary>
+    /// Indicates if Rila server endpoint is available and operational.
+    /// </summary>
+    public bool? IsRilaAvailable { get; set; }
+
+    /// <summary>
     /// Products (examinations) which are allowed by this contract.
     /// </summary>
     public IList<Examination> Examinations { get; set; } = [];
