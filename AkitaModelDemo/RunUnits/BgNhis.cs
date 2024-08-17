@@ -17,12 +17,13 @@ public class BgNhis
 
         // Contracts
         IEnumerable<NhifContract>? contracts = null;
-        bool res = await ApiRunner.InvokeApiFunction(async () => contracts = await akitaService.GetContracts(settings.ApiKey), $"{nameof(BgNhis)}->{nameof(akitaService.GetContracts)}");
-        if (res)
-        {
-            AnsiConsole.MarkupLine($"   [grey]NhifContracts count: {contracts?.Count()}.[/]");
-            AnsiConsole.MarkupLine($"   [grey]First NhifContract doctor's UIN: {contracts?.FirstOrDefault()?.Doctor.Uin}.[/]");
-        }
+        bool res = await ApiRunner.InvokeApiFunction(
+            async () => contracts = await akitaService.GetContracts(settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.GetContracts)}",
+            [
+                () => ApiRunner.PrintInfo("Contracts count", contracts?.Count()),
+                () => ApiRunner.PrintInfo("Doctor's UIN of first contract", contracts?.FirstOrDefault()?.Doctor.Uin)
+            ]);
         return contracts;
 
     }
@@ -32,7 +33,6 @@ public class BgNhis
 
         // Contracts
         IEnumerable<NhifContract>? contracts = await GetContracts(akitaService, settings);
-
         if (!contracts?.Any() ?? false)
         {
             AnsiConsole.MarkupLine($"[red]Execution is cancelled as there are no NHIF contracts.[/]");

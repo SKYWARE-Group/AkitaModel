@@ -9,7 +9,10 @@ namespace AkitaModelDemo.Helpers;
 public class ApiRunner
 {
 
-    public static async Task<bool> InvokeApiFunction(Func<Task> action, string actionName, bool swallowExceptions = false)
+    public static async Task<bool> InvokeApiFunction(
+        Func<Task> action, string actionName,
+        IEnumerable<Action>? successActions = null,
+        bool printExceptions = true)
     {
         bool res = false;
 
@@ -29,17 +32,22 @@ public class ApiRunner
                 catch (HttpRequestException ex)
                 {
                     AnsiConsole.MarkupLineInterpolated($"{actionName}: [red]Failure[/].");
-                    if (!swallowExceptions) AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
+                    if (printExceptions) AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
                 }
                 catch (Exception ex)
                 {
                     AnsiConsole.MarkupLineInterpolated($"{actionName}: [red]Failure[/].");
-                    if (!swallowExceptions) AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
+                    if (printExceptions) AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
                 }
             });
+
+        if (res) foreach (Action act in successActions ?? []) act.Invoke();
 
         return res;
 
     }
+
+    public static void PrintInfo(string label, object? value) => AnsiConsole.MarkupLineInterpolated($"  [grey]{label}: {value}.[/]");
+
 
 }

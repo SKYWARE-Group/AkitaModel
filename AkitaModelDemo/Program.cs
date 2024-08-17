@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Refit;
 
 Console.WriteLine("AkitaModel demo application");
+Console.WriteLine("");
+Console.WriteLine("");
 
 // Set up --------------------------
 // Configuration
@@ -19,9 +21,10 @@ RefitSettings refitSettings = new()
 };
 IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSettings);
 
-//// ---------------------------------
-//// Test invocations
-//// Core
+// ---------------------------------
+// Test invocations
+
+// Core
 //await Core.RunPublic(akitaService);
 //await Core.RunSales(akitaService, settings);
 

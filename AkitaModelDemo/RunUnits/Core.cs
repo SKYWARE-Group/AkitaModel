@@ -2,6 +2,7 @@
 using AkitaModelDemo.Models;
 using AkitaModelDemo.Services;
 using Skyware.Lis.AkitaModel;
+using Spectre.Console;
 
 namespace AkitaModelDemo.RunUnits;
 
@@ -11,70 +12,143 @@ public class Core
     public static async Task RunPublic(IAkitaApi akitaService)
     {
 
+        int failures = 0;
+
+        AnsiConsole.MarkupLine("[dodgerblue1]Akita Core: Public functions[/]");
+        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
+
         // Species
-        IEnumerable<Species> species = await akitaService.GetAllSpecies();
-        Console.WriteLine($"Species count: {species.Count()}");
-        Console.WriteLine($"First species name: {species.FirstOrDefault()?.Name}");
+        IEnumerable<Species>? species = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => species = await akitaService.GetAllSpecies(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllSpecies)}",
+            [
+                () => ApiRunner.PrintInfo("Species count", species?.Count()),
+                () => ApiRunner.PrintInfo("Name of first species", species?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Sample types
-        IEnumerable<SampleType> sampleTypes = await akitaService.GetAllSampleTypes();
-        Console.WriteLine($"Sample types count: {sampleTypes.Count()}");
-        Console.WriteLine($"First sample type name: {sampleTypes.FirstOrDefault()?.Name}");
-
-        // Locations
-        IEnumerable<Location> locations = await akitaService.GetAllLocations();
-        Console.WriteLine($"Locations types count: {locations.Count()}");
-        Console.WriteLine($"First location name: {locations.FirstOrDefault()?.Name}");
+        IEnumerable<SampleType>? sampleTypes = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => sampleTypes = await akitaService.GetAllSampleTypes(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllSampleTypes)}",
+            [
+                () => ApiRunner.PrintInfo("Sample types count", sampleTypes?.Count()),
+                () => ApiRunner.PrintInfo("Name of first sample type", sampleTypes?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Location Groups
-        IEnumerable<LocationGroup> locationGroups = await akitaService.GetAllLocationGroups();
-        Console.WriteLine($"LocationGroups types count: {locationGroups.Count()}");
-        Console.WriteLine($"First locationGroup name: {locationGroups.FirstOrDefault()?.Name}");
+        IEnumerable<LocationGroup>? locationGroups = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => locationGroups = await akitaService.GetAllLocationGroups(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllLocationGroups)}",
+            [
+                () => ApiRunner.PrintInfo("Locations groups count", locationGroups?.Count()),
+                () => ApiRunner.PrintInfo("Name of first location group", locationGroups?.FirstOrDefault()?.Name)
+            ])) failures++;
+
+        // Locations
+        IEnumerable<Location>? locations = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => locations = await akitaService.GetAllLocations(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllLocations)}",
+            [
+                () => ApiRunner.PrintInfo("Locations count", locations?.Count()),
+                () => ApiRunner.PrintInfo("Name of first location", locations?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Departments
-        IEnumerable<Department> departments = await akitaService.GetAllDepartments();
-        Console.WriteLine($"Departments count: {departments.Count()}");
-        Console.WriteLine($"First department name: {departments.FirstOrDefault()?.Name}");
+        IEnumerable<Department>? departments = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => departments = await akitaService.GetAllDepartments(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllDepartments)}",
+            [
+                () => ApiRunner.PrintInfo("Departments count", departments?.Count()),
+                () => ApiRunner.PrintInfo("Name of first department", departments?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Tests
-        IEnumerable<Test> tests = await akitaService.GetAllTests();
-        Console.WriteLine($"Tests count: {tests.Count()}");
-        Console.WriteLine($"First test name: {tests.FirstOrDefault()?.Name}");
+        IEnumerable<Test>? tests = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => tests = await akitaService.GetAllTests(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllTests)}",
+            [
+                () => ApiRunner.PrintInfo("Tests count", tests?.Count()),
+                () => ApiRunner.PrintInfo("Name of first test", tests?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Single Test
-        Test test = await akitaService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID);
-        Console.WriteLine($"Test Id: {test?.Id}");
-        Console.WriteLine($"Test name: {test?.Name}");
+        Test? test = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => test = await akitaService.GetSingleTest(tests?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_TEST_ID),
+            $"{nameof(Core)}->{nameof(akitaService.GetSingleTest)}",
+            [
+                () => ApiRunner.PrintInfo("Test Id", test?.Id),
+                () => ApiRunner.PrintInfo("Test name", test?.Name)
+            ])) failures++;
 
         // Profiles
-        IEnumerable<Profile> profiles = await akitaService.GetAllProfiles();
-        Console.WriteLine($"Profiles count: {profiles.Count()}");
-        Console.WriteLine($"First profile name: {profiles.FirstOrDefault()?.Name}");
+        IEnumerable<Skyware.Lis.AkitaModel.Profile>? profiles = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => profiles = await akitaService.GetAllProfiles(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllProfiles)}",
+            [
+                () => ApiRunner.PrintInfo("Profiles count", profiles?.Count()),
+                () => ApiRunner.PrintInfo("Name of first profile", profiles?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Single Profile
-        Profile profile = await akitaService.GetSingleProfile(profiles?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_PROFILE_ID);
-        Console.WriteLine($"Profile Id: {profile?.Id}");
-        Console.WriteLine($"Profile name: {profile?.Name}");
+        Skyware.Lis.AkitaModel.Profile? profile = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => profile = await akitaService.GetSingleProfile(profiles?.FirstOrDefault()?.Id ?? InternalConstants.CORE_SINGLE_PROFILE_ID),
+            $"{nameof(Core)}->{nameof(akitaService.GetSingleProfile)}",
+            [
+                () => ApiRunner.PrintInfo("Profile Id", profile?.Id),
+                () => ApiRunner.PrintInfo("Profile name", profile?.Name)
+            ])) failures++;
 
 
         // PID Types
-        IEnumerable<PIDType> pidTypes = await akitaService.GetAllPIDTypes();
-        Console.WriteLine($"PIDTypes count: {pidTypes.Count()}");
-        Console.WriteLine($"First PIDType name: {pidTypes.FirstOrDefault()?.Name}");
+        IEnumerable<PIDType>? pidTypes = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => pidTypes = await akitaService.GetAllPIDTypes(),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllPIDTypes)}",
+            [
+                () => ApiRunner.PrintInfo("PID types count", pidTypes?.Count()),
+                () => ApiRunner.PrintInfo("Name of first PID type", pidTypes?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Footnotes
         // TODO: Add Footnote in model
         // TODO: API Returns Only an object with int sequence number
 
         // CultureInfo
-        CultureInfo culture = await akitaService.GetCultureInfo();
-        Console.WriteLine($"CultureInfo Id: {culture?.Id}");
-        Console.WriteLine($"CultureInfo currency: {culture?.CurrencySymbol}");
+        CultureInfo? culture = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => culture = await akitaService.GetCultureInfo(),
+            $"{nameof(Core)}->{nameof(akitaService.GetCultureInfo)}",
+            [
+                () => ApiRunner.PrintInfo("CultureInfo Id", culture?.Id),
+                () => ApiRunner.PrintInfo("CultureInfo currency symbol", culture?.CurrencySymbol)
+            ])) failures++;
 
         // Pricelist
-        IEnumerable<Product> products = await akitaService.GetDefaultPricelist();
-        Console.WriteLine($"Products count: {products.Count()}");
-        Console.WriteLine($"First product name: {products.FirstOrDefault()?.Name}");
+        IEnumerable<Product>? products = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => products = await akitaService.GetDefaultPricelist(),
+            $"{nameof(Core)}->{nameof(akitaService.GetDefaultPricelist)}",
+            [
+                () => ApiRunner.PrintInfo("Products count", products?.Count()),
+                () => ApiRunner.PrintInfo("Name of first product", products?.FirstOrDefault()?.Name)
+            ])) failures++;
+
+        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
+        AnsiConsole.Markup("[dodgerblue1]Failures:[/] ");
+        if (failures == 0)
+            AnsiConsole.MarkupLineInterpolated($"[green3]0 (Success)[/]");
+        else
+            AnsiConsole.MarkupLineInterpolated($"[red]{failures} (Failure)[/]");
+        AnsiConsole.MarkupLine("");
 
     }
 
