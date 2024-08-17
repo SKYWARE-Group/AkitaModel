@@ -4,20 +4,26 @@ using AkitaModelDemo.Services;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.BgNhis;
 using Skyware.Rila.Model;
+using Spectre.Console;
 
-// Ignore Spelling: bg uin
+// Ignore Spelling: bg uin grey
 
 namespace AkitaModelDemo.RunUnits;
 
 public class BgNhis
 {
-    public static async Task RunBasic(IAkitaApi akitaService, AkitaSettings settings)
+    public static async Task<IEnumerable<NhifContract>?> GetContracts(IAkitaApi akitaService, AkitaSettings settings)
     {
 
         // Contracts
-        IEnumerable<NhifContract> contracts = await akitaService.GetContracts(settings.ApiKey);
-        Console.WriteLine($"#BGNHIS NhifContracts count: {contracts.Count()}");
-        Console.WriteLine($"#BGNHIS First NhifContract doctor uin: {contracts.FirstOrDefault()?.Doctor.Uin}");
+        IEnumerable<NhifContract>? contracts = null;
+        bool res = await ApiRunner.InvokeApiFunction(async () => contracts = await akitaService.GetContracts(settings.ApiKey), $"{nameof(BgNhis)}->{nameof(akitaService.GetContracts)}");
+        if (res)
+        {
+            AnsiConsole.MarkupLine($"   [grey]NhifContracts count: {contracts?.Count()}.[/]");
+            AnsiConsole.MarkupLine($"   [grey]First NhifContract doctor's UIN: {contracts?.FirstOrDefault()?.Doctor.Uin}.[/]");
+        }
+        return contracts;
 
     }
 
@@ -25,9 +31,13 @@ public class BgNhis
     {
 
         // Contracts
-        IEnumerable<NhifContract> contracts = await akitaService.GetContracts(settings.ApiKey);
-        Console.WriteLine($"#BGNHIS NhifContracts count: {contracts.Count()}");
-        Console.WriteLine($"#BGNHIS First NhifContract doctor uin: {contracts.FirstOrDefault()?.Doctor.Uin}");
+        IEnumerable<NhifContract>? contracts = await GetContracts(akitaService, settings);
+
+        if (!contracts?.Any() ?? false)
+        {
+            AnsiConsole.MarkupLine($"[red]Execution is cancelled as there are no NHIF contracts.[/]");
+            return;
+        }
 
         // 1. Сценарий 1
         // 1.1 Извличане на НМДД по НРД (очаква се 1)

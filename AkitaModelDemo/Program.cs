@@ -26,8 +26,8 @@ IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSetti
 //await Core.RunSales(akitaService, settings);
 
 // BgNhis
-//await BgNhis.RunBasic(akitaService, settings);
-await BgNhis.Run(akitaService, settings);
+await BgNhis.GetContracts(akitaService, settings);
+//await BgNhis.Run(akitaService, settings);
 
 //// Robin
 //await Robin.Run(akitaService, settings);
