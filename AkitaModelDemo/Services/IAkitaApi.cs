@@ -1,6 +1,7 @@
 ﻿using Refit;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.BgNhis;
+using Skyware.Lis.AkitaModel.Courier;
 using Skyware.Lis.AkitaModel.Flagging;
 using Skyware.Lis.AkitaModel.Robin;
 using Skyware.Rila.Model;
@@ -133,6 +134,22 @@ public interface IAkitaApi
 
     [Patch(Constants.URL_BGNHIS_REFERRAL_ITEM)]
     Task<ApiResponse<bool>> RestoreReferralItem(string nrn, string code, [Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    #endregion
+
+    #region Courier
+
+    [Get(Constants.URL_COURIER_CHANNELS)]
+    Task<IEnumerable<Channel>> GetChannels([Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Get(Constants.URL_COURIER_DEFINITIONS_DIALECTS)]
+    Task<IEnumerable<Dialect>> GetDialects([Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Get(Constants.URL_COURIER_DEFINITIONS_SENDERS)]
+    Task<IEnumerable<Sender>> GetSenders([Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Get(Constants.URL_COURIER_SALES)]
+    Task<string> GetSaleMessage(int id, [Header(Constants.API_KEY_HEADER)] string apiKey);
 
     #endregion
 }

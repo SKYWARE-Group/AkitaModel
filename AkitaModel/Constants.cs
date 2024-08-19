@@ -130,4 +130,26 @@ public class Constants
 
     #endregion
 
+    #region Courier
+
+#if LOCAL_TEST
+    public const string URL_COURIER_API_BASE = "";
+#else
+    public const string URL_COURIER_API_BASE = "/apps/courier";
+#endif
+
+    public const string URL_COURIER_PART_CHANNELS = "/api/channels";
+
+    public const string URL_COURIER_CHANNELS = URL_COURIER_API_BASE + URL_COURIER_PART_CHANNELS;
+
+    public const string URL_COURIER_PART_DEFINITIONS = "/api/definitions";
+
+    public const string URL_COURIER_DEFINITIONS_DIALECTS = URL_COURIER_API_BASE + URL_COURIER_PART_DEFINITIONS + "/dialects";
+    public const string URL_COURIER_DEFINITIONS_SENDERS = URL_COURIER_API_BASE + URL_COURIER_PART_DEFINITIONS + "/senders";
+
+    public const string URL_COURIER_PART_SALES = "/api/sales";
+
+    public const string URL_COURIER_SALES = URL_COURIER_API_BASE + URL_COURIER_PART_SALES + "/{id}";
+
+    #endregion
 }

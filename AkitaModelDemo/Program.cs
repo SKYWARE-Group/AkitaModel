@@ -29,7 +29,7 @@ IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSetti
 //await Core.RunSales(akitaService, settings);
 
 // BgNhis
-await BgNhis.GetContracts(akitaService, settings);
+//await BgNhis.GetContracts(akitaService, settings);
 //await BgNhis.Run(akitaService, settings);
 
 //// Robin
@@ -37,5 +37,9 @@ await BgNhis.GetContracts(akitaService, settings);
 
 //// Flagging
 //await Flagging.Run(akitaService, settings);
+
+
+////Courier
+await Courier.Run(akitaService, settings);
 
 Console.WriteLine("Done.");
