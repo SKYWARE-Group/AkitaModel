@@ -25,7 +25,6 @@ public class BgNhis
                 () => ApiRunner.PrintInfo("Doctor's UIN of first contract", contracts?.FirstOrDefault()?.Doctor.Uin)
             ]);
         return contracts;
-
     }
 
     public static async Task Run(IAkitaApi akitaService, AkitaSettings settings)
@@ -37,6 +36,20 @@ public class BgNhis
         {
             AnsiConsole.MarkupLine($"[red]Execution is cancelled as there are no NHIF contracts.[/]");
             return;
+        }
+
+        // Packages
+        IList<NhifPack> packages = await akitaService.GetPackages(settings.ApiKey);
+        if (packages is not null && packages.Any())
+        {
+            Console.WriteLine($"#BGNHIS Packages: {packages.Count}");
+        }
+
+        // Packages
+        IList<Examination> examinations = await akitaService.GetExaminations(settings.ApiKey);
+        if (examinations is not null && examinations.Any())
+        {
+            Console.WriteLine($"#BGNHIS Examinations: {examinations.Count}");
         }
 
         // 1. Сценарий 1

@@ -117,6 +117,14 @@ public class Constants
 
     public const string URL_BASE_PART_CONTRACTS = "/api/contracts";
 
+    public const string URL_BASE_PART_PRODUCTS_PACKAGES = "/api/products/packages";
+
+    public const string URL_BASE_PART_PRODUCTS_EXAMINATIONS = "/api/products/examinations";
+
+    public const string URL_BGNHIS_GET_PACKAGES = URL_BGNHIS_API_BASE + URL_BASE_PART_PRODUCTS_PACKAGES;
+
+    public const string URL_BGNHIS_GET_EXAMINATIONS = URL_BGNHIS_API_BASE + URL_BASE_PART_PRODUCTS_EXAMINATIONS;
+
     public const string URL_BGNHIS_GET_REFERRAL = URL_BGNHIS_API_BASE + URL_BASE_PART_REFERRALS + "/{nrn}";
 
     public const string URL_BGNHIS_REFERRAL_ITEM = URL_BGNHIS_GET_REFERRAL + "/{code}";
