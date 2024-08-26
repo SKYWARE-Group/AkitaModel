@@ -2,12 +2,12 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Skyware.Lis.AkitaModel.Robin.Reports.Bg;
+namespace Skyware.Lis.AkitaModel.Robin;
 
 /// <inheritdoc/>
-/// <inheritdoc/>
-public class CustomDateTimeConverter(string format) : JsonConverter<DateTime>
+public class IsoDateOnlyConverter(string format) : JsonConverter<DateTime>
 {
+
     private readonly string Format = format;
 
     /// <inheritdoc/>

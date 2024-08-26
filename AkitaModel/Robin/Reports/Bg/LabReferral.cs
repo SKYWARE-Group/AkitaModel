@@ -15,27 +15,6 @@ namespace Skyware.Lis.AkitaModel.Robin.Reports.Bg;
 public class LabReferral : IReportDataObject
 {
 
-    private static JsonSerializerOptions _Opts;
-
-    private static JsonSerializerOptions Opts
-    {
-        get
-        {
-            if (_Opts is null)
-            {
-                _Opts = new()
-                {
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                    PropertyNameCaseInsensitive = true,
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                };
-                _Opts.Converters.Add(new CustomDateTimeConverter("yyyy-MM-dd"));
-            };
-            return _Opts;
-        }
-    }
-
-
     /// <summary>
     /// The NRN of the referral.
     /// Номер на НМДД (НРН от НЗИС).
@@ -53,6 +32,7 @@ public class LabReferral : IReportDataObject
     /// Date of issuing of the referral.
     /// Дата на издаване на НМДД.
     /// </summary>
+    [JsonConverter(typeof(IsoDateOnlyConverter))]
     public DateTime Issued { get; set; } = DateTime.Today;
 
     /// <summary>
@@ -104,6 +84,7 @@ public class LabReferral : IReportDataObject
     /// Датата, на която пациентът с подписа си удостоверява, че е взет биологичен материал или е извършено образно изследване.
     /// (По подразбиране - днешна дата).
     /// </summary>
+    [JsonConverter(typeof(IsoDateOnlyConverter))]
     public DateTime SampleDate { get; set; } = DateTime.Today;
 
     /// <summary>
@@ -111,6 +92,7 @@ public class LabReferral : IReportDataObject
     /// Дата на завършване на дейността по направлението (По подразбиране - днешна дата).
     /// </summary>
     [JsonPropertyName("performed")]
+    [JsonConverter(typeof(IsoDateOnlyConverter))]
     public DateTime ResultsDate { get; set; } = DateTime.Today;
 
     /// <summary>
@@ -140,13 +122,7 @@ public class LabReferral : IReportDataObject
     /// </summary>
     public List<ReferralItem> Examinations { get; set; }
 
-    /// <summary>
-    /// Serialize to JSON and converts it to Base64 string.
-    /// </summary>
-    /// <returns></returns>
-    public string GetBase64Data()
-    {
-        return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(this, Opts)));
-    }
+    /// <inheritdoc/>
+    public string GetBase64Data() => Base64Helper.GetBase64Data(this);
 
 }
