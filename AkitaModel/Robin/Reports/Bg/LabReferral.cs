@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Skyware.Lis.AkitaModel.Helpers;
 
 // Ignore Spelling: uin// Ignore Spelling: uin бл nrn yyyy dd пре
 
@@ -91,8 +92,7 @@ public class LabReferral : IReportDataObject
     /// Date when the examinations are finished (Today by default).
     /// Дата на завършване на дейността по направлението (По подразбиране - днешна дата).
     /// </summary>
-    [JsonPropertyName("performed")]
-    [JsonConverter(typeof(IsoDateOnlyConverter))]
+    [JsonPropertyName("performed"), JsonConverter(typeof(IsoDateOnlyConverter))]
     public DateTime ResultsDate { get; set; } = DateTime.Today;
 
     /// <summary>

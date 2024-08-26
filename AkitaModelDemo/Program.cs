@@ -17,7 +17,7 @@ AkitaSettings settings = configuration.GetSection(nameof(AkitaSettings)).Get<Aki
 // REST Service
 RefitSettings refitSettings = new()
 {
-    ContentSerializer = new SystemTextJsonContentSerializer(Skyware.Lis.AkitaModel.Helpers.JsonSettings.GetJsonOptions()),
+    ContentSerializer = new SystemTextJsonContentSerializer(Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options),
 };
 IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSettings);
 

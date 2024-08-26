@@ -1,7 +1,7 @@
 ﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Price list entry
+/// Price list entry.
 /// </summary>
 public class Product
 {

@@ -3,7 +3,7 @@
 namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Doctor
+/// Doctor.
 /// </summary>
 public class Doctor : PersonBase
 {

@@ -1,4 +1,6 @@
-﻿namespace Skyware.Lis.AkitaModel.Robin.Reports;
+﻿using Skyware.Lis.AkitaModel.Helpers;
+
+namespace Skyware.Lis.AkitaModel.Robin.Reports;
 
 /// <summary>
 /// Data model for report "Pending by test".
