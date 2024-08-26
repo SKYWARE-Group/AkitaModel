@@ -119,6 +119,12 @@ public interface IAkitaApi
     [Get(Constants.URL_BGNHIS_GET_CONTRACTS)]
     Task<IEnumerable<NhifContract>> GetContracts([Header(Constants.API_KEY_HEADER)] string apiKey);
 
+    [Get(Constants.URL_BGNHIS_GET_PACKAGES)]
+    Task<IList<NhifPack>> GetPackages([Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Get(Constants.URL_BGNHIS_GET_EXAMINATIONS)]
+    Task<IList<Examination>> GetExaminations([Header(Constants.API_KEY_HEADER)] string apiKey);
+
     [Post(Constants.URL_BGNHIS_POST_IMPORT)]
     Task<Sale> Import([Body] ImportRequest request, [Header(Constants.API_KEY_HEADER)] string authorization);
 

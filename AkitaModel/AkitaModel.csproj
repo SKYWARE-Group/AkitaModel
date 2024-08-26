@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.10</Version>
+    <Version>0.0.11</Version>
     <RootNamespace>Skyware.Lis.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.$(MSBuildProjectName)</AssemblyName>
@@ -26,9 +26,9 @@
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+  <!--<PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <DefineConstants>$(DefineConstants);LOCAL_TEST</DefineConstants>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.9.2" />

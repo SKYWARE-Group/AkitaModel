@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Refit;
 
 Console.WriteLine("AkitaModel demo application");
+Console.WriteLine("");
+Console.WriteLine("");
 
 // Set up --------------------------
 // Configuration
@@ -15,19 +17,20 @@ AkitaSettings settings = configuration.GetSection(nameof(AkitaSettings)).Get<Aki
 // REST Service
 RefitSettings refitSettings = new()
 {
-    ContentSerializer = new SystemTextJsonContentSerializer(Skyware.Lis.AkitaModel.Helpers.JsonSettings.GetJsonOptions()),
+    ContentSerializer = new SystemTextJsonContentSerializer(Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options),
 };
 IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSettings);
 
-//// ---------------------------------
-//// Test invocations
-//// Core
+// ---------------------------------
+// Test invocations
+
+// Core
 //await Core.RunPublic(akitaService);
 //await Core.RunSales(akitaService, settings);
 
 // BgNhis
-//await BgNhis.RunBasic(akitaService, settings);
-await BgNhis.Run(akitaService, settings);
+await BgNhis.GetContracts(akitaService, settings);
+//await BgNhis.Run(akitaService, settings);
 
 //// Robin
 //await Robin.Run(akitaService, settings);

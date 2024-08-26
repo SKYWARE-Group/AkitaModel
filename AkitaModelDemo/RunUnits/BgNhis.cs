@@ -4,30 +4,53 @@ using AkitaModelDemo.Services;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.BgNhis;
 using Skyware.Rila.Model;
+using Spectre.Console;
 
-// Ignore Spelling: bg uin
+// Ignore Spelling: bg uin grey
 
 namespace AkitaModelDemo.RunUnits;
 
 public class BgNhis
 {
-    public static async Task RunBasic(IAkitaApi akitaService, AkitaSettings settings)
+    public static async Task<IEnumerable<NhifContract>?> GetContracts(IAkitaApi akitaService, AkitaSettings settings)
     {
 
         // Contracts
-        IEnumerable<NhifContract> contracts = await akitaService.GetContracts(settings.ApiKey);
-        Console.WriteLine($"#BGNHIS NhifContracts count: {contracts.Count()}");
-        Console.WriteLine($"#BGNHIS First NhifContract doctor uin: {contracts.FirstOrDefault()?.Doctor.Uin}");
-
+        IEnumerable<NhifContract>? contracts = null;
+        bool res = await ApiRunner.InvokeApiFunction(
+            async () => contracts = await akitaService.GetContracts(settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.GetContracts)}",
+            [
+                () => ApiRunner.PrintInfo("Contracts count", contracts?.Count()),
+                () => ApiRunner.PrintInfo("Doctor's UIN of first contract", contracts?.FirstOrDefault()?.Doctor.Uin)
+            ]);
+        return contracts;
     }
 
     public static async Task Run(IAkitaApi akitaService, AkitaSettings settings)
     {
 
         // Contracts
-        IEnumerable<NhifContract> contracts = await akitaService.GetContracts(settings.ApiKey);
-        Console.WriteLine($"#BGNHIS NhifContracts count: {contracts.Count()}");
-        Console.WriteLine($"#BGNHIS First NhifContract doctor uin: {contracts.FirstOrDefault()?.Doctor.Uin}");
+        IEnumerable<NhifContract>? contracts = await GetContracts(akitaService, settings);
+        if (!contracts?.Any() ?? false)
+        {
+            AnsiConsole.MarkupLine($"[red]Execution is cancelled as there are no NHIF contracts.[/]");
+            return;
+        }
+
+        // Packages
+        IList<NhifPack> packages = await akitaService.GetPackages(settings.ApiKey);
+        if (packages is not null && packages.Any())
+        {
+            Console.WriteLine($"#BGNHIS Packages: {packages.Count}");
+        }
+
+        // Packages
+        IList<Examination> examinations = await akitaService.GetExaminations(settings.ApiKey);
+        if (examinations is not null && examinations.Any())
+        {
+            Console.WriteLine($"#BGNHIS Examinations: {examinations.Count}");
+        }
 
         // 1. Сценарий 1
         // 1.1 Извличане на НМДД по НРД (очаква се 1)
