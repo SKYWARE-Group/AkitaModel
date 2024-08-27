@@ -1,4 +1,5 @@
 ﻿using Skyware.Lis.AkitaModel.Helpers;
+using System.Collections.Generic;
 
 namespace Skyware.Lis.AkitaModel.Robin.Reports;
 
@@ -7,21 +8,16 @@ namespace Skyware.Lis.AkitaModel.Robin.Reports;
 /// </summary>
 public class WorklistByTest : IReportDataObject
 {
+    /// <summary>
+    /// Report parameter key (RPK) for "Title"
+    /// Test name
+    /// </summary>
+    public const string RPK_TITLE = "Title";
 
     /// <summary>
-    /// Sample barkod or Visit Id.
+    /// 
     /// </summary>
-    public string SampleVisitId { get; private set; } = string.Empty;
-
-    /// <summary>
-    /// Patient data.
-    /// </summary>
-    public string PatientInfo { get; private set; } = string.Empty;
-
-    /// <summary>
-    /// Gender indicator.
-    /// </summary>
-    public bool? IsMale { get; set; } = null;
+    public List<WorklistByTestItem> Items { get; set; } = [];
 
     /// <inheritdoc/>
     public string GetBase64Data() => Base64Helper.GetBase64Data(this);
