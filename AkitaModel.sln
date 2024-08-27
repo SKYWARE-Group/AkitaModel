@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkitaModel", "AkitaModel\AkitaModel.csproj", "{F2A80368-D874-404E-8CF4-5CC9A749F417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkitaModelDemo", "AkitaModelDemo\AkitaModelDemo.csproj", "{29DFBF5D-42D0-453F-B3C7-F03568824429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkitaModelDemo", "AkitaModelDemo\AkitaModelDemo.csproj", "{29DFBF5D-42D0-453F-B3C7-F03568824429}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelExamples", "ModelExamples\ModelExamples.csproj", "{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{29DFBF5D-42D0-453F-B3C7-F03568824429}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29DFBF5D-42D0-453F-B3C7-F03568824429}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29DFBF5D-42D0-453F-B3C7-F03568824429}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
