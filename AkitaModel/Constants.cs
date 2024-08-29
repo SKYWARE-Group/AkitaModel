@@ -87,7 +87,7 @@ public class Constants
 
     public const string ROBIN_REPORTS_HELLO_WORLD = "hello-world.jrxml";
     public const string ROBIN_REPORTS_BG_LAB_REFERRAL = "bg.nhif.referral.f4.jrxml";
-    public const string ROBIN_REPORTS_LAB_WORKLIST_BY_TEST = "lab.worklist-by-test.jrxml";
+    public const string ROBIN_REPORTS_LAB_WORKLIST_BY_TEST = "lab-worklist-by-test.jrxml";
 
     #endregion
 
