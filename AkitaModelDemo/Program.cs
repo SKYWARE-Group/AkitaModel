@@ -25,7 +25,7 @@ IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSetti
 // Test invocations
 
 // Core
-await Core.RunPublic(akitaService);
+//await Core.RunPublic(akitaService);
 //await Core.RunSales(akitaService, settings);
 
 // BgNhis
@@ -33,7 +33,7 @@ await Core.RunPublic(akitaService);
 //await BgNhis.Run(akitaService, settings);
 
 // Robin
-await Robin.Run(akitaService, settings);
+//await Robin.Run(akitaService, settings);
 
 // Flagging
 await Flagging.Run(akitaService, settings);
