@@ -14,8 +14,7 @@ public class Core
 
         int failures = 0;
 
-        AnsiConsole.MarkupLine("[dodgerblue1]Akita Core: Public functions[/]");
-        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
+        ApiRunner.PrintHeaderLines("Akita Core: Public functions");
 
         // Species
         IEnumerable<Species>? species = null;
@@ -142,13 +141,7 @@ public class Core
                 () => ApiRunner.PrintInfo("Name of first product", products?.FirstOrDefault()?.Name)
             ])) failures++;
 
-        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
-        AnsiConsole.Markup("[dodgerblue1]Failures:[/] ");
-        if (failures == 0)
-            AnsiConsole.MarkupLineInterpolated($"[green3]0 (Success)[/]");
-        else
-            AnsiConsole.MarkupLineInterpolated($"[red]{failures} (Failure)[/]");
-        AnsiConsole.MarkupLine("");
+        ApiRunner.PrintFooterLines(failures);
 
     }
 
