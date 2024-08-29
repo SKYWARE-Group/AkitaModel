@@ -3,9 +3,6 @@ using AkitaModelDemo.Models;
 using AkitaModelDemo.Services;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.Flagging;
-using Spectre.Console;
-using System.Collections.Generic;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AkitaModelDemo.RunUnits;
 
@@ -57,14 +54,14 @@ public class Flagging
             async () => numericResultResponse2 = await akitaService.GetTestResult(resultRequest2, settings.ApiKey),
             $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)}",
             [
-                () => ApiRunner.PrintInfo("Flagging test 1", flaggingTests?.FirstOrDefault(t => t.Id == resultRequest2?.FirstOrDefault()?.TestId)?.Name),
-                () => ApiRunner.PrintInfo("Original decimal result 1", resultRequest2[0].NumericResult),
-                () => ApiRunner.PrintInfo("Calculated decimal result 1", numericResultResponse2?.FirstOrDefault()?.CalculationResult?.DecimalResult),
-                () => ApiRunner.PrintInfo("Calculated flag level 1", numericResultResponse2?.FirstOrDefault()?.CalculationResult?.FlagLevel),
-                () => ApiRunner.PrintInfo("Flagging test 2", flaggingTests?.LastOrDefault(t => t.Id == resultRequest2?.LastOrDefault()?.TestId)?.Name),
-                () => ApiRunner.PrintInfo("Original decimal result 2", resultRequest2[1].NumericResult),
-                () => ApiRunner.PrintInfo("Calculated decimal result 2", numericResultResponse2?.LastOrDefault()?.CalculationResult?.DecimalResult),
-                () => ApiRunner.PrintInfo("Calculated flag level 2", numericResultResponse2?.LastOrDefault()?.CalculationResult?.FlagLevel)
+                () => ApiRunner.PrintInfo("Flagging test #1", flaggingTests?.FirstOrDefault(t => t.Id == resultRequest2?.FirstOrDefault()?.TestId)?.Name),
+                () => ApiRunner.PrintInfo("Original decimal result #1", resultRequest2[0].NumericResult),
+                () => ApiRunner.PrintInfo("Calculated decimal result #1", numericResultResponse2?.FirstOrDefault()?.CalculationResult?.DecimalResult),
+                () => ApiRunner.PrintInfo("Calculated flag level #1", numericResultResponse2?.FirstOrDefault()?.CalculationResult?.FlagLevel),
+                () => ApiRunner.PrintInfo("Flagging test #2", flaggingTests?.LastOrDefault(t => t.Id == resultRequest2?.LastOrDefault()?.TestId)?.Name),
+                () => ApiRunner.PrintInfo("Original decimal result #2", resultRequest2[1].NumericResult),
+                () => ApiRunner.PrintInfo("Calculated decimal result #2", numericResultResponse2?.LastOrDefault()?.CalculationResult?.DecimalResult),
+                () => ApiRunner.PrintInfo("Calculated flag level #2", numericResultResponse2?.LastOrDefault()?.CalculationResult?.FlagLevel)
             ])) failures++;
 
         ApiRunner.PrintFooterLines(failures);
@@ -92,8 +89,8 @@ public class Flagging
     private static ResultRequest GetSingleNumericTestRequest(IEnumerable<Test> tests)
     {
         (Test targetTest, ReferenceRange targetRange) = GetRange(
-            tests, 
-            (t) => t.ResultType == ResultTypes.Quantitative, 
+            tests,
+            (t) => t.ResultType == ResultTypes.Quantitative,
             (r) => r.SpeciesId == 1 && r.IsRangedByGender && r.MHighValue is not null);
         return GetNumericTestRequestAtHighLimit(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, true);
     }
@@ -120,10 +117,10 @@ public class Flagging
         NumericResult =
             isMale.HasValue ?
                 isMale.Value ?
-                    range.MHighValue!.Value + range.MHighValue!.Value * 0.1m :
-                    range.FHighValue!.Value + range.FHighValue!.Value * 0.1m
+                    range.MHighValue!.Value * 1.1m :
+                    range.FHighValue!.Value * 1.1m
                 :
-                range.HighValue!.Value + range.HighValue!.Value * 0.1m
+                range.HighValue!.Value * 1.1m
     };
 
     private static ResultRequest GetNumericTestRequestAtAlarm1(int testId, string reference, ReferenceRange range, bool? isMale) => new()
@@ -136,10 +133,10 @@ public class Flagging
         NumericResult =
             isMale.HasValue ?
                 isMale.Value ?
-                    range.MHighAlarm1!.Value + range.MHighAlarm1!.Value * 0.1m :
-                    range.FHighAlarm1!.Value + range.FHighAlarm1!.Value * 0.1m
+                    range.MHighAlarm1!.Value * 1.1m :
+                    range.FHighAlarm1!.Value * 1.1m
                 :
-                range.HighAlarm1!.Value + range.HighAlarm1!.Value * 0.1m
+                range.HighAlarm1!.Value * 1.1m
     };
 
 
