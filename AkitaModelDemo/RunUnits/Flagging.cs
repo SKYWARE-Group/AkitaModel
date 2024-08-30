@@ -34,7 +34,7 @@ public class Flagging
                 () => ApiRunner.PrintInfo("Test name", test?.Name)
             ])) failures++;
 
-        // Single numeric test for male patient, gander ranged numeric test with result 10% higher than upper limit of the reference range
+        // Single numeric test for male patient, gender ranged numeric test with result 10% higher than upper limit of the reference range
         IEnumerable<ResultResponse>? numericResultResponse = null;
         ResultRequest resultRequest = GetSingleNumericTestRequest(flaggingTests!);
         if (!await ApiRunner.InvokeApiFunction(
@@ -47,7 +47,7 @@ public class Flagging
                 () => ApiRunner.PrintInfo("Calculated flag level", numericResultResponse?.FirstOrDefault()?.CalculationResult?.FlagLevel)
             ])) failures++;
 
-        // Multiple numeric tests, gander ranged
+        // Multiple numeric tests, gender ranged
         IEnumerable<ResultResponse>? numericResultResponse2 = null;
         ResultRequest[] resultRequest2 = GetMultipleNumericTestsRequest(flaggingTests!);
         if (!await ApiRunner.InvokeApiFunction(
@@ -67,6 +67,15 @@ public class Flagging
         ApiRunner.PrintFooterLines(failures);
     }
 
+    private static ResultRequest GetSingleNumericTestRequest(IEnumerable<Test> tests)
+    {
+        (Test targetTest, ReferenceRange targetRange) = GetRange(
+            tests,
+            (t) => t.ResultType == ResultTypes.Quantitative,
+            (r) => r.SpeciesId == 1 && r.IsRangedByGender && r.MHighValue is not null);
+        return GetNumericTestRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, true, FlagLevels.HIGH, 1.1m);
+    }
+
     private static ResultRequest[] GetMultipleNumericTestsRequest(IEnumerable<Test> tests)
     {
         // Male, scale >=1, age > 16y, high limit
@@ -80,20 +89,20 @@ public class Flagging
             (t) => t.ResultType == ResultTypes.Quantitative && t.Scale >= 1 && t.FlagLimit >= FlagLevelLimits.UP_TO_VERY,
             (r) => r.SpeciesId == 1 && r.IsRangedByGender && r.FHighAlarm1 is not null);
         return [
-            GetNumericTestRequestAtHighLimit(targetTestM.Id, $"S{Utilities.GetRandomString()}", targetRangeM, true),
-            GetNumericTestRequestAtAlarm1(targetTestF.Id, $"S{Utilities.GetRandomString()}", targetRangeF, false),
+            GetNumericTestRequest(targetTestM.Id, $"S{Utilities.GetRandomString()}", targetRangeM, true, FlagLevels.HIGH, 1.1m),
+            GetNumericTestRequest(targetTestF.Id, $"S{Utilities.GetRandomString()}", targetRangeF, false, FlagLevels.VERY_HIGH, 1.1m),
         ];
     }
 
-
-    private static ResultRequest GetSingleNumericTestRequest(IEnumerable<Test> tests)
+    private static ResultRequest GetNumericTestRequest(int testId, string reference, ReferenceRange range, bool? isMale, FlagLevels level, decimal coeficient) => new()
     {
-        (Test targetTest, ReferenceRange targetRange) = GetRange(
-            tests,
-            (t) => t.ResultType == ResultTypes.Quantitative,
-            (r) => r.SpeciesId == 1 && r.IsRangedByGender && r.MHighValue is not null);
-        return GetNumericTestRequestAtHighLimit(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, true);
-    }
+        TestId = testId,
+        SpeciesId = range.SpeciesId,
+        RefId = reference,
+        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(-2),
+        IsMale = isMale,
+        NumericResult = SelectLimit(range, isMale, level) * coeficient ?? throw new Exception("Cant' select proper range limit."),
+    };
 
     private static (Test targetTest, ReferenceRange targetRange) GetRange(IEnumerable<Test> tests, Func<Test, bool> testFilter, Func<ReferenceRange, bool> rangeFilter)
     {
@@ -107,37 +116,39 @@ public class Flagging
         return (test, referenceRange);
     }
 
-    private static ResultRequest GetNumericTestRequestAtHighLimit(int testId, string reference, ReferenceRange range, bool? isMale) => new()
-    {
-        TestId = testId,
-        SpeciesId = range.SpeciesId,
-        RefId = reference,
-        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(-2),
-        IsMale = isMale,
-        NumericResult =
-            isMale.HasValue ?
-                isMale.Value ?
-                    range.MHighValue!.Value * 1.1m :
-                    range.FHighValue!.Value * 1.1m
-                :
-                range.HighValue!.Value * 1.1m
-    };
-
-    private static ResultRequest GetNumericTestRequestAtAlarm1(int testId, string reference, ReferenceRange range, bool? isMale) => new()
-    {
-        TestId = testId,
-        SpeciesId = range.SpeciesId,
-        RefId = reference,
-        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(-2),
-        IsMale = isMale,
-        NumericResult =
-            isMale.HasValue ?
-                isMale.Value ?
-                    range.MHighAlarm1!.Value * 1.1m :
-                    range.FHighAlarm1!.Value * 1.1m
-                :
-                range.HighAlarm1!.Value * 1.1m
-    };
-
+    private static decimal? SelectLimit(ReferenceRange range, bool? isMale, FlagLevels level) =>
+        isMale switch
+        {
+            true => level switch
+            {
+                FlagLevels.ULTRA_LOW => range.MLowAlarm2,
+                FlagLevels.VERY_LOW => range.MLowAlarm1,
+                FlagLevels.LOW => range.MLowValue,
+                FlagLevels.HIGH => range.MHighValue,
+                FlagLevels.VERY_HIGH => range.MHighAlarm1,
+                FlagLevels.ULTRA_HIGH => range.MHighAlarm2,
+                _ => null
+            },
+            false => level switch
+            {
+                FlagLevels.ULTRA_LOW => range.FLowAlarm2,
+                FlagLevels.VERY_LOW => range.FLowAlarm1,
+                FlagLevels.LOW => range.FLowValue,
+                FlagLevels.HIGH => range.FHighValue,
+                FlagLevels.VERY_HIGH => range.FHighAlarm1,
+                FlagLevels.ULTRA_HIGH => range.FHighAlarm2,
+                _ => null
+            },
+            _ => level switch
+            {
+                FlagLevels.ULTRA_LOW => range.LowAlarm2,
+                FlagLevels.VERY_LOW => range.LowAlarm1,
+                FlagLevels.LOW => range.LowValue,
+                FlagLevels.HIGH => range.HighValue,
+                FlagLevels.VERY_HIGH => range.HighAlarm1,
+                FlagLevels.ULTRA_HIGH => range.HighAlarm2,
+                _ => null
+            },
+        };
 
 }
