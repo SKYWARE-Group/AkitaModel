@@ -112,7 +112,7 @@ public class Flagging
         TestId = testId,
         SpeciesId = range.SpeciesId,
         RefId = reference,
-        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(1),
+        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(-2),
         IsMale = isMale,
         NumericResult =
             isMale.HasValue ?
@@ -128,7 +128,7 @@ public class Flagging
         TestId = testId,
         SpeciesId = range.SpeciesId,
         RefId = reference,
-        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(1),
+        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(-2),
         IsMale = isMale,
         NumericResult =
             isMale.HasValue ?
