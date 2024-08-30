@@ -67,7 +67,7 @@ public class Flagging
             [
                 () =>
                 {
-                    if (resultRequest2.Length != (numericResultResponse2?.Count() ?? 0)) throw new Exception("Answer has different length.");
+                    if (resultRequest2.Length != (numericResultResponse2?.Count() ?? 0)) throw new Exception("Answer's size has unexpected length.");
                     AnsiConsole.MarkupLineInterpolated($"  [grey]Invocation time: {processingMs}ms.[/]");
                     for (int ix = 0; ix < resultRequest2!.Length; ix++) {
                         AnsiConsole.MarkupLineInterpolated($"  [grey]--- Case {ix}[/]");
@@ -103,7 +103,7 @@ public class Flagging
             tests,
             (t) => t.ResultType == ResultTypes.Quantitative && t.Scale >= 1 && t.FlagLimit >= FlagLevelLimits.UP_TO_VERY,
             (r) => r.SpeciesId == 1 && r.IsRangedByGender && r.FHighAlarm1 is not null);
-
+        // Unknown gender, scale >=1, low limit
         (Test targetTestU, ReferenceRange targetRangeU) = GetRange(
             tests,
             (t) => t.ResultType == ResultTypes.Quantitative && t.Scale >= 1 && t.FlagLimit >= FlagLevelLimits.UP_TO_VERY,
