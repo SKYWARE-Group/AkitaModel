@@ -3,6 +3,10 @@ using AkitaModelDemo.Models;
 using AkitaModelDemo.Services;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.Flagging;
+using Spectre.Console;
+using System.Diagnostics;
+
+// Ignore Spelling: grey
 
 namespace AkitaModelDemo.RunUnits;
 
@@ -39,7 +43,7 @@ public class Flagging
         ResultRequest resultRequest = GetSingleNumericTestRequest(flaggingTests!);
         if (!await ApiRunner.InvokeApiFunction(
             async () => numericResultResponse = await akitaService.GetTestResult([resultRequest], settings.ApiKey),
-            $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)}",
+            $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)} (single numeric test)",
             [
                 () => ApiRunner.PrintInfo("Flagging test", flaggingTests?.FirstOrDefault(t => t.Id == resultRequest?.TestId)?.Name),
                 () => ApiRunner.PrintInfo("Original decimal result", resultRequest.NumericResult),
@@ -50,18 +54,29 @@ public class Flagging
         // Multiple numeric tests, gender ranged
         IEnumerable<ResultResponse>? numericResultResponse2 = null;
         ResultRequest[] resultRequest2 = GetMultipleNumericTestsRequest(flaggingTests!);
+        long processingMs = 0;
         if (!await ApiRunner.InvokeApiFunction(
-            async () => numericResultResponse2 = await akitaService.GetTestResult(resultRequest2, settings.ApiKey),
-            $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)}",
+            async () =>
+            {
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                numericResultResponse2 = await akitaService.GetTestResult(resultRequest2, settings.ApiKey);
+                stopwatch.Stop();
+                processingMs = stopwatch.ElapsedMilliseconds;
+            },
+            $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)} (multiple numeric tests)",
             [
-                () => ApiRunner.PrintInfo("Flagging test #1", flaggingTests?.FirstOrDefault(t => t.Id == resultRequest2?.FirstOrDefault()?.TestId)?.Name),
-                () => ApiRunner.PrintInfo("Original decimal result #1", resultRequest2[0].NumericResult),
-                () => ApiRunner.PrintInfo("Calculated decimal result #1", numericResultResponse2?.FirstOrDefault()?.CalculationResult?.DecimalResult),
-                () => ApiRunner.PrintInfo("Calculated flag level #1", numericResultResponse2?.FirstOrDefault()?.CalculationResult?.FlagLevel),
-                () => ApiRunner.PrintInfo("Flagging test #2", flaggingTests?.LastOrDefault(t => t.Id == resultRequest2?.LastOrDefault()?.TestId)?.Name),
-                () => ApiRunner.PrintInfo("Original decimal result #2", resultRequest2[1].NumericResult),
-                () => ApiRunner.PrintInfo("Calculated decimal result #2", numericResultResponse2?.LastOrDefault()?.CalculationResult?.DecimalResult),
-                () => ApiRunner.PrintInfo("Calculated flag level #2", numericResultResponse2?.LastOrDefault()?.CalculationResult?.FlagLevel)
+                () =>
+                {
+                    if (resultRequest2.Length != (numericResultResponse2?.Count() ?? 0)) throw new Exception("Answer has different length.");
+                    AnsiConsole.MarkupLineInterpolated($"  [grey]Invocation time: {processingMs}ms.[/]");
+                    for (int ix = 0; ix < resultRequest2!.Length; ix++) {
+                        AnsiConsole.MarkupLineInterpolated($"  [grey]--- Case {ix}[/]");
+                        ApiRunner.PrintInfo($"Flagging test #{ix}", flaggingTests?.FirstOrDefault(t => t.Id == resultRequest2?[ix]?.TestId)?.Name);
+                        ApiRunner.PrintInfo($"Original decimal result #{ix}", resultRequest2?[ix]?.NumericResult);
+                        ApiRunner.PrintInfo($"Calculated decimal result #{ix}", numericResultResponse2?.ToArray()[ix]?.CalculationResult?.DecimalResult);
+                        ApiRunner.PrintInfo($"Calculated flag level #{ix}", numericResultResponse2?.ToArray()[ix]?.CalculationResult?.FlagLevel);
+                    };
+                },
             ])) failures++;
 
         ApiRunner.PrintFooterLines(failures);
@@ -83,14 +98,20 @@ public class Flagging
             tests,
             (t) => t.ResultType == ResultTypes.Quantitative && t.Scale >= 1,
             (r) => r.SpeciesId == 1 && r.IsRangedByGender && r.MHighValue is not null && r.AgeFrom > 16 * 365);
-        // Female, alarm 1 limit
+        // Female, scale >=1, high alarm #1 limit
         (Test targetTestF, ReferenceRange targetRangeF) = GetRange(
             tests,
             (t) => t.ResultType == ResultTypes.Quantitative && t.Scale >= 1 && t.FlagLimit >= FlagLevelLimits.UP_TO_VERY,
             (r) => r.SpeciesId == 1 && r.IsRangedByGender && r.FHighAlarm1 is not null);
+
+        (Test targetTestU, ReferenceRange targetRangeU) = GetRange(
+            tests,
+            (t) => t.ResultType == ResultTypes.Quantitative && t.Scale >= 1 && t.FlagLimit >= FlagLevelLimits.UP_TO_VERY,
+            (r) => r.SpeciesId == 1 && r.LowValue is not null);
         return [
             GetNumericTestRequest(targetTestM.Id, $"S{Utilities.GetRandomString()}", targetRangeM, true, FlagLevels.HIGH, 1.1m),
             GetNumericTestRequest(targetTestF.Id, $"S{Utilities.GetRandomString()}", targetRangeF, false, FlagLevels.VERY_HIGH, 1.1m),
+            GetNumericTestRequest(targetTestU.Id, $"S{Utilities.GetRandomString()}", targetRangeU, null, FlagLevels.LOW, 0.95m),
         ];
     }
 
@@ -127,7 +148,7 @@ public class Flagging
                 FlagLevels.HIGH => range.MHighValue,
                 FlagLevels.VERY_HIGH => range.MHighAlarm1,
                 FlagLevels.ULTRA_HIGH => range.MHighAlarm2,
-                _ => null
+                _ => throw new ArgumentOutOfRangeException(nameof(level), "The level is not supported.")
             },
             false => level switch
             {
@@ -137,7 +158,7 @@ public class Flagging
                 FlagLevels.HIGH => range.FHighValue,
                 FlagLevels.VERY_HIGH => range.FHighAlarm1,
                 FlagLevels.ULTRA_HIGH => range.FHighAlarm2,
-                _ => null
+                _ => throw new ArgumentOutOfRangeException(nameof(level), "The level is not supported.")
             },
             _ => level switch
             {
@@ -147,7 +168,7 @@ public class Flagging
                 FlagLevels.HIGH => range.HighValue,
                 FlagLevels.VERY_HIGH => range.HighAlarm1,
                 FlagLevels.ULTRA_HIGH => range.HighAlarm2,
-                _ => null
+                _ => throw new ArgumentOutOfRangeException(nameof(level), "The level is not supported.")
             },
         };
 
