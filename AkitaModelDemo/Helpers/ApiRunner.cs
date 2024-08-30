@@ -1,7 +1,4 @@
-﻿using Refit;
-using Skyware.Arda.Model;
-using Spectre.Console;
-using System;
+﻿using Spectre.Console;
 
 namespace AkitaModelDemo.Helpers;
 
