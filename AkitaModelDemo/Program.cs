@@ -15,11 +15,12 @@ IConfiguration configuration = ConfigHelper.BuildConfig();
 AkitaSettings settings = configuration.GetSection(nameof(AkitaSettings)).Get<AkitaSettings>() ?? throw new ApplicationException("No configuration is found!");
 
 // REST Service
+var httpClient = new HttpClient(new HttpLoggingHandler()) { BaseAddress = new(settings.BaseUrl) };
 RefitSettings refitSettings = new()
 {
     ContentSerializer = new SystemTextJsonContentSerializer(Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options),
 };
-IAkitaApi akitaService = RestService.For<IAkitaApi>(settings.BaseUrl, refitSettings);
+IAkitaApi akitaService = RestService.For<IAkitaApi>(httpClient, refitSettings);
 
 // ---------------------------------
 // Test invocations
