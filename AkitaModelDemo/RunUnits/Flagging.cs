@@ -79,7 +79,159 @@ public class Flagging
                 },
             ])) failures++;
 
+        // Multiple numeric tests with multiple alarms
+        IEnumerable<ResultResponse>? numericResultResponse3 = null;
+        ResultRequest[] resultRequest3 = GetMultipleNumericTestRequestsWithMultipleAlarms(flaggingTests!);
+        processingMs = 0;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () =>
+            {
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                numericResultResponse3 = await akitaService.GetTestResult(resultRequest3, settings.ApiKey);
+                stopwatch.Stop();
+                processingMs = stopwatch.ElapsedMilliseconds;
+            },
+            $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)} (multiple numeric tests with multiple alarms)",
+            [
+                () =>
+                {
+                    if (resultRequest3.Length != (numericResultResponse3?.Count() ?? 0)) throw new Exception("Answer's size has unexpected length.");
+                    AnsiConsole.MarkupLineInterpolated($"  [grey]Invocation time: {processingMs}ms.[/]");
+                    for (int ix = 0; ix < resultRequest3!.Length; ix++) {
+                        AnsiConsole.MarkupLineInterpolated($"  [grey]--- Case {ix}[/]");
+                        ApiRunner.PrintInfo($"Flagging test #{ix}", flaggingTests?.FirstOrDefault(t => t.Id == resultRequest3?[ix]?.TestId)?.Name);
+                        ApiRunner.PrintInfo($"Original decimal result #{ix}", resultRequest3?[ix]?.NumericResult);
+                        ApiRunner.PrintInfo($"Calculated decimal result #{ix}", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.DecimalResult);
+                        ApiRunner.PrintInfo($"Calculated flag level #{ix}", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.FlagLevel);
+                        ApiRunner.PrintInfo($"Calculated flag symbol", GetFlagSymbol(numericResultResponse3?.ToArray()[ix]?.CalculationResult?.FlagLevel,
+                                                                                     flaggingTests?.FirstOrDefault(t => t.Id == resultRequest3?[ix]?.TestId)));
+                    };
+                },
+            ])) failures++;
+
+        // Multiple semi quantitive tests
+        IEnumerable<ResultResponse>? semiQuantitativeResultResponse = null;
+        ResultRequest[] resultsemiQuantitativeRequest = GetMultipleSemiQuantitativeTestRequests(flaggingTests!);
+        processingMs = 0;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () =>
+            {
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                semiQuantitativeResultResponse = await akitaService.GetTestResult(resultsemiQuantitativeRequest, settings.ApiKey);
+                stopwatch.Stop();
+                processingMs = stopwatch.ElapsedMilliseconds;
+            },
+            $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)} (multiple semi quantitative tests)",
+            [
+                () =>
+                {
+                    if (resultsemiQuantitativeRequest.Length != (semiQuantitativeResultResponse?.Count() ?? 0)) throw new Exception("Answer's size has unexpected length.");
+                    AnsiConsole.MarkupLineInterpolated($"  [grey]Invocation time: {processingMs}ms.[/]");
+                    for (int ix = 0; ix < resultsemiQuantitativeRequest!.Length; ix++) {
+                        AnsiConsole.MarkupLineInterpolated($"  [grey]--- Case {ix}[/]");
+                        ApiRunner.PrintInfo($"Flagging test #{ix}", flaggingTests?.FirstOrDefault(t => t.Id == resultsemiQuantitativeRequest?[ix]?.TestId)?.Name);
+                        ApiRunner.PrintInfo($"Original decimal result #{ix}", resultsemiQuantitativeRequest?[ix]?.NumericResult);
+                        ApiRunner.PrintInfo($"Calculated decimal result #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.DecimalResult);
+                        ApiRunner.PrintInfo($"Calculated flag level #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel);
+                        ApiRunner.PrintInfo($"Calculated flag level #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.TextResult);
+                        ApiRunner.PrintInfo($"Calculated flag symbol", GetFlagSymbol(semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel,
+                                                                                     flaggingTests?.FirstOrDefault(t => t.Id == resultsemiQuantitativeRequest?[ix]?.TestId)));
+                    };
+                },
+            ])) failures++;
+
+        // Multiple list tests
+        IEnumerable<ResultResponse>? listTestResponse = null;
+        ResultRequest[] resultListTestRequest = GetMultipleListTestRequests(flaggingTests!);
+        processingMs = 0;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () =>
+            {
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                listTestResponse = await akitaService.GetTestResult(resultListTestRequest, settings.ApiKey);
+                stopwatch.Stop();
+                processingMs = stopwatch.ElapsedMilliseconds;
+            },
+            $"{nameof(Flagging)}->{nameof(akitaService.GetTestResult)} (multiple list tests)",
+            [
+                () =>
+                {
+                    if (resultListTestRequest.Length != (listTestResponse?.Count() ?? 0)) throw new Exception("Answer's size has unexpected length.");
+                    AnsiConsole.MarkupLineInterpolated($"  [grey]Invocation time: {processingMs}ms.[/]");
+                    for (int ix = 0; ix < resultListTestRequest!.Length; ix++) {
+                        AnsiConsole.MarkupLineInterpolated($"  [grey]--- Case {ix}[/]");
+                        ApiRunner.PrintInfo($"Flagging test #{ix}", flaggingTests?.FirstOrDefault(t => t.Id == resultListTestRequest?[ix]?.TestId)?.Name);
+                        ApiRunner.PrintInfo($"Calculated flag level #{ix}", listTestResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel);
+                        ApiRunner.PrintInfo($"Calculated flag level #{ix}", listTestResponse?.ToArray()[ix]?.CalculationResult?.TextResult);
+                        ApiRunner.PrintInfo($"Calculated flag symbol", GetFlagSymbol(listTestResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel,
+                                                                                     flaggingTests?.FirstOrDefault(t => t.Id == resultListTestRequest?[ix]?.TestId)));
+                    };
+                },
+            ])) failures++;
+
+
         ApiRunner.PrintFooterLines(failures);
+    }
+
+    private static string GetFlagSymbol(FlagLevels? flagLevel, Test? test)
+    {
+        return flagLevel switch
+        {
+            FlagLevels.ULTRA_LOW => test?.FlagType?.UltraLow ?? string.Empty,
+            FlagLevels.VERY_LOW => test?.FlagType?.VeryLow ?? string.Empty,
+            FlagLevels.LOW => test?.FlagType?.Low ?? string.Empty,
+            FlagLevels.HIGH => test?.FlagType?.High ?? string.Empty,
+            FlagLevels.VERY_HIGH => test?.FlagType?.VeryHigh ?? string.Empty,
+            FlagLevels.ULTRA_HIGH => test?.FlagType?.UltraHigh ?? string.Empty,
+            FlagLevels.NONE => string.Empty,
+            FlagLevels.SEMI_QUANT_QUESTION => string.Empty,
+            _ => throw new ArgumentOutOfRangeException(nameof(flagLevel), "The level is not supported.")
+        };
+    }
+
+    private static ResultRequest[] GetMultipleListTestRequests(IEnumerable<Test> tests)
+    {
+        ///list test request
+        Test test = GetTest(tests, (t) => t.ResultType == ResultTypes.List && t.FlagLimit >= FlagLevelLimits.UP_TO_ULTRA && t.AllowedResults.Any(ar => ar.FlagLevel == FlagLevels.HIGH || ar.FlagLevel == FlagLevels.VERY_HIGH));
+        Test test1 = GetTest(tests, (t) => t.ResultType == ResultTypes.List && t.FlagLimit == FlagLevelLimits.NO_FLAG && t.AllowedResults.Any(ar => ar.FlagLevel == FlagLevels.NONE));
+
+
+        return [
+            GetListRequest(test.Id, $"S{Utilities.GetRandomString()}", null, test.AllowedResults?.FirstOrDefault(ar => ar.FlagLevel == FlagLevels.HIGH)),
+            GetListRequest(test.Id, $"S{Utilities.GetRandomString()}", null, test.AllowedResults?.FirstOrDefault(ar => ar.FlagLevel == FlagLevels.VERY_HIGH)),
+            GetListRequest(test1.Id, $"S{Utilities.GetRandomString()}", null, test1.AllowedResults?.FirstOrDefault(ar => ar.FlagLevel == FlagLevels.NONE))
+            ];
+    }
+
+    private static ResultRequest[] GetMultipleNumericTestRequestsWithMultipleAlarms(IEnumerable<Test> tests)
+    {
+        ///test with multiple alarms
+        (Test targetTest, ReferenceRange targetRange) = GetRange(
+            tests,
+            (t) => t.ResultType == ResultTypes.Quantitative && t.FlagLimit >= FlagLevelLimits.UP_TO_ULTRA,
+            (r) => r.SpeciesId == 1 && !r.IsRangedByGender && r.HighAlarm2 is not null && r.HighAlarm1 is not null && r.LowAlarm1 is not null && r.LowAlarm2 is not null);
+
+        return [
+           GetNumericTestRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, null, FlagLevels.VERY_HIGH, 1.1m),
+           GetNumericTestRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, null, FlagLevels.ULTRA_HIGH, 1.1m),
+           GetNumericTestRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, null, FlagLevels.VERY_LOW, 0.95m),
+           GetNumericTestRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, null, FlagLevels.ULTRA_LOW, 0.95m)
+        ];
+    }
+
+    private static ResultRequest[] GetMultipleSemiQuantitativeTestRequests(IEnumerable<Test> tests)
+    {
+        ///test request for no flag, high, semi quant question between low and high
+        (Test targetTest, ReferenceRange targetRange) = GetRange(
+            tests,
+            (t) => t.ResultType == ResultTypes.SemiQuantitative && t.FlagLimit >= FlagLevelLimits.UP_TO_ULTRA,
+            (r) => r.SpeciesId == 1 && r.HighValue is not null && r.LowValue is not null);
+
+        return [
+            GetSemiQuantitativeRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, null, FlagLevels.HIGH, 1.1m),
+            GetSemiQuantitativeRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, null, FlagLevels.LOW, 1.1m),
+            GetSemiQuantitativeRequest(targetTest.Id, $"S{Utilities.GetRandomString()}", targetRange, null, FlagLevels.LOW, 0.95m)
+            ];
     }
 
     private static ResultRequest GetSingleNumericTestRequest(IEnumerable<Test> tests)
@@ -125,6 +277,24 @@ public class Flagging
         NumericResult = SelectLimit(range, isMale, level) * coeficient ?? throw new Exception("Cant' select proper range limit."),
     };
 
+    private static ResultRequest GetListRequest(int testId, string reference, bool? isMale, ResultEntry? entry) => new()
+    {
+        TestId = testId,
+        RefId = reference,
+        IsMale = isMale,
+        TextResult = entry?.Value
+    };
+
+    private static ResultRequest GetSemiQuantitativeRequest(int testId, string reference, ReferenceRange range, bool? isMale, FlagLevels level, decimal coeficient) => new()
+    {
+        TestId = testId,
+        SpeciesId = range.SpeciesId,
+        RefId = reference,
+        DateOfBirth = DateTime.Now.AddDays(range.AgeFrom * -1).AddDays(-2),
+        IsMale = isMale,
+        NumericResult = SelectLimit(range, isMale, level) * coeficient ?? throw new Exception("Cant' select proper range limit."),
+    };
+
     private static (Test targetTest, ReferenceRange targetRange) GetRange(IEnumerable<Test> tests, Func<Test, bool> testFilter, Func<ReferenceRange, bool> rangeFilter)
     {
         ReferenceRange referenceRange = tests
@@ -135,6 +305,11 @@ public class Flagging
 
         Test test = tests.FirstOrDefault(x => x.Ranges?.Any(r => object.ReferenceEquals(r, referenceRange)) ?? false) ?? throw new Exception("Can't find suitable test.");
         return (test, referenceRange);
+    }
+
+    private static Test GetTest(IEnumerable<Test> tests, Func<Test, bool> testFilter)
+    {
+        return tests.FirstOrDefault(testFilter) ?? throw new Exception("Can't find suitable test.");
     }
 
     private static decimal? SelectLimit(ReferenceRange range, bool? isMale, FlagLevels level) =>

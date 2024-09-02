@@ -42,7 +42,7 @@ public class ResultRequest
     /// <summary>
     /// Numeric result of the test.
     /// </summary>
-    public decimal NumericResult { get; set; }
+    public decimal? NumericResult { get; set; }
 
     /// <summary>
     /// Reference Id, e.g. SaleItemId, Sample barcode, etc.
