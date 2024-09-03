@@ -44,6 +44,11 @@ public class SaleItem
     public int? DepartmentRank { get; set; }
 
     /// <summary>
+    /// Note for this sale
+    /// </summary>
+    public string SaleDepartmentNote { get; set; }
+
+    /// <summary>
     /// LOINC code.
     /// </summary>
     /// <remarks>
