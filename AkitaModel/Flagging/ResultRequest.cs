@@ -3,7 +3,7 @@
 namespace Skyware.Lis.AkitaModel.Flagging;
 
 /// <summary>
-/// Represents DTO for Flagging api call.
+/// Represents DTO for Flagging API call.
 /// </summary>
 public class ResultRequest
 {

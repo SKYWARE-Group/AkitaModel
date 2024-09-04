@@ -109,7 +109,7 @@ public class Flagging
                 },
             ])) failures++;
 
-        // Multiple semi quantitive tests
+        // Multiple semiquantitative tests
         IEnumerable<ResultResponse>? semiQuantitativeResultResponse = null;
         ResultRequest[] resultsemiQuantitativeRequest = GetMultipleSemiQuantitativeTestRequests(flaggingTests!);
         processingMs = 0;
@@ -221,7 +221,7 @@ public class Flagging
 
     private static ResultRequest[] GetMultipleSemiQuantitativeTestRequests(IEnumerable<Test> tests)
     {
-        ///test request for no flag, high, semi quant question between low and high
+        ///test request for no flag, high, semiquantitative question between low and high
         (Test targetTest, ReferenceRange targetRange) = GetRange(
             tests,
             (t) => t.ResultType == ResultTypes.SemiQuantitative && t.FlagLimit >= FlagLevelLimits.UP_TO_ULTRA,
