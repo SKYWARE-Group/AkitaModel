@@ -1,6 +1,7 @@
 ﻿using AkitaModelDemo.Helpers;
 using AkitaModelDemo.Models;
 using AkitaModelDemo.Services;
+using Refit;
 using Skyware.Lis.AkitaModel;
 using Skyware.Lis.AkitaModel.BgNhis;
 using Skyware.Rila.Model;
@@ -29,6 +30,9 @@ public class BgNhis
 
     public static async Task Run(IAkitaApi akitaService, AkitaSettings settings)
     {
+        int failures = 0;
+
+        ApiRunner.PrintHeaderLines("Akita BgNhis: Public functions");
 
         // Contracts
         IEnumerable<NhifContract>? contracts = await GetContracts(akitaService, settings);
@@ -39,34 +43,57 @@ public class BgNhis
         }
 
         // Packages
-        IList<NhifPack> packages = await akitaService.GetPackages(settings.ApiKey);
-        if (packages is not null && packages.Any())
-        {
-            Console.WriteLine($"#BGNHIS Packages: {packages.Count}");
-        }
+        IEnumerable<NhifPack>? packages = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => packages = await akitaService.GetPackages(settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.GetPackages)}",
+            [
+                () => ApiRunner.PrintInfo("Packages count", packages?.Count()),
+                () => ApiRunner.PrintInfo("Name of first package", packages?.FirstOrDefault()?.Name)
+            ])) failures++;
 
-        // Packages
-        IList<Examination> examinations = await akitaService.GetExaminations(settings.ApiKey);
-        if (examinations is not null && examinations.Any())
-        {
-            Console.WriteLine($"#BGNHIS Examinations: {examinations.Count}");
-        }
+        // Examinations
+        IEnumerable<Examination>? examinations = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => examinations = await akitaService.GetExaminations(settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.GetExaminations)}",
+            [
+                () => ApiRunner.PrintInfo("Examinations count", examinations?.Count()),
+                () => ApiRunner.PrintInfo("Name of first examination", examinations?.FirstOrDefault()?.Name)
+            ])) failures++;
+
 
         // 1. Сценарий 1
         // 1.1 Извличане на НМДД по НРД (очаква се 1)
         // 1.2 Търсене по ЕГН (очаква се 1)
 
         // Get referral
-        RilaReferralResultsData? referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Referral number: {referral?.ReferralData.Nrn}");
+        RilaReferralResultsData? referral = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => referral = await akitaService.GetReferral(DataFactory.NRN, settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.GetReferral)}",
+            [
+                () => ApiRunner.PrintInfo("Referral number", referral?.ReferralData?.Nrn),
+            ])) failures++;
 
         // Get referral not found
-        var message = await akitaService.GetReferralNotFound("fsjefoheshjf", settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Fake referral with status code: {message.StatusCode}");
+        HttpResponseMessage? message = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => message = await akitaService.GetReferralNotFound("fsjefoheshjf", settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.GetReferralNotFound)}",
+            [
+                () => ApiRunner.PrintInfo("Fake referral with status code", message?.StatusCode),
+            ])) failures++;
 
         // Search referrals
-        IEnumerable<RilaReferralResultsData>? referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Referrals count: {referrals?.Count()}");
+        IEnumerable<RilaReferralResultsData>? referrals = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => referrals = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.SearchReferrals)}",
+            [
+                () => ApiRunner.PrintInfo("Referrals count", referrals?.Count()),
+                () => ApiRunner.PrintInfo("Nrn of first referral", referrals?.FirstOrDefault()?.ReferralData.Nrn)
+            ])) failures++;
 
 
         // 2. Сценарий 2
@@ -79,42 +106,87 @@ public class BgNhis
         // 2.7  Освобождаване на всички направления
 
         //2.1
-        IEnumerable<RilaReferralResultsData>? referrals2 = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Referrals count: {referrals2?.Count()}");
-        if (referrals2 is null) throw new Exception("No referrals");
+        IEnumerable<RilaReferralResultsData>? referrals2 = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => referrals2 = await akitaService.SearchReferrals(DataFactory.PID, settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.SearchReferrals)}",
+            [
+                () => ApiRunner.PrintInfo("Referrals count", referrals2?.Count()),
+                () => ApiRunner.PrintInfo("Nrn of first referral", referrals2?.FirstOrDefault()?.ReferralData.Nrn)
+            ])) failures++;
 
+        if (referrals2 is null)
+        {
+            AnsiConsole.MarkupLine($"[red]Execution is cancelled as there are no referrals.[/]");
+            return;
+        }
 
         List<string> nrns = referrals2.Select(r => r.ReferralData.Nrn).ToList();
 
         //2.2
-        var importRequest = DataFactory.GetImportRequest(nrns.Take(2), contracts.FirstOrDefault()!, null);
-        Sale sale = await akitaService.Import(importRequest, settings.ApiKey);
-        Console.WriteLine($"#BGNHIS Sale id with 2 referrals: {sale.Id}");
+        ImportRequest? importRequest = DataFactory.GetImportRequest(nrns.Take(2), contracts?.FirstOrDefault()!, null);
+        Sale? sale = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => sale = await akitaService.Import(importRequest, settings.ApiKey),
+            $"{nameof(BgNhis)}->{nameof(akitaService.Import)}",
+            [
+                () => ApiRunner.PrintInfo("Sale id with 2 referrals", sale?.Id),
+                () => { foreach (var nrn in nrns.Take(2))
+                    {
+                        ApiRunner.PrintInfo("Nrn -->", nrn);
+                    }}
+            ])) failures++;
+
 
         if (sale is not null)
         {
             //2.3
-            importRequest = DataFactory.GetImportRequest(nrns.Skip(2), contracts.FirstOrDefault()!, sale.Id);
-            sale = await akitaService.Import(importRequest, settings.ApiKey);
-            Console.WriteLine($"#BGNHIS Import third referral: {sale.Id}");
+            importRequest = DataFactory.GetImportRequest(nrns.Skip(2), contracts?.FirstOrDefault()!, sale?.Id);
+            if (!await ApiRunner.InvokeApiFunction(
+                async () => sale = await akitaService.Import(importRequest, settings.ApiKey),
+                $"{nameof(BgNhis)}->{nameof(akitaService.Import)}",
+                [
+                    () => ApiRunner.PrintInfo("Third referral imported", sale?.Id),
+                    () => ApiRunner.PrintInfo("Third referral nrn", nrns.Skip(2).FirstOrDefault())
+                ])) failures++;
 
             //2.4
-            sale = await akitaService.ReleaseReferral(nrns.FirstOrDefault()!, settings.ApiKey);
-            Console.WriteLine($"#BGNHIS Remove third referral: {sale.Id}");
+            if (!await ApiRunner.InvokeApiFunction(
+                async () => sale = await akitaService.ReleaseReferral(nrns.FirstOrDefault()!, settings.ApiKey),
+                $"{nameof(BgNhis)}->{nameof(akitaService.ReleaseReferral)}",
+                [
+                    () => ApiRunner.PrintInfo("Remove third referral", sale?.Id)
+                ])) failures++;
 
             string code = referrals2.ToList()[1].ReferralData.Procedures.FirstOrDefault()?.Code ?? string.Empty;
 
             //2.5
-            var response = await akitaService.VoidReferralItem(nrns[1], code, settings.ApiKey);
-            Console.WriteLine($"#BGNHIS Referral item voided result: {response.StatusCode}");
+            ApiResponse<bool>? response = null;
+            if (!await ApiRunner.InvokeApiFunction(
+                 async () => response = await akitaService.VoidReferralItem(nrns[1], code, settings.ApiKey),
+                 $"{nameof(BgNhis)}->{nameof(akitaService.VoidReferralItem)}",
+                 [
+                     () => ApiRunner.PrintInfo("Referral item voided result", response?.StatusCode)
+                 ])) failures++;
+
             //2.6
-            response = await akitaService.RestoreReferralItem(nrns[1], code, settings.ApiKey);
-            Console.WriteLine($"#BGNHIS Referral item restored result: {response.StatusCode}");
+            if (!await ApiRunner.InvokeApiFunction(
+                 async () => response = await akitaService.RestoreReferralItem(nrns[1], code, settings.ApiKey),
+                 $"{nameof(BgNhis)}->{nameof(akitaService.RestoreReferralItem)}",
+                 [
+                     () => ApiRunner.PrintInfo("Referral item restored result", response?.StatusCode)
+                 ])) failures++;
 
             //2.7
-            importRequest = DataFactory.GetImportRequest(nrns, contracts.FirstOrDefault()!, null);
-            sale = await akitaService.ReleaseAll(importRequest, settings.ApiKey);
-            Console.WriteLine($"#BGNHIS Remove all referrals: {sale.Id}");
+            importRequest = DataFactory.GetImportRequest(nrns, contracts?.FirstOrDefault()!, null);
+            if (!await ApiRunner.InvokeApiFunction(
+                async () => sale = await akitaService.ReleaseAll(importRequest, settings.ApiKey),
+                $"{nameof(BgNhis)}->{nameof(akitaService.ReleaseAll)}",
+                [
+                    () => ApiRunner.PrintInfo("Remove all referrals", sale?.Id),
+                ])) failures++;
+
+            ApiRunner.PrintFooterLines(failures);
         }
     }
 }
