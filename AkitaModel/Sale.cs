@@ -35,6 +35,11 @@ public class Sale
     public int? SchemaId { get; set; }
 
     /// <summary>
+    ///  Sale schema name.
+    /// </summary>
+    public string SchemaName { get; set; } = string.Empty;
+
+    /// <summary>
     /// FK to location where registration was made.
     /// </summary>
     public int? LocationId { get; set; }
@@ -73,6 +78,16 @@ public class Sale
     /// Samples to the visit.
     /// </summary>
     public IList<Sample> Samples { get; set; }
+
+    /// <summary>
+    /// Name of first fund
+    /// </summary>
+    public string Fund1Name { get; set; }
+
+    /// <summary>
+    /// Name of second fund
+    /// </summary>
+    public string Fund2Name { get; set; }
 
     // public List<Note>? Notes { get; set; }
 

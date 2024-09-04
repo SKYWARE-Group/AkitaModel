@@ -8,6 +8,11 @@ namespace Skyware.Lis.AkitaModel.Robin.Reports;
 public class LaboratoryResults
 {
     /// <summary>
+    /// Sale/Visit data.
+    /// </summary>
+    public Sale Visit { get; set; }
+
+    /// <summary>
     /// Patient data
     /// </summary>
     public Patient Patient { get; set; }
@@ -23,7 +28,7 @@ public class LaboratoryResults
     public IList<SaleItem> Results { get; set; } = [];
 
     /// <summary>
-    /// Footnotes list
+    /// Footnotes list.
     /// </summary>
     public IList<Footnote> Footnotes { get; set; } = [];
 

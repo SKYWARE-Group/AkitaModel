@@ -16,6 +16,16 @@ public class Patient : PersonBase
     public int? PidTypeId { get; set; }
 
     /// <summary>
+    /// Name of the identifier
+    /// </summary>
+    public string PidTypeIdName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Patient's identifier is a unique
+    /// </summary>
+    public bool PidTypeIdIsIdentity { get; set; } = true;
+
+    /// <summary>
     /// Well-known identifier, e.g. SSN, EGN, etc.
     /// </summary>
     public string PatientId { get; set; }
@@ -31,6 +41,11 @@ public class Patient : PersonBase
     public int? SpeciesId { get; set; }
 
     /// <summary>
+    /// Name of a species of the patient (human, cat, dog, etc.)
+    /// </summary>
+    public string SpeciesIdName { get; set; } = string.Empty;
+
+    /// <summary>
     /// Date of birth.
     /// </summary>
     [JsonConverter(typeof(IsoDateOnlyConverter))]
@@ -41,4 +56,8 @@ public class Patient : PersonBase
     /// </summary>
     public bool? IsDobAprox { get; set; }
 
+    /// <summary>
+    /// Patient age at registration time
+    /// </summary>
+    public string AgeAtRegTimeString { get; set; } = string.Empty;
 }
