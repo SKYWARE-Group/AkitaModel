@@ -256,5 +256,7 @@ public class Core
             [
                 () => ApiRunner.PrintInfo("John Doe #2 first item's result (second set)", item?.Result)
             ])) failures++;
+
+        ApiRunner.PrintFooterLines(failures);
     }
 }
