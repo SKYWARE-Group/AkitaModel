@@ -26,6 +26,10 @@
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Robin\Reports\Visit.cs" />
+  </ItemGroup>
+
   <!--<PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <DefineConstants>$(DefineConstants);LOCAL_TEST</DefineConstants>
   </PropertyGroup>-->
