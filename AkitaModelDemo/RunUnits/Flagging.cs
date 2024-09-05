@@ -104,6 +104,8 @@ public class Flagging
                         ApiRunner.PrintInfo($"Calculated decimal result #{ix}", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.DecimalResult);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.FlagLevel);
                         ApiRunner.PrintInfo($"Calculated flag symbol", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.Flag);
+                        ApiRunner.PrintInfo($"Calculated flag prefix", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.Prefix);
+                        ApiRunner.PrintInfo($"Calculated flag HL7", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.Hl7Flag);
                     };
                 },
             ])) failures++;
@@ -134,6 +136,9 @@ public class Flagging
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.TextResult);
                         ApiRunner.PrintInfo($"Calculated flag symbol", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.Flag);
+                        ApiRunner.PrintInfo($"Calculated flag prefix", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.Prefix);
+                        ApiRunner.PrintInfo($"Calculated flag HL7", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.Hl7Flag);
+
                     };
                 },
             ])) failures++;
@@ -162,6 +167,8 @@ public class Flagging
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", listTestResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", listTestResponse?.ToArray()[ix]?.CalculationResult?.TextResult);
                         ApiRunner.PrintInfo($"Calculated flag symbol", listTestResponse?.ToArray()[ix]?.CalculationResult?.Flag);
+                        ApiRunner.PrintInfo($"Calculated flag prefix", listTestResponse?.ToArray()[ix]?.CalculationResult?.Prefix);
+                        ApiRunner.PrintInfo($"Calculated flag HL7", listTestResponse?.ToArray()[ix]?.CalculationResult?.Hl7Flag);
                     };
                 },
             ])) failures++;
