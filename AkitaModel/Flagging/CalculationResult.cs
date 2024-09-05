@@ -1,5 +1,7 @@
 ﻿namespace Skyware.Lis.AkitaModel.Flagging;
 
+// Ignore Spelling: hl
+
 /// <summary>
 /// Represents result received from the flagging API
 /// </summary>
@@ -30,5 +32,10 @@ public class CalculationResult
     /// Flag, e.g. "↑", "↓↓", "3+", etc.
     /// </summary>
     public string Flag { get; set; }
+
+    /// <summary>
+    /// Flag, according to HL7 table 0078.
+    /// </summary>
+    public string Hl7Flag { get; set; }
 
 }
