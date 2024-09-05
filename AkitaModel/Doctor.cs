@@ -43,4 +43,9 @@ public class Doctor : PersonBase
     /// </summary>
     public string PostAddress { get; set; }
 
+    /// <summary>
+    /// Doctor's information (last name, title, first name, speciality name and job place)
+    /// </summary>
+    public string DisplayName {  get; set; }
+
 }

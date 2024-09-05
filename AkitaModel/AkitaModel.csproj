@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.12</Version>
+    <Version>0.0.13</Version>
     <RootNamespace>Skyware.Lis.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.$(MSBuildProjectName)</AssemblyName>
@@ -25,6 +25,10 @@
     <PackageIcon>akita.png</PackageIcon>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Robin\Reports\Visit.cs" />
+  </ItemGroup>
 
   <!--<PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <DefineConstants>$(DefineConstants);LOCAL_TEST</DefineConstants>

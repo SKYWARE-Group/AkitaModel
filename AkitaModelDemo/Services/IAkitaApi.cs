@@ -97,11 +97,11 @@ public interface IAkitaApi
     [Get(Constants.URL_FLAGGING_TESTS)]
     Task<IEnumerable<Test>> GetAllTests([Header(Constants.API_KEY_HEADER)] string apiKey);
 
-    [Post(Constants.URL_FLAGGING_TESTS)]
-    Task<IEnumerable<ResultResponse>> GetTestResult([Body] IEnumerable<ResultRequest> request, [Header(Constants.API_KEY_HEADER)] string authorization);
-
     [Get(Constants.URL_FLAGGING_SINGLE_TEST)]
     Task<Test> GetSingleTest(int id, [Header(Constants.API_KEY_HEADER)] string apiKey);
+
+    [Post(Constants.URL_FLAGGING_TESTS)]
+    Task<IEnumerable<ResultResponse>> GetTestResult([Body] IEnumerable<ResultRequest> request, [Header(Constants.API_KEY_HEADER)] string authorization);
 
     #endregion
 

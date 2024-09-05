@@ -14,8 +14,7 @@ public class Core
 
         int failures = 0;
 
-        AnsiConsole.MarkupLine("[dodgerblue1]Akita Core: Public functions[/]");
-        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
+        ApiRunner.PrintHeaderLines("Akita Core: Public functions");
 
         // Species
         IEnumerable<Species>? species = null;
@@ -142,45 +141,64 @@ public class Core
                 () => ApiRunner.PrintInfo("Name of first product", products?.FirstOrDefault()?.Name)
             ])) failures++;
 
-        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
-        AnsiConsole.Markup("[dodgerblue1]Failures:[/] ");
-        if (failures == 0)
-            AnsiConsole.MarkupLineInterpolated($"[green3]0 (Success)[/]");
-        else
-            AnsiConsole.MarkupLineInterpolated($"[red]{failures} (Failure)[/]");
-        AnsiConsole.MarkupLine("");
+        ApiRunner.PrintFooterLines(failures);
 
     }
 
     public static async Task RunSales(IAkitaApi akitaService, AkitaSettings settings)
     {
+        int failures = 0;
+
+        ApiRunner.PrintHeaderLines("Akita Core: Sales functions");
 
         // Get all schemas
-        IEnumerable<Schema> schemas = await akitaService.GetAllSchemas(settings.ApiKey);
-        Console.WriteLine($"Schemas count: {schemas.Count()}");
-        Console.WriteLine($"First schema name: {schemas.FirstOrDefault()?.Name}");
+        IEnumerable<Schema>? schemas = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => schemas = await akitaService.GetAllSchemas(settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.GetAllSchemas)}",
+            [
+                () => ApiRunner.PrintInfo("Schemas count", schemas?.Count()),
+                () => ApiRunner.PrintInfo("Name of first schema", schemas?.FirstOrDefault()?.Name)
+            ])) failures++;
 
         // Get single schema
-        Schema schema = await akitaService.GetSingleSchema(schemas?.FirstOrDefault()?.Id ?? 1, settings.ApiKey);
-        Console.WriteLine($"Schema Id: {schema?.Id}");
-        Console.WriteLine($"Schema name: {schema?.Name}");
-        Console.WriteLine($"Schema products: {schema?.Items?.Count() ?? 0}");
+        Schema? schema = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => schema = await akitaService.GetSingleSchema(schemas?.FirstOrDefault()?.Id ?? 1, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.GetSingleSchema)}",
+            [
+                () => ApiRunner.PrintInfo("Schema id", schema?.Id),
+                () => ApiRunner.PrintInfo("Schema name", schema?.Name),
+                () => ApiRunner.PrintInfo("Schema products", schema?.Items?.Count() ?? 0)
+            ])) failures++;
 
         // Register Sale (Native Bulgarian)
-        Sale visitBulgarian = DataFactory.GetBulgarianCitizenVisit(schemas?.FirstOrDefault()?.Id ?? 1, schema?.Items?.Where(x => !string.IsNullOrWhiteSpace(x.LoincCode)).Take(3).Select(x => x.LoincCode) ?? []);
-        visitBulgarian = await akitaService.CreateSale(visitBulgarian, settings.ApiKey);
-        if (visitBulgarian is null) throw new Exception();
-        Console.WriteLine($"Visit Id (Native Bulgarian): {visitBulgarian?.Id}");
+        Sale? visitBulgarian = DataFactory.GetBulgarianCitizenVisit(schemas?.FirstOrDefault()?.Id ?? 1, schema?.Items?.Where(x => !string.IsNullOrWhiteSpace(x.LoincCode)).Take(3).Select(x => x.LoincCode) ?? []);
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => visitBulgarian = await akitaService.CreateSale(visitBulgarian, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.CreateSale)}",
+            [
+                () => ApiRunner.PrintInfo("Visit Id (Native Bulgarian)", visitBulgarian?.Id)
+            ])) failures++;
 
         // Get samples (Native Bulgarian)
-        IEnumerable<Sample> bulgarianCitizenSamples = await akitaService.GetSamples(visitBulgarian?.Id ?? 0, settings.ApiKey);
-        Console.WriteLine($"Native Bulgarian sample count: {bulgarianCitizenSamples.Count()}");
-        Console.WriteLine($"Native Bulgarian first sample: {bulgarianCitizenSamples.FirstOrDefault()?.Barcode}");
+        IEnumerable<Sample>? bulgarianCitizenSamples = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => bulgarianCitizenSamples = await akitaService.GetSamples(visitBulgarian?.Id ?? 0, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.GetSamples)}",
+            [
+                () => ApiRunner.PrintInfo("Native Bulgarian sample count", bulgarianCitizenSamples?.Count()),
+                () => ApiRunner.PrintInfo("Native Bulgarian first sample", bulgarianCitizenSamples?.FirstOrDefault()?.Barcode)
+            ])) failures++;
 
         // Register Sale (John Doe)
-        Sale visitJohnDoe = DataFactory.GetJohnDoeVisit(schemas?.FirstOrDefault()?.Id ?? 1, schema?.Items?.Where(x => !string.IsNullOrWhiteSpace(x.LoincCode)).Take(5).Select(x => x.LoincCode) ?? []);
-        visitJohnDoe = await akitaService.CreateSale(visitJohnDoe, settings.ApiKey);
-        Console.WriteLine($"Visit Id (John Doe): {visitJohnDoe?.Id}");
+        Sale? visitJohnDoe = DataFactory.GetJohnDoeVisit(schemas?.FirstOrDefault()?.Id ?? 1, schema?.Items?.Where(x => !string.IsNullOrWhiteSpace(x.LoincCode)).Take(5).Select(x => x.LoincCode) ?? []);
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => visitJohnDoe = await akitaService.CreateSale(visitJohnDoe, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.CreateSale)}",
+            [
+                () => ApiRunner.PrintInfo("Visit Id (John Doe)", visitJohnDoe?.Id)
+            ])) failures++;
 
         // Update Sale (John Doe -> Jane Doe)
         if (visitJohnDoe is null) throw new Exception();
@@ -188,33 +206,57 @@ public class Core
         visitJohnDoe.Items.RemoveAt(2);
         visitJohnDoe.Patient = DataFactory.GetJaneDoe();
         visitJohnDoe.IsStat = false;
-        Sale visitJaneDoe = await akitaService.UpadteSale(visitJohnDoe.Id ?? -1, visitJohnDoe, settings.ApiKey);
-        Console.WriteLine($"Visit Id (Jane Doe): {visitJohnDoe?.Id}");
+        Sale? visitJaneDoe = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => visitJaneDoe = await akitaService.UpadteSale(visitJohnDoe.Id ?? -1, visitJohnDoe, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.UpadteSale)}",
+            [
+                () => ApiRunner.PrintInfo("Visit Id (Jane Doe)", visitJaneDoe?.Id)
+            ])) failures++;
+
 
         // Register Sale (John Doe #2, no samples)
-        Sale visitJohnDoe2 = DataFactory.GetJohnDoeVisit(schemas?.FirstOrDefault()?.Id ?? 1, schema?.Items?.Where(x => !string.IsNullOrWhiteSpace(x.LoincCode)).Take(5).Select(x => x.LoincCode) ?? []);
-        visitJohnDoe2 = await akitaService.CreateSale(visitJohnDoe2, settings.ApiKey, false);
-        Console.WriteLine($"Visit Id (John Doe): {visitJohnDoe2?.Id}");
-        if (visitJohnDoe2 is null) throw new Exception();
-        Console.WriteLine($"Visit Id (John Doe #2): {visitJohnDoe2.Id}");
+        Sale? visitJohnDoe2 = DataFactory.GetJohnDoeVisit(schemas?.FirstOrDefault()?.Id ?? 1, schema?.Items?.Where(x => !string.IsNullOrWhiteSpace(x.LoincCode)).Take(5).Select(x => x.LoincCode) ?? []);
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => visitJohnDoe2 = await akitaService.CreateSale(visitJohnDoe2, settings.ApiKey, false),
+            $"{nameof(Core)}->{nameof(akitaService.CreateSale)}",
+            [
+                () => { if (visitJohnDoe2 is null) throw new Exception(); },
+                () => ApiRunner.PrintInfo("Visit Id (John Doe #2)", visitJohnDoe2?.Id)
+            ])) failures++;
+
 
         // Set result (John Doe #2 first item)
-        SaleItem item = (visitJohnDoe2?.Items.FirstOrDefault(x => x.TestId.HasValue)) ?? throw new Exception();
+        SaleItem? item = (visitJohnDoe2?.Items.FirstOrDefault(x => x.TestId.HasValue)) ?? throw new Exception();
         item.Result = "82.3";
         item.NumericResult = 82.3m;
-        SaleItem resultItem = await akitaService.SetResult(visitJohnDoe2.Id ?? 0, item, settings.ApiKey);
-        Console.WriteLine($"John Doe #2 first item's result: {resultItem.Result}");
+        SaleItem? resultItem = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => resultItem = await akitaService.SetResult(visitJohnDoe2.Id ?? 0, item, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.SetResult)}",
+            [
+                () => ApiRunner.PrintInfo("John Doe #2 first item's result", resultItem?.Result)
+            ])) failures++;
 
         // Unset result (John Doe #2 first item)
-        SaleItem unsetItem = await akitaService.UnsetResult(visitJohnDoe2.Id ?? 0, item.LoincId, settings.ApiKey);
-        Console.WriteLine($"John Doe #2 first item's result (unset): {unsetItem.Result}");
+        SaleItem? unsetItem = null;
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => unsetItem = await akitaService.UnsetResult(visitJohnDoe2.Id ?? 0, item.LoincId, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.UnsetResult)}",
+            [
+                () => ApiRunner.PrintInfo("John Doe #2 first item's result (unset)", unsetItem?.Result)
+            ])) failures++;
 
         // Set result (John Doe #2 first item, second time)
         item.Result = "85.1";
         item.NumericResult = 85.1m;
-        item = await akitaService.SetResult(visitJohnDoe2.Id ?? 0, item, settings.ApiKey);
-        Console.WriteLine($"John Doe #2 first item's result (second set): {item.Result}");
+        if (!await ApiRunner.InvokeApiFunction(
+            async () => item = await akitaService.SetResult(visitJohnDoe2.Id ?? 0, item, settings.ApiKey),
+            $"{nameof(Core)}->{nameof(akitaService.SetResult)}",
+            [
+                () => ApiRunner.PrintInfo("John Doe #2 first item's result (second set)", item?.Result)
+            ])) failures++;
 
+        ApiRunner.PrintFooterLines(failures);
     }
-
 }

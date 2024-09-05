@@ -1,7 +1,4 @@
-﻿using Refit;
-using Skyware.Arda.Model;
-using Spectre.Console;
-using System;
+﻿using Spectre.Console;
 
 namespace AkitaModelDemo.Helpers;
 
@@ -48,6 +45,23 @@ public class ApiRunner
     }
 
     public static void PrintInfo(string label, object? value) => AnsiConsole.MarkupLineInterpolated($"  [grey]{label}: {value}.[/]");
+
+    public static void PrintFooterLines(int failures)
+    {
+        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
+        AnsiConsole.Markup("[dodgerblue1]Failures:[/] ");
+        if (failures == 0)
+            AnsiConsole.MarkupLineInterpolated($"[green3]0 (Success)[/]");
+        else
+            AnsiConsole.MarkupLineInterpolated($"[red]{failures} (Failure)[/]");
+        AnsiConsole.MarkupLine("");
+    }
+
+    public static void PrintHeaderLines(string title)
+    {
+        AnsiConsole.MarkupLineInterpolated($"[dodgerblue1]{title}[/]");
+        AnsiConsole.MarkupLine("[dodgerblue1]--------------------------------------------------------[/]");
+    }
 
 
 }
