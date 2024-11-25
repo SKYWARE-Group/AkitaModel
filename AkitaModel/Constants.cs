@@ -87,8 +87,15 @@ public class Constants
 
     public const string ROBIN_REPORTS_HELLO_WORLD = "hello-world.jrxml";
     public const string ROBIN_REPORTS_BG_LAB_REFERRAL = "bg.nhif.referral.f4.jrxml";
-    public const string ROBIN_REPORTS_LAB_WORKLIST_BY_TEST = "lab-worklist-by-test.jrxml";
+    
     public const string ROBIN_REPORTS_LABORATORY_RESULTS = "laboratory-results.jrxml";
+    
+    public const string ROBIN_REPORTS_LAB_WORKLIST_BY_TEST = "lab-worklist-by-test.jrxml";
+    public const string ROBIN_REPORTS_LAB_WORKLIST_FILTERS = "lab-worklist-filters.jrxml";
+    public const string ROBIN_REPORTS_LAB_SAMPLES_TOTAL_BY_POINT = "lab-samples-total-by-point.jrxml";
+    public const string ROBIN_REPORTS_LAB_SAMPLES_LIST = "lab-samples-list.jrxml";
+    public const string ROBIN_REPORTS_LAB_SAMPLES_IN_LOCATION_BY_POINT = "lab-samples-in-location-by-point.jrxml";
+    public const string ROBIN_REPORTS_LAB_PACKING_LIST = "lab-packing-list.jrxml";
 
     #endregion
 
