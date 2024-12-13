@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Skyware.Lis.AkitaModel;
 
+[JsonDerivedType(typeof(Sample))]
+[JsonDerivedType(typeof(Results.Sample))]
 public abstract class SampleBase
 {
 
