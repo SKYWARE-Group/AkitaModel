@@ -1,5 +1,9 @@
-﻿namespace Skyware.Lis.AkitaModel.Results;
+﻿using System.Text.Json.Serialization;
 
+namespace Skyware.Lis.AkitaModel.Results;
+
+[JsonDerivedType(typeof(ExaminatioinBase))]
+[JsonDerivedType(typeof(Product))]
 public abstract class ItemBase
 {
 

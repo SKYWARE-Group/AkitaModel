@@ -2,6 +2,9 @@
 
 namespace Skyware.Lis.AkitaModel.Results;
 
+/// <summary>
+/// Represents a panel of tests (Profile).
+/// </summary>
 public class Panel : ExaminatioinBase
 {
 

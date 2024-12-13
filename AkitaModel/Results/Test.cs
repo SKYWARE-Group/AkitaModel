@@ -1,5 +1,8 @@
 ﻿namespace Skyware.Lis.AkitaModel.Results;
 
+/// <summary>
+/// Represents a single test (analyte, assay) result.
+/// </summary>
 public class Test : ExaminatioinBase
 {
 

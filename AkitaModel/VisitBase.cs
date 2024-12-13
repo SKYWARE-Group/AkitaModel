@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
 /// Patient visit. This is a base class for all types of visits.
 /// </summary>
+[JsonDerivedType(typeof(Results.VisitBalance))]
+[JsonDerivedType(typeof(Results.VisitResults))]
 public abstract class VisitBase
 {
 
