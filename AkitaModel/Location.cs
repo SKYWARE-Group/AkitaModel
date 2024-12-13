@@ -19,8 +19,14 @@ public class Location
     /// </summary>
     public int Id { get; set; }
 
+    /// <summary>
+    /// Name of the location, e.g. "Central lab", etc.
+    /// </summary>
     public string Name { get; set; }
 
+    /// <summary>
+    /// Description of the location, e.g. "Sample collection point in Medical Center North.", etc.
+    /// </summary>
     public string Description { get; set; }
 
     /// <summary>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Visit, laboratory order.
+/// Sale, laboratory order.
 /// </summary>
 public class Sale
 {
@@ -20,7 +20,7 @@ public class Sale
     public string ExternalId { get; set; } = string.Empty;
 
     /// <summary>
-    /// Date and time the visit was registered.
+    /// Date and time the sale was created.
     /// </summary>
     public DateTime? Registered { get; set; }
 

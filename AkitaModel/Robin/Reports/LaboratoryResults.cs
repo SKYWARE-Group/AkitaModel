@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Skyware.Lis.AkitaModel.Robin.Reports;
 
 /// <summary>
 /// Data model for report "Laboratory results". 
 /// </summary>
+[Obsolete("Use Results.VisitResults instead.")]
 public class LaboratoryResults
 {
+
     /// <summary>
     /// Sale/Visit data.
     /// </summary>

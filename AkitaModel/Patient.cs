@@ -52,12 +52,14 @@ public class Patient : PersonBase
     public DateTime? DateOfBirth { get; set; }
 
     /// <summary>
-    /// Indicator wheter date of birth is apporximate or exact.
+    /// Indicator whether date of birth is approximate or exact.
     /// </summary>
+    [Obsolete("Here is a typo, in next version will be fixed.")]
     public bool? IsDobAprox { get; set; }
 
     /// <summary>
     /// Patient age at registration time
     /// </summary>
+    [Obsolete("This property will be removed in next version, do not use it.")]
     public string AgeAtRegTimeString { get; set; } = string.Empty;
 }

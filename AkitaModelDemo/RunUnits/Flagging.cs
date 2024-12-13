@@ -103,8 +103,9 @@ public class Flagging
                         ApiRunner.PrintInfo($"Original decimal result #{ix}", resultRequest3?[ix]?.NumericResult);
                         ApiRunner.PrintInfo($"Calculated decimal result #{ix}", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.DecimalResult);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.FlagLevel);
-                        ApiRunner.PrintInfo($"Calculated flag symbol", GetFlagSymbol(numericResultResponse3?.ToArray()[ix]?.CalculationResult?.FlagLevel,
-                                                                                     flaggingTests?.FirstOrDefault(t => t.Id == resultRequest3?[ix]?.TestId)));
+                        ApiRunner.PrintInfo($"Calculated flag symbol", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.Flag);
+                        ApiRunner.PrintInfo($"Calculated flag prefix", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.Prefix);
+                        ApiRunner.PrintInfo($"Calculated flag HL7", numericResultResponse3?.ToArray()[ix]?.CalculationResult?.Hl7Flag);
                     };
                 },
             ])) failures++;
@@ -134,8 +135,10 @@ public class Flagging
                         ApiRunner.PrintInfo($"Calculated decimal result #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.DecimalResult);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.TextResult);
-                        ApiRunner.PrintInfo($"Calculated flag symbol", GetFlagSymbol(semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel,
-                                                                                     flaggingTests?.FirstOrDefault(t => t.Id == resultsemiQuantitativeRequest?[ix]?.TestId)));
+                        ApiRunner.PrintInfo($"Calculated flag symbol", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.Flag);
+                        ApiRunner.PrintInfo($"Calculated flag prefix", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.Prefix);
+                        ApiRunner.PrintInfo($"Calculated flag HL7", semiQuantitativeResultResponse?.ToArray()[ix]?.CalculationResult?.Hl7Flag);
+
                     };
                 },
             ])) failures++;
@@ -163,30 +166,15 @@ public class Flagging
                         ApiRunner.PrintInfo($"Flagging test #{ix}", flaggingTests?.FirstOrDefault(t => t.Id == resultListTestRequest?[ix]?.TestId)?.Name);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", listTestResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel);
                         ApiRunner.PrintInfo($"Calculated flag level #{ix}", listTestResponse?.ToArray()[ix]?.CalculationResult?.TextResult);
-                        ApiRunner.PrintInfo($"Calculated flag symbol", GetFlagSymbol(listTestResponse?.ToArray()[ix]?.CalculationResult?.FlagLevel,
-                                                                                     flaggingTests?.FirstOrDefault(t => t.Id == resultListTestRequest?[ix]?.TestId)));
+                        ApiRunner.PrintInfo($"Calculated flag symbol", listTestResponse?.ToArray()[ix]?.CalculationResult?.Flag);
+                        ApiRunner.PrintInfo($"Calculated flag prefix", listTestResponse?.ToArray()[ix]?.CalculationResult?.Prefix);
+                        ApiRunner.PrintInfo($"Calculated flag HL7", listTestResponse?.ToArray()[ix]?.CalculationResult?.Hl7Flag);
                     };
                 },
             ])) failures++;
 
 
         ApiRunner.PrintFooterLines(failures);
-    }
-
-    private static string GetFlagSymbol(FlagLevels? flagLevel, Test? test)
-    {
-        return flagLevel switch
-        {
-            FlagLevels.ULTRA_LOW => test?.FlagType?.UltraLow ?? string.Empty,
-            FlagLevels.VERY_LOW => test?.FlagType?.VeryLow ?? string.Empty,
-            FlagLevels.LOW => test?.FlagType?.Low ?? string.Empty,
-            FlagLevels.HIGH => test?.FlagType?.High ?? string.Empty,
-            FlagLevels.VERY_HIGH => test?.FlagType?.VeryHigh ?? string.Empty,
-            FlagLevels.ULTRA_HIGH => test?.FlagType?.UltraHigh ?? string.Empty,
-            FlagLevels.NONE => string.Empty,
-            FlagLevels.SEMI_QUANT_QUESTION => string.Empty,
-            _ => throw new ArgumentOutOfRangeException(nameof(flagLevel), "The level is not supported.")
-        };
     }
 
     private static ResultRequest[] GetMultipleListTestRequests(IEnumerable<Test> tests)

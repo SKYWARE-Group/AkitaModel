@@ -24,17 +24,17 @@ public class Doctor : PersonBase
     public Speciality Speciality { get; set; }
 
     /// <summary>
-    /// Region
+    /// Region.
     /// </summary>
     public string Region { get; set; }
 
     /// <summary>
-    /// City
+    /// City.
     /// </summary>
     public string City { get; set; }
 
     /// <summary>
-    /// Postal code
+    /// Postal code.
     /// </summary>
     public string PostalCode { get; set; }
 
@@ -44,7 +44,7 @@ public class Doctor : PersonBase
     public string PostAddress { get; set; }
 
     /// <summary>
-    /// Doctor's information (last name, title, first name, speciality name and job place)
+    /// Doctor's information (last name, title, first name, speciality name and job place).
     /// </summary>
     public string DisplayName {  get; set; }
 

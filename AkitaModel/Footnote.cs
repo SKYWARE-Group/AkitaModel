@@ -1,27 +1,29 @@
 ﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Footnote
+/// Footnote.
 /// </summary>
 public class Footnote
 {
+
     /// <summary>
     /// Unique Identification Number.
     /// </summary>
     public int Id { get; set; }
 
     /// <summary>
-    /// Label
+    /// Label.
     /// </summary>
     public string Label { get; set; }
 
     /// <summary>
-    /// Footnote text
+    /// Footnote text.
     /// </summary>
     public string Text { get; set; }
 
     /// <summary>
-    /// Sequence number
+    /// Sequence number.
     /// </summary>
     public byte SequenceNumber { get; set; }
+
 }
