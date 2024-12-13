@@ -3,14 +3,8 @@ using System.Collections.Generic;
 
 namespace Skyware.Lis.AkitaModel.Results;
 
-public class VisitResults
+public class VisitResults : VisitBase
 {
-
-    public int Id { get; set; }
-
-    public DateTime Date { get; set; }
-
-    public Patient Patient { get; set; }
 
     public IList<Note> Notes { get; set; } 
 

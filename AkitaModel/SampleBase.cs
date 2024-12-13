@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Skyware.Lis.AkitaModel;
 
-public class SampleBase
+public abstract class SampleBase
 {
 
     /// <summary>
