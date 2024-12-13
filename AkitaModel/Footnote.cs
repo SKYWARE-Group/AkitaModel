@@ -5,6 +5,7 @@
 /// </summary>
 public class Footnote
 {
+
     /// <summary>
     /// Unique Identification Number.
     /// </summary>
@@ -24,4 +25,5 @@ public class Footnote
     /// Sequence number.
     /// </summary>
     public byte SequenceNumber { get; set; }
+
 }
