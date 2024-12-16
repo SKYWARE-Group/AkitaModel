@@ -11,6 +11,11 @@ public abstract class ItemBase
 
     public int? ProductId { get; set; }
 
-    public string Name { get; set; } = string.Empty; 
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Rank of the department, use it for sorting.
+    /// </summary>
+    public int Rank { get; set; }
 
 }

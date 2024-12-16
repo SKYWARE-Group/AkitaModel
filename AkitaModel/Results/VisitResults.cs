@@ -26,6 +26,6 @@ public class VisitResults : VisitBase
     /// <summary>
     /// Footnotes list.
     /// </summary>
-    public IList<Footnote> Footnotes { get; set; } = [];
+    public IList<Footnote> Footnotes { get; set; }
 
 }
