@@ -11,13 +11,13 @@ public class Test : ExaminatioinBase
 
     public string TextResult { get; set; } = string.Empty;
 
-    public string Units { get; set; } = string.Empty;
+    public string Units { get; set; }
 
-    public string ReferenceRange { get; set; } = string.Empty;
+    public string ReferenceRange { get; set; }
 
     public FlagLevels? FlagLevel { get; set; } 
 
-    public string FlagText { get; set; } = string.Empty;
+    public string FlagText { get; set; }
 
     public int? FootnoteId { get; set; }
 

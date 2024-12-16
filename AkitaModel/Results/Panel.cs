@@ -9,8 +9,8 @@ public class Panel : ExaminatioinBase
 {
 
     /// <inheritdoc />
-    public override bool IsPanel => false;
+    public override bool IsPanel => true;
 
-    public IList<Test> Tests { get; set; } = [];
+    public IList<Test> Tests { get; set; }
 
 }

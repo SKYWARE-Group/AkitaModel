@@ -55,7 +55,9 @@ public class Patient : PersonBase
     /// Indicator whether date of birth is approximate or exact.
     /// </summary>
     [Obsolete("Here is a typo, in next version will be fixed.")]
-    public bool? IsDobAprox { get; set; }
+    public bool? IsDobAprox { get => IsDobApprox; set { IsDobApprox = value; } }
+
+    public bool? IsDobApprox { get; set; }
 
     /// <summary>
     /// Patient age at registration time
