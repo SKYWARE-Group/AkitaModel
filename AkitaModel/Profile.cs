@@ -4,10 +4,11 @@ using System.Collections.Generic;
 namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Represents Set of tests in lis db
+/// Represents Set of tests in LIS db
 /// </summary>
 public class Profile
 {
+
     /// <summary>
     /// PK is LIS Database
     /// </summary>
@@ -33,4 +34,5 @@ public class Profile
     public DateTime LastModified { get; set; }
 
     public List<ProfileItem> Items { get; set; }
+
 }

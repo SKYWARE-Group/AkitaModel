@@ -1,0 +1,12 @@
+{
+  "name": "skyware.lis.akitamotel",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "Mikhail Kalatchev",
+  "description": "Data model of Akita (LIS iLab API)",
+  "homepage": "https://github.com/SKYWARE-Group/AkitaModel",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^9.17.0"
+  }
+}

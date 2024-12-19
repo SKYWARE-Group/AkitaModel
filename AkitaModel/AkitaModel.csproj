@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>13.0</LangVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Mikhail Kalatchev</Authors>
-    <PackageId>Skyware.Lis.$(AssemblyName)</PackageId>
+    <PackageId>Skyware.Lis.AkitaModel</PackageId>
     <Company>SKYWARE Group</Company>
     <Product>Akita Model</Product>
     <Description>Data model of Akita (LIS iLab API)</Description>
@@ -16,9 +16,9 @@
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
     <Version>0.0.17</Version>
-    <RootNamespace>Skyware.Lis.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <RootNamespace>Skyware.Lis.AkitaModel</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyName>Skyware.Lis.$(MSBuildProjectName)</AssemblyName>
+    <AssemblyName>Skyware.Lis.AkitaModel</AssemblyName>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>Akita Data Model</Title>
     <ApplicationIcon>akita.ico</ApplicationIcon>
@@ -30,14 +30,19 @@
     <Compile Remove="Robin\Reports\Visit.cs" />
   </ItemGroup>
 
-  <!--<PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <DefineConstants>$(DefineConstants);LOCAL_TEST</DefineConstants>
-  </PropertyGroup>-->
+  <!-- Dependencies for net7.0 and earlier -->
+  <ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
+  <!-- Dependencies for .net9.0 -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="Skyware.Rila.Model" Version="1.8.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>

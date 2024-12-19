@@ -3,7 +3,7 @@
 namespace Skyware.Lis.AkitaModel.Results;
 
 /// <summary>
-/// Department as wrapper of examination results.
+/// Wrapper class of examination results that follows structure of the printout.
 /// </summary>
 public class DepartmentResults
 {
@@ -23,13 +23,19 @@ public class DepartmentResults
     /// </summary>
     public int Rank { get; set; }
 
+    /// <summary>
+    /// Label for the reference range column for this department.
+    /// </summary>
     public string RangeLabel { get; set; }
 
+    /// <summary>
+    /// Department-level note.
+    /// </summary>
     public Note Note { get; set; }
 
     /// <summary>
     /// List of examination results.
     /// </summary>
-    public IList<ExaminatioinBase> Results { get; set; }
+    public IList<ExaminationBase> Results { get; set; }
 
 }

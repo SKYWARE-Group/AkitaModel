@@ -1,7 +1,7 @@
 ﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Department is a group of tests (analytes) and profiles/panels.
+/// Department is a group of tests (analytes) and panels/profiles.
 /// </summary>
 public class Department
 {

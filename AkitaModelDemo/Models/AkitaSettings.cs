@@ -3,8 +3,8 @@
 public class AkitaSettings
 {
 
-    public string BaseUrl { get; set; }
+    public string BaseUrl { get; set; } = "https://dev-akita.ilab-cloud.com";
 
-    public string ApiKey { get; set; }
+    public string ApiKey { get; set; } = string.Empty;
 
 }

@@ -7,7 +7,7 @@ public class Species
 {
 
     /// <summary>
-    /// Primary key.
+    /// Primary key. Value 1 is reserved for "Human".
     /// </summary>
     public int Id { get; set; }
 

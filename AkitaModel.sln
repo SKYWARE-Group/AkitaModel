@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkitaModelDemo", "AkitaMode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelExamples", "ModelExamples\ModelExamples.csproj", "{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "AkitaMotelTS", "AkitaMotelTS\AkitaMotelTS.esproj", "{B44C414F-79FD-4763-82B3-B6EA87482BB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E5BEB17-5957-41E0-BF91-B0E9C8A1B629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B44C414F-79FD-4763-82B3-B6EA87482BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B44C414F-79FD-4763-82B3-B6EA87482BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B44C414F-79FD-4763-82B3-B6EA87482BB9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B44C414F-79FD-4763-82B3-B6EA87482BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B44C414F-79FD-4763-82B3-B6EA87482BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B44C414F-79FD-4763-82B3-B6EA87482BB9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
