@@ -5,7 +5,8 @@
         "BLDV",
         "EDTA",
         "EDTK",
-        "projectlombok"
+        "projectlombok",
+        "speciality"
     ],
     "java.configuration.updateBuildConfiguration": "interactive"
 }

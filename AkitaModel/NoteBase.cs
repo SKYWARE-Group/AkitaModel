@@ -1,9 +1,9 @@
 ﻿namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
-/// Medical speciality of a doctor, e.g. General practitioner, Surgeon, etc.
+/// Represents base class for notes.
 /// </summary>
-public class Speciality
+public abstract class NoteBase
 {
 
     /// <summary>
@@ -12,8 +12,8 @@ public class Speciality
     public int? Id { get; set; }
 
     /// <summary>
-    /// Name of the speciality, e.g. "Surgeon".
+    /// Text of the note.
     /// </summary>
-    public string Name { get; set; }
+    public string Text { get; set; } = string.Empty;
 
 }
