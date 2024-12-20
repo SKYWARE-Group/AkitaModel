@@ -52,3 +52,5 @@ namespace Skyware.Lis.AkitaModel {
 
     }
 }
+
+export { Skyware.Lis.AkitaModel.FlagLevels };
