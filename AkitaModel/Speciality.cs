@@ -12,7 +12,7 @@ public class Speciality
     public int? Id { get; set; }
 
     /// <summary>
-    /// Name of the speciality.
+    /// Name of the speciality, e.g. "Surgeon".
     /// </summary>
     public string Name { get; set; }
 

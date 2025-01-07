@@ -1,8 +1,12 @@
-﻿namespace Skyware.Lis.AkitaModel;
+﻿using System.Text.Json.Serialization;
+
+namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
 /// Abstract class for people.
 /// </summary>
+[JsonDerivedType(typeof(Doctor))]
+[JsonDerivedType(typeof(Patient))]
 public abstract class PersonBase
 {
 

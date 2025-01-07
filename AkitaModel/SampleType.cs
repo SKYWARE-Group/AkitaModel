@@ -12,7 +12,7 @@ public class SampleType
     public int? Id { get; set; }
 
     /// <summary>
-    /// Name.
+    /// Name of the sample type, e.g. "Serum", "Whole blood", "Stool", etc.
     /// </summary>
     public string Name { get; set; }
 
@@ -33,7 +33,7 @@ public class SampleType
     public int? ColorG { get; set; }
 
     /// <summary>
-    /// Blood component of the sample color code.
+    /// Blue component of the sample color code.
     /// </summary>
     public int? ColorB { get; set; }
 
@@ -50,10 +50,10 @@ public class SampleType
     public string AdditiveCode { get; set; }
 
     /// <summary>
-    /// Body part (specimen source) code, e.g. "BLDV" (Blood  venous in HL7 table 0070).<br/>
-    /// See <see href="http://terminology.hl7.org/CodeSystem/v2-0550"/>.
+    /// Specimen source code, e.g. "BLDV" (Blood  venous in HL7 table 0070).<br/>
+    /// See <see href="https://terminology.hl7.org/4.0.0/CodeSystem-v2-0070.html"/>.
     /// </summary>
-    public string BodyPartCode { get; set; }
+    public string SpecimenSourceCode { get; set; }
 
 
 }

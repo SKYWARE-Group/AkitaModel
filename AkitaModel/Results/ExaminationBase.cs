@@ -7,7 +7,7 @@ namespace Skyware.Lis.AkitaModel.Results;
 /// </summary>
 [JsonDerivedType(typeof(Panel))]
 [JsonDerivedType(typeof(Test))]
-public abstract class ExaminatioinBase : ItemBase
+public abstract class ExaminationBase : ItemBase
 {
 
     /// <summary>

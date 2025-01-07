@@ -1,20 +1,21 @@
 ﻿namespace Skyware.Lis.AkitaModel.Results;
 
-public class Note
+// Ignore Spelling: Dismissible
+
+/// <summary>
+/// Represents a note that may appear at visit or department level.
+/// </summary>
+public class Note : NoteBase
 {
 
     /// <summary>
-    /// PK in LIS iLab.
+    /// Level of importance of the note.
     /// </summary>
-    public int? Id { get; set; }
-
     public NoteLevels Level { get; set; } = NoteLevels.Info;
-
-    public string Text { get; set; } = string.Empty;
 
     /// <summary>
     /// True if the note can be dismissed by the user.
     /// </summary>
-    public bool IsDismissable { get; set; } = false;
+    public bool IsDismissible { get; set; } = false;
 
 }

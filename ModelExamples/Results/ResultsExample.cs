@@ -19,7 +19,7 @@ public class ResultsExample
         IsMale = false,
     };
 
-    public static VisitResults GetDemoVisit() => new()
+    public static VisitResults GetDemoVisitResults() => new()
     {
         Id = 654321,
         Patient = GetDemoPatient(),
@@ -27,11 +27,42 @@ public class ResultsExample
         DepartmentResults = [ GetDemoDepartmentResults() ],
     };
 
+    public static VisitBalance GetDemoVisitBalance() => new()
+    {
+        Id = 654321,
+        Patient = GetDemoPatient(),
+        Date = DateTime.Now,
+        Sales = [ 
+            new() {
+                Id = 123456,
+                Date = DateTime.Now,
+                Products = [
+                    new() { Id = 789, Name = "CBC", Price = 6.50m },
+                    new() { Id = 790, Name = "Glucose", Price = 3.20m },
+                ],
+                Payments = [
+                    new CashPayment() { Id = 987654, Date = DateTime.Now, Amount = 9.70m },
+                ],
+            }
+        ],
+    };
+
     public static DepartmentResults GetDemoDepartmentResults() => new()
     {
         DepartmentId = 15,
         DepartmentName = "Hematology",
-        Results = [GetDemoPanel()],
+        Results = [
+            GetDemoPanel(),
+            new Skyware.Lis.AkitaModel.Results.Test() { 
+                Id = 225544, 
+                Name = "Glucose", 
+                TextResult = "7.2", 
+                Units = "mmol/L",
+                FlagLevel = FlagLevels.HIGH,
+                FlagText = "↑",
+                Rank = 1,
+            },
+        ],
     };
 
     public static Panel GetDemoPanel() => new()
@@ -40,7 +71,7 @@ public class ResultsExample
         Name = "CBC",
         ProductId = 789,
         Tests = [
-            new() { Id = 225544, Name = "HGB", TextResult = "140", Units = "mg/L" },
+            new() { Id = 225544, Name = "HGB", TextResult = "140", Units = "g/L" },
             new() { Id = 225544, Name = "WBC", TextResult = "5.62", FlagLevel = FlagLevels.HIGH, FlagText = "↑", Units = "G/L" },
         ],
     };

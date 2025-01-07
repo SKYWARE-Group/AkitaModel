@@ -4,7 +4,7 @@
 /// Uniform plugin information.
 /// </summary>
 /// <remarks>
-/// The standard path for this resource should be /api/service/info
+/// The standard path for this resource is /api/service/info.
 /// </remarks>
 public class Plugin
 {

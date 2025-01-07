@@ -9,7 +9,7 @@ public class VisitResults : VisitBase
 {
 
     /// <summary>
-    /// List of notes and announcements.
+    /// List of visit-level notes and announcements.
     /// </summary>
     public IList<Note> Notes { get; set; }
 

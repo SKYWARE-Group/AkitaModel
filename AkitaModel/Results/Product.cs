@@ -1,5 +1,8 @@
 ﻿namespace Skyware.Lis.AkitaModel.Results;
 
+/// <summary>
+/// Represents a orderable/payable product in Sale.
+/// </summary>
 public class Product : ItemBase
 {
 
