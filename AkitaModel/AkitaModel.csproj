@@ -9,13 +9,13 @@
     <Company>SKYWARE Group</Company>
     <Product>Akita Model</Product>
     <Description>Data model of Akita (LIS iLab API)</Description>
-    <Copyright>Copyright (C) 2000-2024, SKYWARE Group</Copyright>
+    <Copyright>Copyright (C) 2000-2025, SKYWARE Group</Copyright>
     <PackageProjectUrl>https://github.com/SKYWARE-Group/AkitaModel</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SKYWARE-Group/AkitaModel</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.17</Version>
+    <Version>0.0.18</Version>
     <RootNamespace>Skyware.Lis.AkitaModel</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.AkitaModel</AssemblyName>
