@@ -1,8 +1,11 @@
-﻿namespace Skyware.Lis.AkitaModel;
+﻿using System.Text.Json.Serialization;
+
+namespace Skyware.Lis.AkitaModel;
 
 /// <summary>
 /// Represents base class for notes.
 /// </summary>
+[JsonDerivedType(typeof(Results.Note))]
 public abstract class NoteBase
 {
 

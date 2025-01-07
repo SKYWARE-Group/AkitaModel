@@ -11,14 +11,24 @@ AnsiConsole.MarkupLine("[green]Akita Model Demo[/]");
 //Console.WriteLine($"{nameof(LaboratoryResults)}: {resFileName}");
 
 
-VisitResults obj = ModelExamples.Results.ResultsExample.GetDemoVisit();
-
-string jsonString = System.Text.Json.JsonSerializer.Serialize(obj, Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options);
-JsonText json = new(jsonString);
+VisitResults res = ModelExamples.Results.ResultsExample.GetDemoVisitResults();
+string jsonString = System.Text.Json.JsonSerializer.Serialize(res, Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options);
+JsonText jsonResults = new(jsonString);
 
 AnsiConsole.Write(
-    new Spectre.Console.Panel(json)
+    new Spectre.Console.Panel(jsonResults)
         .Header(nameof(VisitResults))
+        .Collapse()
+        .RoundedBorder()
+        .BorderColor(Color.Yellow));
+
+VisitBalance balance = ModelExamples.Results.ResultsExample.GetDemoVisitBalance();
+jsonString = System.Text.Json.JsonSerializer.Serialize(balance, Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options);
+JsonText jsonBalance = new(jsonString);
+
+AnsiConsole.Write(
+    new Spectre.Console.Panel(jsonBalance)
+        .Header(nameof(VisitBalance))
         .Collapse()
         .RoundedBorder()
         .BorderColor(Color.Yellow));
