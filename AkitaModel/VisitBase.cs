@@ -8,6 +8,7 @@ namespace Skyware.Lis.AkitaModel;
 /// </summary>
 [JsonDerivedType(typeof(Results.VisitBalance))]
 [JsonDerivedType(typeof(Results.VisitResults))]
+[JsonDerivedType(typeof(Portal.Visit))]
 public abstract class VisitBase
 {
 

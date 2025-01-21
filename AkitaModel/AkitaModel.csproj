@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0</TargetFrameworks>
     <LangVersion>13.0</LangVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Mikhail Kalatchev</Authors>
@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.18</Version>
+    <Version>0.0.19</Version>
     <RootNamespace>Skyware.Lis.AkitaModel</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.AkitaModel</AssemblyName>
@@ -31,18 +31,19 @@
   </ItemGroup>
 
   <!-- Dependencies for net7.0 and earlier -->
-  <ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
+  <!--<ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <!-- Dependencies for .net9.0 -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
     <PackageReference Include="System.Text.Json" Version="9.0.0" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="Skyware.Rila.Model" Version="1.8.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>
