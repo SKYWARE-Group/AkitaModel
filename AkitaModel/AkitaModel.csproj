@@ -9,13 +9,13 @@
     <Company>SKYWARE Group</Company>
     <Product>Akita Model</Product>
     <Description>Data model of Akita (LIS iLab API)</Description>
-    <Copyright>Copyright (C) 2000-2025, SKYWARE Group</Copyright>
+    <Copyright>Copyright (C) 1999-2025, SKYWARE Group</Copyright>
     <PackageProjectUrl>https://github.com/SKYWARE-Group/AkitaModel</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SKYWARE-Group/AkitaModel</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.19</Version>
+    <Version>0.0.20</Version>
     <RootNamespace>Skyware.Lis.AkitaModel</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.AkitaModel</AssemblyName>
@@ -25,20 +25,6 @@
     <PackageIcon>akita.png</PackageIcon>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Robin\Reports\Visit.cs" />
-  </ItemGroup>
-
-  <!-- Dependencies for net7.0 and earlier -->
-  <!--<ItemGroup Condition="'$(TargetFramework)' != 'net9.0'">
-    <PackageReference Include="System.Text.Json" Version="8.0.5" />
-  </ItemGroup>-->
-
-  <!-- Dependencies for .net9.0 -->
-  <!--<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
-    <PackageReference Include="System.Text.Json" Version="9.0.0" />
-  </ItemGroup>-->
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.11.0" />
