@@ -30,7 +30,12 @@ public class Visit : VisitBase
     /// <summary>
     /// Degree of readiness from 0 (none) to 5 (complete).
     /// </summary>
-    public int DegreeOfReadiness => TotalTests == 0 ? 5 : Math.Min(5, (int)Math.Floor((double)ReadyTests / TotalTests * 5));
+    public int DegreeOfReadiness5 => TotalTests == 0 ? 5 : Math.Min(5, (int)Math.Floor((double)ReadyTests / TotalTests * 5));
+
+    /// <summary>
+    /// Degree of readiness from 0 (none) to 8 (complete).
+    /// </summary>
+    public int DegreeOfReadiness8 => TotalTests == 0 ? 8 : Math.Min(8, (int)Math.Floor((double)ReadyTests / TotalTests * 8));
 
     /// <summary>
     /// Number of flagged tests.
