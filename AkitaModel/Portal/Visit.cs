@@ -23,6 +23,15 @@ public class Visit : VisitBase
     public int ReadyTests { get; set; }
 
     /// <summary>
+    /// Number of flagged tests.
+    /// </summary>
+    /// <remarks>
+    /// The value here counts only already flagged tests. 
+    /// It does not include tests that could be flagged on the fly.
+    /// </remarks>
+    public int FlaggedTests { get; set; }
+
+    /// <summary>
     /// Percent of completed tests.
     /// </summary>
     public int PercentReady => TotalTests == 0 ? 100 : (int)Math.Floor(((double)ReadyTests / TotalTests * 100));
@@ -36,14 +45,5 @@ public class Visit : VisitBase
     /// Degree of readiness from 0 (none) to 8 (complete).
     /// </summary>
     public int DegreeOfReadiness8 => TotalTests == 0 ? 8 : Math.Min(8, (int)Math.Floor((double)ReadyTests / TotalTests * 8));
-
-    /// <summary>
-    /// Number of flagged tests.
-    /// </summary>
-    /// <remarks>
-    /// The value here counts only already flagged tests. 
-    /// It does not include tests that could be flagged on the fly.
-    /// </remarks>
-    public int FlaggedTests { get; set; }
 
 }
