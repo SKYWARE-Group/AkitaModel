@@ -4,6 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Skyware.Lis.AkitaModel;
 
+// Ignore Spelling: pid dob
+
 /// <summary>
 /// Patient.
 /// </summary>
@@ -43,7 +45,7 @@ public class Patient : PersonBase
     /// <summary>
     /// Name of a species of the patient (human, cat, dog, etc.)
     /// </summary>
-    public string SpeciesIdName { get; set; } = string.Empty;
+    public string SpeciesIdName { get; set; }
 
     /// <summary>
     /// Date of birth.
@@ -66,5 +68,6 @@ public class Patient : PersonBase
     /// Patient age at registration time
     /// </summary>
     [Obsolete("This property will be removed in next version, do not use it.")]
-    public string AgeAtRegTimeString { get; set; } = string.Empty;
+    public string AgeAtRegTimeString { get; set; }
+
 }

@@ -1,12 +1,15 @@
-﻿using System;
-
-namespace Skyware.Lis.AkitaModel.Portal;
+﻿namespace Skyware.Lis.AkitaModel.Portal;
 
 /// <summary>
 /// Entry of the patient's file.
 /// </summary>
 public class TestSummary
 {
+
+    /// <summary>
+    /// Patient.
+    /// </summary>
+    public Patient Patient { get; set; }
 
     /// <summary>
     /// The Test this summary is for.
@@ -19,23 +22,8 @@ public class TestSummary
     public int NumberOfResults { get; set; }
 
     /// <summary>
-    /// Date/time of the last result.
+    /// Latest test result.
     /// </summary>
-    public DateTime ResultTime { get; set; }
-
-    /// <summary>
-    /// The last result of the test.
-    /// </summary>
-    public string TextResult { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Level of the abnormality flag of the last result.
-    /// </summary>
-    public FlagLevels? FlagLevel { get; set; }
-
-    /// <summary>
-    /// Text of the abnormality flag of the last result.
-    /// </summary>
-    public string FlagText { get; set; }
+    public TestResult LastResult { get; set; }
 
 }
