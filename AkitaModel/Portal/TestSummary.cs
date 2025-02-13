@@ -7,11 +7,6 @@ public class TestSummary
 {
 
     /// <summary>
-    /// Patient.
-    /// </summary>
-    public Patient Patient { get; set; }
-
-    /// <summary>
     /// The Test this summary is for.
     /// </summary>
     public Test Test { get; set; }
