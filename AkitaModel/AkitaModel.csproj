@@ -15,7 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>iLab;Akita;Model;API</PackageTags>
     <SignAssembly>False</SignAssembly>
-    <Version>0.0.21</Version>
+    <Version>0.0.22</Version>
     <RootNamespace>Skyware.Lis.AkitaModel</RootNamespace>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <AssemblyName>Skyware.Lis.AkitaModel</AssemblyName>
