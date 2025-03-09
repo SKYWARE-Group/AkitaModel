@@ -15,6 +15,16 @@ public class Test : ExaminationBase
     public string TextResult { get; set; } = string.Empty;
 
     /// <summary>
+    /// The numeric result of the test.
+    /// </summary>
+    public decimal? NumericResult { get; set; }
+
+    /// <summary>
+    /// Prefix (leading value modifier), e.g. '&lt;&lt;&lt;', '&gt;=', etc.
+    /// </summary>
+    public string NumericPrefix { get; set; }
+
+    /// <summary>
     /// Measurement units.
     /// </summary>
     public string Units { get; set; }
@@ -38,6 +48,5 @@ public class Test : ExaminationBase
     /// FK to the footnote in LIS iLab.
     /// </summary>
     public int? FootnoteId { get; set; }
-
 
 }

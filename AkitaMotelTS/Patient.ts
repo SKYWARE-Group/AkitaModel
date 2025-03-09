@@ -1,4 +1,4 @@
-import { PersonBase } from "./PersonBase";
+import { AkitaModel, Lis, PersonBase } from "./PersonBase";
 
 namespace Skyware.Lis.AkitaModel {
     /**
