@@ -25,6 +25,11 @@ public class ResultRequest
     public int? SpeciesId { get; set; } = 1; // Human in LIS iLab
 
     /// <summary>
+    /// Date/time the sample was taken.
+    /// </summary>
+    public DateTime? SampleDate { get; set; } = DateTime.Now;
+
+    /// <summary>
     /// References the taken test identifier.
     /// </summary>
     public int TestId { get; set; }
