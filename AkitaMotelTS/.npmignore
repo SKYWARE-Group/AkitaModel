@@ -1,0 +1,22 @@
+# Source files
+src/
+tsconfig.json
+eslint.config.js
+
+# Development files
+node_modules/
+*.log
+*.tgz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+coverage/
+.nyc_output/
+
+# Build artifacts
+*.tsbuildinfo
