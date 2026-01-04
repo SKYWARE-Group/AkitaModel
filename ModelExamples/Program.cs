@@ -1,7 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Microsoft.Extensions.Configuration;
 using Skyware.Lis.AkitaModel.Results;
 using Spectre.Console;
 using Spectre.Console.Json;
+
+// Build configuration
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddUserSecrets<Program>()
+    .Build();
+
+// Get connection string
+string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
 AnsiConsole.MarkupLine("[green]Akita Model Demo[/]");
 
@@ -11,7 +22,10 @@ AnsiConsole.MarkupLine("[green]Akita Model Demo[/]");
 //Console.WriteLine($"{nameof(LaboratoryResults)}: {resFileName}");
 
 
-VisitResults res = ModelExamples.Results.ResultsExample.GetDemoVisitResults();
+// VisitResults res = ModelExamples.Results.ResultsExample.GetDemoVisitResults();
+
+
+VisitResults res = await ModelExamples.Results.ResultsFactory.GetVisitResults(connectionString ?? throw new Exception("Connection string 'DefaultConnection' not found."), 625294);
 string jsonString = System.Text.Json.JsonSerializer.Serialize(res, Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options);
 JsonText jsonResults = new(jsonString);
 
@@ -22,13 +36,13 @@ AnsiConsole.Write(
         .RoundedBorder()
         .BorderColor(Color.Yellow));
 
-VisitBalance balance = ModelExamples.Results.ResultsExample.GetDemoVisitBalance();
-jsonString = System.Text.Json.JsonSerializer.Serialize(balance, Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options);
-JsonText jsonBalance = new(jsonString);
+//VisitBalance balance = ModelExamples.Results.ResultsExample.GetDemoVisitBalance();
+//jsonString = System.Text.Json.JsonSerializer.Serialize(balance, Skyware.Lis.AkitaModel.Helpers.AkitaJsonOptions.Options);
+//JsonText jsonBalance = new(jsonString);
 
-AnsiConsole.Write(
-    new Spectre.Console.Panel(jsonBalance)
-        .Header(nameof(VisitBalance))
-        .Collapse()
-        .RoundedBorder()
-        .BorderColor(Color.Yellow));
+//AnsiConsole.Write(
+//    new Spectre.Console.Panel(jsonBalance)
+//        .Header(nameof(VisitBalance))
+//        .Collapse()
+//        .RoundedBorder()
+//        .BorderColor(Color.Yellow));

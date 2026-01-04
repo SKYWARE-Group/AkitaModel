@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0</TargetFrameworks>
-    <LangVersion>13.0</LangVersion>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Mikhail Kalatchev</Authors>
     <PackageId>Skyware.Lis.AkitaModel</PackageId>
@@ -27,9 +27,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.11.0" />
-    <PackageReference Include="Skyware.Rila.Model" Version="1.8.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.2" />
+    <PackageReference Include="FluentValidation" Version="[11.11.0,)" />
+    <PackageReference Include="Skyware.Rila.Model" Version="[1.8.0,)" />
+    <PackageReference Include="System.Text.Json" Version="[9.0.0,)" />
   </ItemGroup>
 
   <ItemGroup>

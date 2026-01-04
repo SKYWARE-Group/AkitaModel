@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Skyware.Lis.AkitaModel.Helpers;
+using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using Skyware.Lis.AkitaModel.Helpers;
 
 // Ignore Spelling: uin// Ignore Spelling: uin бл nrn yyyy dd пре
 
 namespace Skyware.Lis.AkitaModel.Robin.Reports.Bg;
-
 
 /// <summary>
 /// Bulgarian Nhif Laboratory Referral generation.

@@ -1,19 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+<PropertyGroup>
+  <OutputType>Exe</OutputType>
+  <TargetFramework>net10.0</TargetFramework>
+  <ImplicitUsings>enable</ImplicitUsings>
+  <Nullable>enable</Nullable>
+  <UserSecretsId>akita-model-examples-secrets</UserSecretsId>
+</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
-    <PackageReference Include="Spectre.Console.Json" Version="0.49.1" />
-  </ItemGroup>
+<ItemGroup>
+  <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.1" />
+  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
+  <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.1" />
+  <PackageReference Include="Skyware.LisModel" Version="4.22.0.1" />
+  <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
+  <PackageReference Include="Spectre.Console.Json" Version="0.54.0" />
+</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AkitaModel\AkitaModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
