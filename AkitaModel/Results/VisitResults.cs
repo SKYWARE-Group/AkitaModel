@@ -9,6 +9,11 @@ public class VisitResults : VisitBase
 {
 
     /// <summary>
+    /// Collection of orders associated with the visit.
+    /// </summary>
+    public IList<VisitOrder> Orders { get; set; }
+
+    /// <summary>
     /// List of visit-level notes and announcements.
     /// </summary>
     public IList<Note> Notes { get; set; }

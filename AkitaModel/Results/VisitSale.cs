@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Skyware.Lis.AkitaModel.Results;
 
+/// <summary>
+/// Represents a billable sale within a visit.
+/// </summary>
 public class VisitSale
 {
 
